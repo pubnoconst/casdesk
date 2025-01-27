@@ -1,0 +1,8 @@
+[package]
+name = "casdesk"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+freya = "0.2.2"
+dioxus-router = "0.5"
