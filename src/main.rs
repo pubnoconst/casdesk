@@ -3,8 +3,8 @@
 use freya::prelude::*;
 
 static FONT1: &[u8] = include_bytes!("../resources/Jost-500-Medium.ttf");
-fn main() {
-    
+
+fn main() {    
     launch_cfg(
         app,
         LaunchConfig::<()>::builder()
