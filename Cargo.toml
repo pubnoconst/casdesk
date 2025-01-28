@@ -1,8 +1,26 @@
 [package]
-name = "casdesk"
+name = "dxbed"
 version = "0.1.0"
+authors = ["pubnoconst <noconst@email.com>"]
 edition = "2021"
 
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
 [dependencies]
-freya = "0.2.2"
-dioxus-router = "0.5"
+dioxus = { version = "0.6.0", features = ["router"] }
+
+[features]
+default = ["desktop"]
+desktop = ["dioxus/desktop"]
+
+[profile]
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"

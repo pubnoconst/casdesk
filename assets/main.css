@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+.jost-500 {
+    font-family: "Jost", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal; 
+  }
+  
+* {
+    font-family: "Jost", 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    background: steelblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#home-body {
+    margin-bottom: 25vh; 
+}
+
+
+#title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+h1 {
+    color: aliceblue;
+    font-size: 72;
+}
+
+#home-view-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;   
+}
+
+button {
+    background: linear-gradient(135deg, #FFFAF0, #F0FFF0 ); 
+    color: #333; /* Subtle dark-gray text for contrast */
+    font-size: 1rem; /* Font size */
+    font-weight: 600; /* Bold text */
+    padding: 7px 15px; /* Button padding */
+    border: 1px solid #dcdcdc; /* Soft border for subtle effect */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.3s ease; /* Smooth animations */
+}
+
+button:hover {
+    background: linear-gradient(135deg, #d6e2d6, #FFFAF0); 
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35); /* Slightly intensified shadow */
+    /* transform: translateY(-2px); */
+}
+
+button:active {
+    background: #eef2f7; /* Single soft color for active state */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Return to subtle shadow */
+    transform: translateY(0); /* Reset lift effect */
+}
