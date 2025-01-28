@@ -2,6 +2,12 @@ use dioxus::prelude::*;
 
 static CSS: Asset = asset!("/assets/main.css");
 
+#[derive(Routable, Clone, PartialEq)]
+enum Route {
+    #[route("/")]
+    Home {}
+}
+
 fn main() {
     dioxus::launch(App);
 }
@@ -10,6 +16,13 @@ fn main() {
 fn App() -> Element {
     rsx! {
         document::Stylesheet{href: CSS}
+        Router::<Route> {}
+    }
+}
+
+#[component]
+fn Home() -> Element {
+    rsx!{
         body {
             div {
                 id: "home-body",
