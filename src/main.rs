@@ -1,12 +1,17 @@
 use dioxus::prelude::*;
+mod formsview;
+use formsview::*;
 
 static CSS: Asset = asset!("/assets/main.css");
 
 #[derive(Routable, Clone, PartialEq)]
-enum Route {
+pub enum Route {
     #[route("/")]
-    Home {}
+    Home {},
+    #[route("/forms")]
+    Forms {}
 }
+
 
 fn main() {
     dioxus::launch(App);
@@ -22,6 +27,7 @@ fn App() -> Element {
 
 #[component]
 fn Home() -> Element {
+    let nav = navigator();
     rsx!{
         body {
             div {
@@ -33,6 +39,7 @@ fn Home() -> Element {
                 div { 
                     id: "home-view-buttons",
                     button {
+                        onclick: move |_| { nav.push(Route::Forms {}); },
                         "Forms"
                     }         
                     button {  
