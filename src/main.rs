@@ -34,7 +34,7 @@ fn Home() -> Element {
                 id: "home-body",
                 div { 
                     id: "title",
-                    h1 { "Casdesk." }
+                    h1 { "Casdesk" }
                 }
                 div { 
                     id: "home-view-buttons",

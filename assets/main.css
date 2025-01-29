@@ -12,6 +12,9 @@
 }
 
 html, body {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
     height: 100%;
     background: steelblue;
     display: flex;
@@ -35,8 +38,13 @@ html, body {
 h1 {
     color: aliceblue;
     font-size: 72;
+    text-decoration: underline;
 }
 
+h2 {
+    color: aliceblue;
+    font-size: 50;
+}
 #home-view-buttons {
     display: flex;
     justify-content: center;
@@ -66,4 +74,47 @@ button:active {
     background: #eef2f7; /* Single soft color for active state */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Return to subtle shadow */
     transform: translateY(0); /* Reset lift effect */
+}
+
+hr {
+    width: 2px;
+}
+
+#title {
+    display: flex;
+    flex-direction: column;
+}
+
+#forms-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#forms-navigator {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    right: 3%;
+}
+
+#forms-back-button {
+    align-self: center; /* Ensures it stays at the start */
+}
+
+#forms-h2 {
+    align-self: flex-end;
+    font-size: 2rem;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+
+#forms-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
