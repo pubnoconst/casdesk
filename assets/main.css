@@ -9,6 +9,7 @@
   
 * {
     font-family: "Jost", 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+    user-select: none;
 }
 
 html, body {
