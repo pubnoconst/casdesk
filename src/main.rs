@@ -12,9 +12,12 @@ pub enum Route {
     Forms {}
 }
 
-
 fn main() {
-    dioxus::launch(App);
+    LaunchBuilder::new().with_cfg(
+        dioxus::desktop::Config::default()
+        .with_menu(None)
+        .with_window(dioxus::desktop::WindowBuilder::new().with_title("Casdesk"))
+    ).launch(App);
 }
 
 #[component]
