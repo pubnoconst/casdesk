@@ -100,13 +100,13 @@ button:focus {
     flex-direction: column;
 }
 
-#forms-body {
+.primary-body {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#forms-navigator {
+.primary-navigator {
     display: flex;
     justify-content: space-between;
     width: 90%;

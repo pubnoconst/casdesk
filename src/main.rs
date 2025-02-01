@@ -3,6 +3,8 @@ use dioxus_free_icons::icons::fi_icons::*;
 use dioxus_free_icons::Icon;
 mod formsview;
 use formsview::*;
+mod quoteview;
+use quoteview::*;
 
 static CSS: Asset = asset!("/assets/main.css");
 
@@ -11,7 +13,9 @@ pub enum Route {
     #[route("/")]
     Home {},
     #[route("/forms")]
-    Forms {}
+    Forms {},
+    #[route("/quote")]
+    Quote {}
 }
 
 fn main() {
@@ -54,6 +58,7 @@ fn Home() -> Element {
                         "Forms"
                     }         
                     button {  
+                        onclick: move |_| { nav.push(Route::Quote {}); },
                         Icon {
                             icon: FiDollarSign
                         },

@@ -8,9 +8,9 @@ pub fn Forms() -> Element {
     let nav = navigator();
     rsx! {
         div {
-            id: "forms-body",
+            class: "primary-body",
             div {
-                id: "forms-navigator",
+                class: "primary-navigator",
                 button {
                     class: "back-button",
                     onclick: move |_| {
