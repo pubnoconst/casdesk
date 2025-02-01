@@ -1,4 +1,6 @@
 use dioxus::prelude::*;
+use dioxus_free_icons::icons::fi_icons::FiChevronLeft;
+use dioxus_free_icons::Icon;
 use crate::Route;
 
 #[component]
@@ -10,13 +12,18 @@ pub fn Forms() -> Element {
             div {
                 id: "forms-navigator",
                 button {
-                    id: "forms-back-button",
-                    onclick: move |_| {nav.push(Route::Home {}); },
+                    class: "back-button",
+                    onclick: move |_| {
+                        nav.push(Route::Home {}); 
+                    },
+                    Icon {
+                        icon: FiChevronLeft
+                    }
                     "Back"
                 }
                 div {
                     h2 {
-                        id: "forms-h2",
+                        class: "title-text",
                         "Forms"
                     }
                 }

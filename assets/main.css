@@ -6,22 +6,27 @@
     font-weight: 500;
     font-style: normal; 
   }
-  
+
 * {
     font-family: "Jost", 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
-    user-select: none;
 }
 
 html, body {
+    user-select: none;
     margin: 0px;
     padding: 0px;
     border: 0px;
     height: 100%;
-    background: steelblue;
+    width: 100%;
+    background: #f3f3f3;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+body {
+    align-self: center;
 }
 
 #home-body {
@@ -36,16 +41,15 @@ html, body {
     width: 100%;
 }
 
-h1 {
-    color: aliceblue;
-    font-size: 72;
-    text-decoration: underline;
+.title-text {
+    font-weight: normal;
+    color: black;
 }
 
-h2 {
-    color: aliceblue;
-    font-size: 50;
+h1 {
+    font-size: 65;
 }
+
 #home-view-buttons {
     display: flex;
     justify-content: center;
@@ -53,32 +57,42 @@ h2 {
 }
 
 button {
-    background: linear-gradient(135deg, #FFFAF0, #F0FFF0 ); 
-    color: #333; /* Subtle dark-gray text for contrast */
-    font-size: 1rem; /* Font size */
-    font-weight: 600; /* Bold text */
-    padding: 7px 15px; /* Button padding */
-    border: 1px solid #dcdcdc; /* Soft border for subtle effect */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: all 0.3s ease; /* Smooth animations */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    background: #FAFAFA;
+    color: #000000;
+    border: 1px solid #dadada;
+    transition: background 0.2s, border 0.2s, transform 0.1s;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
 }
 
 button:hover {
-    background: linear-gradient(135deg, #d6e2d6, #FFFAF0); 
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35); /* Slightly intensified shadow */
-    /* transform: translateY(-2px); */
+    background: #F0F0F0;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.12);
 }
 
 button:active {
-    background: #eef2f7; /* Single soft color for active state */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Return to subtle shadow */
-    transform: translateY(0); /* Reset lift effect */
+    background: #E0E0E0;
+    transform: scale(0.98);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+ 
+button:focus {
+    box-shadow: 0 0 0 2px #0078d4;
 }
 
-hr {
-    width: 2px;
+.back-button {
+    background: #E5E5E5;
+    align-self: center;
 }
 
 #title {
@@ -97,22 +111,10 @@ hr {
     justify-content: space-between;
     width: 90%;
     position: absolute;
-    top: 3%;
+    top: 0;
     left: 3%;
-    right: 3%;
+    /* right: 3%; */
 }
-
-#forms-back-button {
-    align-self: center; /* Ensures it stays at the start */
-}
-
-#forms-h2 {
-    align-self: flex-end;
-    font-size: 2rem;
-    font-weight: bold;
-    color: aliceblue;
-}
-
 
 #forms-buttons {
     display: flex;
