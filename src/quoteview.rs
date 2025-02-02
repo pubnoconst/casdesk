@@ -8,13 +8,14 @@ use crate::Route;
 #[derive(Clone, Copy)]
 struct Item {
     id: u64,
-    value: i32,
+    value: f64,
 }
 
 #[component]
 pub fn Quote() -> Element {
     let nav = navigator();
     let mut items = use_signal(|| Vec::<Item>::new());
+    let mut input = use_signal(|| String::new());
 
     rsx! {
         div {
@@ -76,12 +77,29 @@ pub fn Quote() -> Element {
                             }
                         }
                     }
-                    button {  
-                        id: "add-item-button",
-                        // onclick: move |_| {
-                        //     let new_id = SystemTime::now().duration_since(UNIX_EPOCH).expect("Time went backwards").as_secs();
-                        // },
-                        "Add item"
+                    div {
+                        id: "add-button-card",
+                        h3 {
+                            class: "title-text",
+                            "Add item"
+                        }
+                        input {
+                            r#type: "number",
+                            value: "{input()}",
+                            placeholder: "Part cost",
+                            oninput: move |e| {
+                                input.set(e.value());
+                            }
+                        }
+                        button {
+                            onclick: move |_| {
+                                if let Ok(num) = input.clone().read().parse::<f64>() {
+                                    let id = SystemTime::now().duration_since(UNIX_EPOCH).expect("Time went backwards").as_secs();
+                                    items.write().push(Item { id: id, value: num });
+                                }
+                            },
+                            "Confirm"
+                        }
                     }
                     button {
                         class: "reset-btn",
