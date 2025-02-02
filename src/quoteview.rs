@@ -1,8 +1,9 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use crate::Route;
+use arboard::Clipboard;
 use dioxus::prelude::*;
-use dioxus_free_icons::icons::fi_icons::{FiChevronLeft, FiTrash2};
+use dioxus_free_icons::icons::fi_icons::{FiChevronLeft, FiCopy, FiTrash2};
 use dioxus_free_icons::Icon;
 
 #[derive(Clone, Copy)]
@@ -12,7 +13,9 @@ struct Item {
 }
 
 fn quote(part_cost: f64) -> f64 {
-    if part_cost < 1. { return 150. }
+    if part_cost < 1. {
+        return 150.;
+    }
     let over_200 = (part_cost >= 200.) as i32 as f64;
     let over_350 = (part_cost > 350.) as i32 as f64;
 
@@ -24,9 +27,13 @@ pub fn Quote() -> Element {
     let nav = navigator();
     let mut items = use_signal(|| Vec::<Item>::new());
     let mut input = use_signal(|| String::new());
-    let sum = items.read().iter().map(|item| quote(item.value)).sum::<f64>();
+    let sum = items
+        .read()
+        .iter()
+        .map(|item| quote(item.value))
+        .sum::<f64>();
     let sum_text = format!("Total: ${:.2}", sum);
-    let deposit_text = format!("Minimum deposit: ${:.2}", sum/2.);
+    let deposit_text = format!("Minimum deposit: ${:.2}", sum / 2.);
 
     rsx! {
         div {
@@ -129,19 +136,52 @@ pub fn Quote() -> Element {
                     div {
                         id: "quote-total-card",
                         if items.read().len() > 0 {
-                            h3 {
-                                id: "quote-total",
-                                class: "title-text",                           
-                                "{sum_text}" 
+                           div {
+                                id: "sum-card",
+                                h3 {
+                                    id: "quote-total",
+                                    class: "title-text",
+                                    "{sum_text}"
+                                }
+                                button {
+                                    class: "quote-copy-button",
+                                    id: "copy-sum-button",
+                                    onclick: move |_| {
+                                        if let Ok(mut cb) = Clipboard::new() {
+                                            if let Ok(_) = cb.set_text(format!("{:.2}", sum)) {
+                                                println!("Sent {} to clipboard", sum);
+                                            }
+                                        }
+                                    },
+                                    Icon {
+                                        icon: FiCopy
+                                    }
+                                }
                             }
-                            h4 {
-                                // id: "quote-deposit",
-                                class: "title-text",                           
-                                "{deposit_text}"
+                            div {
+                                id: "deposit-card",
+                                h4 {
+                                    class: "title-text",
+                                    "{deposit_text}"
+                                }
+                                button {
+                                    class: "quote-copy-button",
+                                    id: "copy-deposit-button",
+                                    onclick: move |_| {
+                                        if let Ok(mut cb) = Clipboard::new() {
+                                            if let Ok(_) = cb.set_text(format!("{:.2}", sum/2.)) {
+                                                println!("Sent {} to clipboard", sum/2.);
+                                            }
+                                        }
+                                    },
+                                    Icon {
+                                        icon: FiCopy
+                                    }
+                                }
                             }
                         }
                     }
-                   div { 
+                   div {
                         id: "reset-button-card",
                         button {
                             id: "reset-button",
@@ -152,7 +192,7 @@ pub fn Quote() -> Element {
                             "Reset Table"
                         }
                     }
-                   
+
                 }
             }
         }

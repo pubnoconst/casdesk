@@ -51,6 +51,10 @@ h1 {
     font-size: 65;
 }
 
+h4 {
+    align-self: center;
+}
+
 #home-view-buttons {
     display: flex;
     justify-content: center;
@@ -133,22 +137,23 @@ button:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 200;
+    height: 212;
     width: 400;
     overflow: auto;
     border: 1px solid #ddd;
     border-radius: 6px;
     background: white;
-    padding-top: 10px;
+    /* padding-top: 10px; */
 }
 
 thead {
     background: #E0E0E0;
-    font-weight: norm;
+    font-weight: normal;
 }
 
 th {
     padding: 10px;
+    width: 15rem;
     border-bottom: 2px solid #ccc;
 }
 
@@ -230,7 +235,8 @@ tr:last-child td:last-child {
 }
 
 .encouraged-button {
-    background: #0078D4; /* Fluent blue */
+    background: #0078D4;
+    /* Fluent blue */
     color: white;
     border: none;
     padding: 5px 8px;
@@ -264,12 +270,13 @@ tr:last-child td:last-child {
 }
 
 #part-confirm-button {
-    padding-left: 10;
-    padding-right: 10;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 input {
     padding: 3;
+    width: 14rem;
 }
 
 #quote-total-card {
@@ -280,6 +287,7 @@ input {
 }
 
 #reset-button-card {
+    height: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -291,4 +299,23 @@ input {
     gap: 10px;
     justify-content: center;
     align-items: center;
+}
+
+#sum-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#deposit-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.quote-copy-button {
+    height: 1.7rem;
+    width: 3.0rem;
 }
