@@ -5,6 +5,7 @@ use arboard::Clipboard;
 use dioxus::prelude::*;
 use dioxus_free_icons::icons::fi_icons::{FiChevronLeft, FiCopy, FiTrash2};
 use dioxus_free_icons::Icon;
+use notify_rust::Notification;
 
 #[derive(Clone, Copy)]
 struct Item {
@@ -149,7 +150,11 @@ pub fn Quote() -> Element {
                                     onclick: move |_| {
                                         if let Ok(mut cb) = Clipboard::new() {
                                             if let Ok(_) = cb.set_text(format!("{:.2}", sum)) {
-                                                println!("Sent {} to clipboard", sum);
+                                                let _ = Notification::new()
+                                                    .summary("Copy successful")
+                                                    .body(&format!("Successfully copied {:.2} to the clipboard", sum))
+                                                    .appname("Casdesk")
+                                                    .show();
                                             }
                                         }
                                     },
@@ -170,7 +175,11 @@ pub fn Quote() -> Element {
                                     onclick: move |_| {
                                         if let Ok(mut cb) = Clipboard::new() {
                                             if let Ok(_) = cb.set_text(format!("{:.2}", sum/2.)) {
-                                                println!("Sent {} to clipboard", sum/2.);
+                                                let _ = Notification::new()
+                                                    .summary("Copy successful")
+                                                    .body(&format!("Successfully copied {:.2} to the clipboard", sum))
+                                                    .appname("Casdesk")
+                                                    .show();
                                             }
                                         }
                                     },

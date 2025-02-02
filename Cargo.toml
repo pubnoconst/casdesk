@@ -10,6 +10,7 @@ edition = "2021"
 arboard = "3.4.1"
 dioxus = { version = "0.6.0", features = ["router", "launch"] }
 dioxus-free-icons = { version = "0.9", features = ["feather"] }
+notify-rust = "4.11.4"
 
 [features]
 default = ["desktop"]
