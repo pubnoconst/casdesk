@@ -6,7 +6,6 @@ use formsview::*;
 mod quoteview;
 use quoteview::*;
 
-static JOST_FONT: Asset = asset!("/assets/Jost-500-Medium.ttf");
 static CSS: Asset = asset!("/assets/main.css");
 
 #[derive(Routable, Clone, PartialEq)]
@@ -16,15 +15,17 @@ pub enum Route {
     #[route("/forms")]
     Forms {},
     #[route("/quote")]
-    Quote {}
+    Quote {},
 }
 
 fn main() {
-    LaunchBuilder::new().with_cfg(
-        dioxus::desktop::Config::default()
-        .with_menu(None)
-        .with_window(dioxus::desktop::WindowBuilder::new().with_title("Casdesk"))
-    ).launch(App);
+    LaunchBuilder::new()
+        .with_cfg(
+            dioxus::desktop::Config::default()
+                .with_menu(None)
+                .with_window(dioxus::desktop::WindowBuilder::new().with_title("Casdesk")),
+        )
+        .launch(App);
 }
 
 #[component]
@@ -38,18 +39,18 @@ fn App() -> Element {
 #[component]
 fn Home() -> Element {
     let nav = navigator();
-    rsx!{
+    rsx! {
         body {
             div {
                 id: "home-body",
-                div { 
+                div {
                     id: "title",
-                    h1 { 
+                    h1 {
                         class: "title-text",
-                        "Casdesk" 
+                        "Casdesk"
                     }
                 }
-                div { 
+                div {
                     id: "home-view-buttons",
                     button {
                         onclick: move |_| { nav.push(Route::Forms {}); },
@@ -57,14 +58,14 @@ fn Home() -> Element {
                             icon: FiFileText
                         },
                         "Forms"
-                    }         
-                    button {  
+                    }
+                    button {
                         onclick: move |_| { nav.push(Route::Quote {}); },
                         Icon {
                             icon: FiDollarSign
                         },
                         "Quote"
-                    }       
+                    }
                     button {
                         Icon {
                             icon: FiDivide
@@ -76,4 +77,3 @@ fn Home() -> Element {
         }
     }
 }
-
