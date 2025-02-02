@@ -1,11 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
-
-.jost-500 {
-    font-family: "Jost", serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
-}
+@font-face {
+    font-family: 'Jost';
+    src: url('{FONT}') format('truetype');
+  }
 
 * {
     font-family: "Jost", 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;

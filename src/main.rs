@@ -6,6 +6,7 @@ use formsview::*;
 mod quoteview;
 use quoteview::*;
 
+static JOST_FONT: Asset = asset!("/assets/Jost-500-Medium.ttf");
 static CSS: Asset = asset!("/assets/main.css");
 
 #[derive(Routable, Clone, PartialEq)]
