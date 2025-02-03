@@ -112,12 +112,6 @@ button:focus {
     /* right: 3%; */
 }
 
-#forms-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 #empty-table-card {
     display: flex;
     align-items: center;
@@ -309,4 +303,25 @@ input {
 .quote-copy-button {
     height: 1.7rem;
     width: 3.0rem;
+}
+
+#forms-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+}
+
+#forms-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+
+#forms-column-divider {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    height: 100%;
 }
