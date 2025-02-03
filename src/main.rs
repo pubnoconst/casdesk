@@ -66,12 +66,6 @@ fn Home() -> Element {
                         },
                         "Quote"
                     }
-                    button {
-                        Icon {
-                            icon: FiDivide
-                        },
-                        "Calculator"
-                    }
                 }
             }
         }
