@@ -62,6 +62,7 @@ fn FormBody() -> Element {
                 }
             }
             div {
+                class: "form-container",
                 match *(current_tab.read()) {
                     Tab::Sale => rsx! { SaleForm {} },
                     Tab::Purchase => rsx! { PurchaseForm {} },
@@ -75,18 +76,19 @@ fn FormBody() -> Element {
 #[component]
 fn SaleForm() -> Element {
     rsx! {
+        h2 { "Sale Form" }
         form {
-            h2 { "Sale Form" }
-            // Customer details inputs
-            label { "Customer Name:" }
-            input { r#type: "text", name: "customer_name", placeholder: "Enter customer name" }
-            br {}
-            // Mobile device details inputs
-            label { "Device Model:" }
-            input { r#type: "text", name: "device_model", placeholder: "Enter device model" }
-            br {}
-            // Add any additional fields as needed...
-            // button { r#type: "submit", "Submit" }
+            class: "form-div",
+            div {
+                class: "form-row",
+                label { "Customer Name:" }
+                input { r#type: "text", name: "customer_name", placeholder: "Enter customer name" }
+            }
+            div {
+                class: "form-row",
+                label { "Device Model:" }
+                input { r#type: "text", name: "device_model", placeholder: "Enter device model" }
+            }
         }
     }
 }
