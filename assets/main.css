@@ -87,6 +87,11 @@ button:focus {
 }
 
 .back-button {
+    background: #F0F0F0;
+    align-self: center;
+}
+
+.back-button:hover {
     background: #E5E5E5;
     align-self: center;
 }

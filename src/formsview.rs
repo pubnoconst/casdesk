@@ -96,15 +96,19 @@ fn SaleForm() -> Element {
 #[component]
 fn PurchaseForm() -> Element {
     rsx! {
+        h2 { "Purchase Form" }
         form {
-            h2 { "Purchase Form" }
-            label { "Customer Name:" }
-            input { r#type: "text", name: "customer_name", placeholder: "Enter customer name" }
-            br {}
-            label { "Device Model:" }
-            input { r#type: "text", name: "device_model", placeholder: "Enter device model" }
-            br {}
-            // button { r#type: "submit", "Submit" }
+            class: "form-div",
+            div {
+                class: "form-row",
+                label { "Customer Name:" }
+                input { r#type: "text", name: "customer_name", placeholder: "Enter customer name" }
+            }
+            div {
+                class: "form-row",
+                label { "Device Model:" }
+                input { r#type: "text", name: "device_model", placeholder: "Enter device model" }
+            }
         }
     }
 }
@@ -112,14 +116,19 @@ fn PurchaseForm() -> Element {
 #[component]
 fn LeaseForm() -> Element {
     rsx! {
+        h2 { "Lease Form" }
         form {
-            h2 { "Lease Form" }
-            label { "Customer Name:" }
-            input { r#type: "text", name: "customer_name", placeholder: "Enter customer name" }
-            br {}
-            label { "Device Model:" }
-            input { r#type: "text", name: "device_model", placeholder: "Enter device model" }
-            br {}
+            class: "form-div",
+            div {
+                class: "form-row",
+                label { "Customer Name:" }
+                input { r#type: "text", name: "customer_name", placeholder: "Enter customer name" }
+            }
+            div {
+                class: "form-row",
+                label { "Device Model:" }
+                input { r#type: "text", name: "device_model", placeholder: "Enter device model" }
+            }
             // button { r#type: "submit", "Submit" }
         }
     }
