@@ -314,7 +314,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5rem;
+    gap: 2rem;
 }
 
 #forms-buttons {
@@ -360,4 +360,10 @@ form {
     flex: 1;  /* Makes input take the remaining space */
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.form-submit-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

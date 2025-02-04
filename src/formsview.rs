@@ -279,7 +279,14 @@ fn LeaseForm() -> Element {
                 label { "date" }
                 input { r#type: "text", name: "date_of_sale", placeholder: "MM/DD/YY" }
             }
-            // button { r#type: "submit", "Submit" }
+            div {
+                class: "form-submit-button-container",
+                button { 
+                    class: "encouraged-button",
+                    r#type: "submit", 
+                    "Confirm" 
+                }
+            }
         }
     }
 }
