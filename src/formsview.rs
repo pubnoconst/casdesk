@@ -215,14 +215,69 @@ fn LeaseForm() -> Element {
         form {
             class: "form-div",
             div {
-                class: "form-row",
-                label { "Customer Name:" }
-                input { r#type: "text", name: "customer_name", placeholder: "Enter customer name" }
+                h4 {
+                    "Device information"
+                }
             }
             div {
                 class: "form-row",
-                label { "Device Model:" }
-                input { r#type: "text", name: "device_model", placeholder: "Enter device model" }
+                label { "Device:" }
+                input { r#type: "text", name: "device_model", placeholder: "Name, model, model number" }
+            }
+            div {
+                class: "form-row",
+                label { "Device Color:" }
+                input { r#type: "text", name: "device_color", placeholder: "Enter device color" }
+            }
+            div {
+                class: "form-row",
+                label { "IMEI/Serial number:" }
+                input { r#type: "text", name: "device_imei", placeholder: "*#06*#" }
+            }
+            div {
+                class: "form-row",
+                label { "Device condition:" }
+                input { r#type: "text", name: "device_condition", placeholder: "Describe the condition of the device" }
+            }
+            div {
+                class: "form-row",
+                label { "Accessories:" }
+                input { r#type: "text", name: "accessories", placeholder: "None/Case/Screen Protector" }
+            }
+            div {
+                h4 {
+                    "Borrower's information"
+                }
+            }
+            div {
+                class: "form-row",
+                label { "Borrower's Name:" }
+                input { r#type: "text", name: "borrower_name", placeholder: "Enter borrower name" }
+            }
+            div {
+                class: "form-row",
+                label { "Seller's contact number:" }
+                input { r#type: "text", name: "sellers_contact_number", placeholder: "Enter phone number" }
+            }
+            div {
+                class: "form-row",
+                label { "Borrower's address:" }
+                input { r#type: "text", name: "seller_addr", placeholder: "Enter seller's address" }
+            }
+            div {
+                class: "form-row",
+                label { "Borrower's ID number:" }
+                input { r#type: "text", name: "seller_id", placeholder: "Enter customer ID" }
+            }
+            div {
+                class: "form-row",
+                label { "Staff name:" }
+                input { r#type: "text", name: "stuff_name", placeholder: "Enter staff name" }
+            }
+            div {
+                class: "form-row",
+                label { "date" }
+                input { r#type: "text", name: "date_of_sale", placeholder: "MM/DD/YY" }
             }
             // button { r#type: "submit", "Submit" }
         }
