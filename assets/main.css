@@ -340,7 +340,7 @@ form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 600px;
+    max-width: 30rem;
 }
 
 .form-row {
@@ -349,7 +349,7 @@ form {
 }
 
 .form-row label {
-    width: 150px;  /* Adjust label width as needed */
+    width: 15rem;  
     text-align: left;  /* Align label text to the left */
 }
   
