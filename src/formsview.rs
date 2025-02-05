@@ -79,6 +79,9 @@ fn SaleForm() -> Element {
         h2 { "Sale Form" }
         form {
             class: "form-div",
+            onsubmit: move |_| {
+
+            },
             div {
                 class: "form-row",
                 label { "Customer Name:" }
@@ -136,8 +139,17 @@ fn SaleForm() -> Element {
             }
             div {
                 class: "form-row",
-                label { "date" }
+                label { "Date:" }
                 input { r#type: "text", name: "date_of_sale", placeholder: "MM/DD/YY" }
+            }
+            div {
+                class: "form-submit-button-container",
+                button { 
+                    class: "encouraged-button",
+                    class: "form-submit-button",
+                    r#type: "submit", 
+                    "Confirm" 
+                }
             }
         }
     }
@@ -149,6 +161,9 @@ fn PurchaseForm() -> Element {
         h2 { "Purchase Form" }
         form {
             class: "form-div",
+            onsubmit: move |_| {
+
+            },
             div {
                 class: "form-row",
                 label { "Seller's Name:" }
@@ -201,8 +216,17 @@ fn PurchaseForm() -> Element {
             }
             div {
                 class: "form-row",
-                label { "date" }
+                label { "Date:" }
                 input { r#type: "text", name: "date_of_sale", placeholder: "MM/DD/YY" }
+            }
+            div {
+                class: "form-submit-button-container",
+                button { 
+                    class: "encouraged-button",
+                    class: "form-submit-button",
+                    r#type: "submit", 
+                    "Confirm" 
+                }
             }
         }
     }
@@ -214,11 +238,14 @@ fn LeaseForm() -> Element {
         h2 { "Lease Form" }
         form {
             class: "form-div",
-            div {
-                h4 {
-                    "Device information"
-                }
-            }
+            onsubmit: move |_| {
+                
+            },
+            // div {
+            //     h4 {
+            //         "Device information"
+            //     }
+            // }
             div {
                 class: "form-row",
                 label { "Device:" }
@@ -244,11 +271,11 @@ fn LeaseForm() -> Element {
                 label { "Accessories:" }
                 input { r#type: "text", name: "accessories", placeholder: "None/Case/Screen Protector" }
             }
-            div {
-                h4 {
-                    "Borrower's information"
-                }
-            }
+            // div {
+            //     h4 {
+            //         "Borrower's information"
+            //     }
+            // }
             div {
                 class: "form-row",
                 label { "Borrower's Name:" }
@@ -256,8 +283,8 @@ fn LeaseForm() -> Element {
             }
             div {
                 class: "form-row",
-                label { "Seller's contact number:" }
-                input { r#type: "text", name: "sellers_contact_number", placeholder: "Enter phone number" }
+                label { "Borrower's contact number:" }
+                input { r#type: "text", name: "borrowers_contact_number", placeholder: "Enter phone number" }
             }
             div {
                 class: "form-row",
@@ -276,13 +303,14 @@ fn LeaseForm() -> Element {
             }
             div {
                 class: "form-row",
-                label { "date" }
+                label { "Date:" }
                 input { r#type: "text", name: "date_of_sale", placeholder: "MM/DD/YY" }
             }
             div {
                 class: "form-submit-button-container",
                 button { 
                     class: "encouraged-button",
+                    class: "form-submit-button",
                     r#type: "submit", 
                     "Confirm" 
                 }

@@ -366,4 +366,12 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.form-submit-button {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
