@@ -1,7 +1,11 @@
+use std::collections::HashMap;
+
 use dioxus::prelude::*;
 use dioxus_free_icons::icons::fi_icons::FiChevronLeft;
 use dioxus_free_icons::Icon;
+use crate::util;
 use crate::Route;
+use crate::util::*;
 
 #[derive(PartialEq, Eq, Clone, Copy)]
 enum Tab {
@@ -81,8 +85,37 @@ fn SaleForm() -> Element {
             class: "form-div",
             onsubmit: move |e| {
                 e.prevent_default();
-                let form_data = e.data.values();
-                println!("{:?}", form_data);
+                let data: HashMap<String, FormValue> = e.data().values();
+
+                fn extract_data(data: &std::collections::HashMap<String, FormValue>) -> Option<(Customer, SellableDevice, String, String)> {
+                    let customer_name = data.get("customer_name")?.get(0)?;
+                    let device_model = data.get("device_model")?.get(0)?;
+                    let device_color = data.get("device_color")?.get(0)?;
+                    let device_imei = data.get("device_imei")?.get(0)?;
+                    let device_provider = data.get("device_provider")?.get(0)?;
+                    let device_price = data.get("device_price")?.get(0)?;
+                    let payment_method = data.get("payment_method")?.get(0)?;
+                    let customers_contact_number = data.get("customers_contact_number")?.get(0)?;
+                    let customer_addr = data.get("customer_addr")?.get(0)?;
+                    let customer_id = data.get("customer_id")?.get(0)?;
+
+                    let stuff_name = data.get("stuff_name")?.get(0)?.to_owned();
+                    let date_of_sale = data.get("date_of_sale")?.get(0)?.to_owned();
+                
+                    let customer = Customer::new(customer_name, customers_contact_number, customer_addr, customer_id);
+                    let device = SellableDevice::new(device_model, device_color, device_provider, device_imei, device_price, payment_method);
+                
+                    Some((customer, device, stuff_name, date_of_sale))
+                }           
+                if let Some((customer, device, stuff_name, date_of_sale)) = extract_data(&data) {
+                    println!("Customer: {:?}", customer);
+                    println!("Device: {:?}", device);
+                    println!("Staff: {}", stuff_name);
+                    println!("Date: {}", date_of_sale);
+                } else {
+                    eprintln!("Error: Could not extract data from the sales form");
+                }
+
             },
             div {
                 class: "form-row",

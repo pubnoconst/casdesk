@@ -1,5 +1,7 @@
 use std::rc::Rc;
 
+mod pdf;
+
 trait ShortString {
     fn cut_30(&self) -> String;
 }
@@ -20,6 +22,7 @@ impl LongString for &str {
     }
 }
 
+#[derive(Debug)]
 pub struct Customer {
     name: Rc<str>,
     contact: Rc<str>,
@@ -38,6 +41,7 @@ impl Customer {
     }
 }
 
+#[derive(Debug)]
 pub struct SellableDevice {
     name: Rc<str>,
     color: Rc<str>,
@@ -60,6 +64,7 @@ impl SellableDevice {
     }
 }
 
+#[derive(Debug)]
 pub struct PurchasedDevice {
     name: Rc<str>,
     color: Rc<str>,
@@ -80,6 +85,7 @@ impl PurchasedDevice {
     }
 }
 
+#[derive(Debug)]
 pub struct LeasedDevice {
     name: Rc<str>,
     color: Rc<str>,
@@ -101,4 +107,5 @@ impl LeasedDevice {
         }
     }
 }
+
 
