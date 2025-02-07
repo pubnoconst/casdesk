@@ -28,7 +28,7 @@ pub struct Customer {
 }
 
 impl Customer {
-    pub fn new(name: &str, contact: &str, address: &str, id_num: &str) -> Customer {
+    pub fn new(name: &str, contact: &str, address: &str, id_num: &str) -> Self {
         Customer {
             name: name.cut_30().into(),
             contact: contact.cut_30().into(),
@@ -38,22 +38,24 @@ impl Customer {
     }
 }
 
-pub struct Device {
+pub struct SellableDevice {
     name: Rc<str>,
     color: Rc<str>,
     locked: Rc<str>,
+    imei: Rc<str>,
     price: Rc<str>,
-    payment_method: Option<Rc<str>>
+    payment_method: Rc<str>
 }
 
-impl Device {
-    pub fn new(name: &str, color: &str, locked: &str, price: &str, payment_method: Option<&str>) -> Device {
-        Device {
+impl SellableDevice {
+    pub fn new(name: &str, color: &str, locked: &str, imei: &str, price: &str, payment_method: &str) -> Self {
+        Self {
             name: name.cut_30().into(),
             color: color.cut_30().into(),
             locked: locked.cut_30().into(),
+            imei: imei.cut_30().into(),
             price: price.cut_30().into(),
-            payment_method: payment_method.map(|p| p.cut_30().into())
+            payment_method: payment_method.cut_30().into()
         }
     }
 }
