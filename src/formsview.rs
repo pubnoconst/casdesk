@@ -79,8 +79,10 @@ fn SaleForm() -> Element {
         h2 { "Sale Form" }
         form {
             class: "form-div",
-            onsubmit: move |_| {
-
+            onsubmit: move |e| {
+                e.prevent_default();
+                let form_data = e.data.values();
+                println!("{:?}", form_data);
             },
             div {
                 class: "form-row",

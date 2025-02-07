@@ -5,6 +5,7 @@ mod formsview;
 use formsview::*;
 mod quoteview;
 use quoteview::*;
+mod util;
 
 static CSS: Asset = asset!("/assets/main.css");
 
