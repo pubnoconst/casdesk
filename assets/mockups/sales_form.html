@@ -11,22 +11,37 @@
     body {
         margin: 25px 25px 25px 25px;
         padding: 0;
+        display: flex;
+        flex-direction: column;
     }
+
     table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: none; /* Removed border */
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            padding-right: 5px; /* added padding to create space */
-        }
-        td {
-            padding-left: 5px; /* Added padding to the left of the second column */
-        }
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 0.75rem;
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+
+    th,
+    td {
+        border: none;
+        text-align: left;
+    }
+
+    th {
+        padding-right: 5px;
+        /* added padding to create space */
+    }
+
+    td {
+        padding-left: 5px;
+        /* Added padding to the left of the second column */
+    }
+
+    footer {
+        align-self: flex-end;
+    }
 </style>
 
 <body>
@@ -50,7 +65,7 @@
         This agreement shall be governed by the laws of the State of Queensland and the Country of Australia. </p>
     <table>
         <tr>
-            <th>Device (Brand, Model, Model Number)</th>
+            <th>Device <small>(Brand, Model, Model Number)</small></th>
             <td>???</td>
         </tr>
         <tr>
@@ -86,6 +101,14 @@
             <td>???</td>
         </tr>
         <tr>
+            <th>
+                Signature of the Buyer
+            </th>
+            <td>
+                ???
+            </td>
+        </tr>
+        <tr>
             <th>ID Number of Buyer</th>
             <td>???</td>
         </tr>
@@ -97,6 +120,17 @@
             <th>Staff Name</th>
             <td>???</td>
         </tr>
+    </table>
+    <p>
+    <div id="footer">
+        <small>ABN 44 143 740 943<br>
+            (07) 3392 0995<br>
+            info@casphone.com.au<br>
+            148 Ipswich Road, Woolloongabba<br>
+            Brisbane QLD 4102<br></small>
+        casphone.com.au
+    </div>
+
 </body>
 
 </html>
