@@ -1,4 +1,4 @@
-//> using dep "org.scalafx::scalafx:23.0.1-R34" 
+//> using dep "org.scalafx::scalafx:23.0.1-R34"
 //> using resourceDir "../assets"
 
 import scalafx.application.JFXApp3
@@ -9,12 +9,14 @@ import scalafx.scene.control._
 import scalafx.scene.layout._
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
-import scalafx.Includes._ 
+import scalafx.Includes._
 
 object QuoteFormsApp extends JFXApp3 {
-
   // Quote Scene
   private lazy val quoteScene: Scene = {
+    val backButton = new Button("Back to Main") { // Back button for quote scene
+      onAction = _ => stage.scene = mainScene
+    }
     val partCosts = ObservableBuffer[Double]()
 
     // Card 1: Known Parts
@@ -23,7 +25,11 @@ object QuoteFormsApp extends JFXApp3 {
       disable = true
     }
     val knownPartsCard = new VBox {
-      children = Seq(new Label("Known Parts"), deviceModelInput, new Button("Confirm") { disable = true })
+      children = Seq(
+        new Label("Known Parts"),
+        deviceModelInput,
+        new Button("Confirm") { disable = true }
+      )
       padding = Insets(20)
       spacing = 10
       style = "-fx-border-color: black; -fx-padding: 10;"
@@ -35,19 +41,23 @@ object QuoteFormsApp extends JFXApp3 {
     }
 
     val calculateQuoteCard = new VBox {
-      children = Seq(new Label("Calculate Quote"), partCostInput, new Button("Confirm") {
-        onAction = (ae: ActionEvent) => {
-          try {
-            val cost = partCostInput.text.value.toDouble // .value is crucial in ScalaFX
-            partCosts.add(cost)
-            partCostInput.clear()
-            println(s"Added cost: $cost, Total costs: ${partCosts.sum}")
-          } catch {
-            case e: NumberFormatException =>
-              println("Invalid part cost. Please enter a number.")
-          }
+      children = Seq(
+        new Label("Calculate Quote"),
+        partCostInput,
+        new Button("Confirm") {
+          onAction = (ae: ActionEvent) =>
+            try {
+              val cost =
+                partCostInput.text.value.toDouble // .value is crucial in ScalaFX
+              partCosts.add(cost)
+              partCostInput.clear()
+              println(s"Added cost: $cost, Total costs: ${partCosts.sum}")
+            } catch {
+              case e: NumberFormatException =>
+                println("Invalid part cost. Please enter a number.")
+            }
         }
-      })
+      )
       padding = Insets(20)
       spacing = 10
       style = "-fx-border-color: black; -fx-padding: 10;"
@@ -57,38 +67,52 @@ object QuoteFormsApp extends JFXApp3 {
     val costsListView = new ListView[Double](partCosts)
 
     val quoteLayout = new VBox {
-      children = Seq(knownPartsCard, calculateQuoteCard, costsListLabel, costsListView)
+      children = Seq(
+        backButton,
+        knownPartsCard,
+        calculateQuoteCard,
+        new Label("Part Costs:"),
+        new ListView[Double](partCosts)
+      ) // Back button added
       alignment = Pos.Center
       padding = Insets(20)
       spacing = 20
     }
-
-    new Scene(quoteLayout, 600, 400)
+    new Scene(quoteLayout, 650, 650)
   }
 
   // Main Scene
-  override def start(): Unit = {
-    JFXApp3.userAgentStylesheet = getClass.getResource("primer-light.css").toExternalForm
+  private lazy val mainScene: Scene = { // Make mainScene a lazy val as well
+    JFXApp3.userAgentStylesheet = getClass.getResource("cupertino-light.css").toExternalForm
     val quoteButton = new Button("Quote") {
       onAction = _ => stage.scene = quoteScene
     }
-    val formsButton = new Button("Forms") // Add your forms logic here later
-    val titleLabel = new Label("Welcome to the App")
+    val formsButton = new Button("Forms") {
+      // onAction = _ => stage.scene = formsScene // Switch to forms scene
+    }
+    val titleLabel = new Label("Casdesk")
 
     val mainLayout = new VBox {
-      children = Seq(titleLabel, new HBox {
-        children = Seq(quoteButton, formsButton)
-        alignment = Pos.Center
-        spacing = 20
-      })
+      children = Seq(
+        titleLabel,
+        new HBox {
+          children = Seq(quoteButton, formsButton)
+          alignment = Pos.Center
+          spacing = 20
+        }
+      )
       alignment = Pos.Center
       padding = Insets(20)
       spacing = 20
     }
-
-    stage = new JFXApp3.PrimaryStage {
-      title = "Quote and Forms App"
-      scene = new Scene(mainLayout, 400, 200)
-    }
+    new Scene(mainLayout, 650, 650)
   }
+
+  override def start(): Unit =
+    stage = new JFXApp3.PrimaryStage {
+      title = "Casdesk"
+      scene = mainScene // Set initial scene to mainScene
+      minHeight = 650
+      minWidth = 650
+    }
 }
