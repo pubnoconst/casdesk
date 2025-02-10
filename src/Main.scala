@@ -1,5 +1,4 @@
 //> using dep "org.scalafx::scalafx:23.0.1-R34"
-//> using resourceDir "../assets"
 
 import scalafx.application.JFXApp3
 import scalafx.geometry.Insets
@@ -83,7 +82,11 @@ object QuoteFormsApp extends JFXApp3 {
 
   // Main Scene
   private lazy val mainScene: Scene = { // Make mainScene a lazy val as well
-    JFXApp3.userAgentStylesheet = getClass.getResource("cupertino-light.css").toExternalForm
+    // val cssStream = getClass.getResourceAsStream("primer-light.css")
+    // require(cssStream != null, "Resource 'primer-light.css' not found!")
+    // val cssContent = new String(cssStream.readAllBytes(), "UTF-8")
+    // JFXApp3.userAgentStylesheet = "data:text/css," + cssContent
+
     val quoteButton = new Button("Quote") {
       onAction = _ => stage.scene = quoteScene
     }
@@ -91,6 +94,7 @@ object QuoteFormsApp extends JFXApp3 {
       // onAction = _ => stage.scene = formsScene // Switch to forms scene
     }
     val titleLabel = new Label("Casdesk")
+    titleLabel.style = "-fx-font-size: 48pt;"
 
     val mainLayout = new VBox {
       children = Seq(
