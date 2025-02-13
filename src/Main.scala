@@ -1,4 +1,7 @@
-//> using dep "org.scalafx::scalafx:23.0.1-R34"
+//> using dep org.scalafx::scalafx:23.0.1-R34
+//> using dep io.github.mkpaz:atlantafx-base:2.0.1
+
+//> using jvm 21
 
 import scalafx.application.JFXApp3
 import scalafx.geometry.Insets
@@ -9,6 +12,8 @@ import scalafx.scene.layout._
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
 import scalafx.Includes._
+import javafx.application.Application
+import atlantafx.base.theme.PrimerLight
 
 object QuoteFormsApp extends JFXApp3 {
   // Quote Scene
@@ -82,10 +87,6 @@ object QuoteFormsApp extends JFXApp3 {
 
   // Main Scene
   private lazy val mainScene: Scene = { // Make mainScene a lazy val as well
-    // val cssStream = getClass.getResourceAsStream("primer-light.css")
-    // require(cssStream != null, "Resource 'primer-light.css' not found!")
-    // val cssContent = new String(cssStream.readAllBytes(), "UTF-8")
-    // JFXApp3.userAgentStylesheet = "data:text/css," + cssContent
 
     val quoteButton = new Button("Quote") {
       onAction = _ => stage.scene = quoteScene
@@ -113,6 +114,7 @@ object QuoteFormsApp extends JFXApp3 {
   }
 
   override def start(): Unit =
+    Application.setUserAgentStylesheet(PrimerLight().getUserAgentStylesheet())
     stage = new JFXApp3.PrimaryStage {
       title = "Casdesk"
       scene = mainScene // Set initial scene to mainScene
