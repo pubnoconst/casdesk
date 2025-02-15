@@ -5,6 +5,8 @@ use super::*;
 use std::path::PathBuf;
 use std::process::Command;
 
+const LOGO_BANNER: &[u8] = include_bytes!("../../assets/logobanner.png");
+
 fn open_html_file(file_path: PathBuf) -> Result<(), std::io::Error> {
     let file_url = format!("file://{}", file_path.display());
 
@@ -52,8 +54,15 @@ fn open_html_file(file_path: PathBuf) -> Result<(), std::io::Error> {
     Ok(())
 }
 
-pub fn sales_form(customer: Customer, device: SellableDevice, date: String, staff: String, payment_method: String) {
+pub fn sales_form(
+    customer: Customer,
+    device: SellableDevice,
+    date: String,
+    staff: String,
+    payment_method: String,
+) {
     let template = include_str!("../../assets/mockups/sales_form.html").to_string();
+    let template = template.replace("__LOGO_BANNER", &rbase64::encode(LOGO_BANNER));
     let template = template.replace("__CUSTOMER_NAME", &customer.name);
     let template = template.replace("__CUSTOMER_CONTACT", &customer.contact);
     let template = template.replace("__CUSTOMER_ADDRESS", &customer.address);
@@ -80,18 +89,18 @@ pub fn sales_form(customer: Customer, device: SellableDevice, date: String, staf
                 if let Err(e) = open_html_file(file_path) {
                     eprintln!("Failed to open the file: {}", e);
                     let _ = Notification::new()
-                                .summary("Failed to load temporary form file")
-                                .appname("Casdesk")
-                                .show();
+                        .summary("Failed to load temporary form file")
+                        .appname("Casdesk")
+                        .show();
                 }
             }
             Err(e) => {
                 eprintln!("Failed to write the file: {}", e);
                 let _ = Notification::new()
-                                .summary("Failed to create temporary form file")
-                                .appname("Casdesk")
-                                .show();
+                    .summary("Failed to create temporary form file")
+                    .appname("Casdesk")
+                    .show();
             }
         }
-    }); 
+    });
 }
