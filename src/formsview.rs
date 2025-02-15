@@ -146,7 +146,7 @@ fn SaleForm() -> Element {
             div {
                 class: "form-row",
                 label { "Device Price AUD $:" }
-                input { r#type: "text", name: "device_price", placeholder: "Enter device price" }
+                input { r#type: "number", name: "device_price", placeholder: "Enter device price" }
             }
             div {
                 class: "form-row",

@@ -1,8 +1,8 @@
 use notify_rust::Notification;
-
-use super::*;
 use std::path::PathBuf;
 use std::process::Command;
+
+use super::*;
 
 const LOGO_BANNER: &[u8] = include_bytes!("../../assets/logobanner.png");
 
@@ -53,38 +53,11 @@ fn open_html_file(file_path: PathBuf) -> Result<(), std::io::Error> {
     Ok(())
 }
 
-pub fn sales_form(
-    customer: Customer,
-    device: SellableDevice,
-    date: String,
-    staff: String,
-    payment_method: String,
-) {
-    let template = include_str!("../../assets/mockups/sales_form.html").to_string();
-    let template = template.replace("__LOGO_BANNER", &rbase64::encode(LOGO_BANNER));
-    let template = template.replace("__CUSTOMER_NAME", &customer.name);
-    let template = template.replace("__CUSTOMER_CONTACT", &customer.contact);
-    let template = template.replace("__CUSTOMER_ADDRESS", &customer.address);
-    let template = template.replace("__CUSTOMER_ID", &customer.id_num);
-    let template = template.replace("__DEVICE_NAME", &device.name);
-    let template = template.replace("__DEVICE_COLOR", &device.color);
-    let template = template.replace("__DEVICE_LOCKED", &device.locked);
-    let template = template.replace("__DEVICE_IMEI", &device.imei);
-    let template = template.replace("__DEVICE_PRICE", &device.price);
-    let template = template.replace("__PAYMENT_METHOD", &payment_method);
-    let template = template.replace("__DATE", &date);
-    let template = template.replace("__STAFF", &staff);
-
-    // start a new thread and create the html_file in env::temp_dir()
-    // then call open_html_file() to open the file in the default browser
-    // if failes, print the error
-
+fn generate_and_open_form(template: String, file_name: String) {
     std::thread::spawn(move || {
-        // create the file using std::fs::write, catch any errors
-        let file_path = std::env::temp_dir().join("sales_form.html");
+        let file_path = std::env::temp_dir().join(file_name);
         match std::fs::write(&file_path, template) {
             Ok(_) => {
-                // open the file in the default browser
                 if let Err(e) = open_html_file(file_path) {
                     eprintln!("Failed to open the file: {}", e);
                     let _ = Notification::new()
@@ -104,6 +77,43 @@ pub fn sales_form(
     });
 }
 
+fn replace_placeholders<S: AsRef<str>>(template: &str, replacements: &[(&str, S)]) -> String {
+    let template = template.to_string();
+    let img = &rbase64::encode(LOGO_BANNER);
+    let mut template = template.replace("__LOGO_BANNER", img);
+    for (placeholder, value) in replacements {
+        template = template.replace(placeholder, value.as_ref());
+    }
+    template
+}
+
+pub fn sales_form(
+    customer: Customer,
+    device: SellableDevice,
+    date: String,
+    staff: String,
+    payment_method: String,
+) {
+    let template = include_str!("../../assets/mockups/sales_form.html").to_string();
+    let replacements = vec![
+        ("__CUSTOMER_NAME", &customer.name as &str),
+        ("__CUSTOMER_CONTACT", &customer.contact as &str),
+        ("__CUSTOMER_ADDRESS", &customer.address as &str),
+        ("__CUSTOMER_ID", &customer.id_num as &str),
+        ("__DEVICE_NAME", &device.name as &str),
+        ("__DEVICE_COLOR", &device.color as &str),
+        ("__DEVICE_LOCKED", &device.locked as &str),
+        ("__DEVICE_IMEI", &device.imei as &str),
+        ("__DEVICE_PRICE", &device.price as &str),
+        ("__PAYMENT_METHOD", &payment_method as &str),
+        ("__DATE", &date as &str),
+        ("__STAFF", &staff as &str),
+    ];
+
+    let filled_template = replace_placeholders(&template, &replacements);
+    generate_and_open_form(filled_template, "sales_form.html".to_string());
+}
+
 pub fn purchase_form(
     customer: Customer,
     device: PurchasedDevice,
@@ -113,47 +123,23 @@ pub fn purchase_form(
     notes: String,
 ) {
     let template = include_str!("../../assets/mockups/purchase_form.html").to_string();
-    let template = template.replace("__LOGO_BANNER", &rbase64::encode(LOGO_BANNER));
-    let template = template.replace("__SELLER_NAME", &customer.name);
-    let template = template.replace("__PRICE", &price);
-    let template = template.replace("__SELLER_CONTACT", &customer.contact);
-    let template = template.replace("__SELLER_ADDRESS", &customer.address);
-    let template = template.replace("__SELLER_ID", &customer.id_num);
-    let template = template.replace("__DEVICE_NAME", &device.name);
-    let template = template.replace("__DEVICE_MEMORY", &device.memory);
-    let template = template.replace("__DEVICE_COLOR", &device.color);
-    let template = template.replace("__DEVICE_LOCKED", &device.locked);
-    let template = template.replace("__DEVICE_IMEI", &device.imei);
-    let template = template.replace("__DEVICE_PRICE", &price);
-    let template = template.replace("__NOTES", &notes);
-    let template = template.replace("__DATE", &date);
-    let template = template.replace("__STAFF", &staff);
+    let replacements = vec![
+        ("__SELLER_NAME", &customer.name as &str),
+        ("__PRICE", &price as &str),
+        ("__SELLER_CONTACT", &customer.contact as &str),
+        ("__SELLER_ADDRESS", &customer.address as &str),
+        ("__SELLER_ID", &customer.id_num as &str),
+        ("__DEVICE_NAME", &device.name as &str),
+        ("__DEVICE_MEMORY", &device.memory as &str),
+        ("__DEVICE_COLOR", &device.color as &str),
+        ("__DEVICE_LOCKED", &device.locked as &str),
+        ("__DEVICE_IMEI", &device.imei as &str),
+        ("__DEVICE_PRICE", &price as &str),
+        ("__NOTES", &notes as &str),
+        ("__DATE", &date as &str),
+        ("__STAFF", &staff as &str),
+    ];
 
-    // start a new thread and create the html_file in env::temp_dir()
-    // then call open_html_file() to open the file in the default browser
-    // if failes, print the error
-
-    std::thread::spawn(move || {
-        // create the file using std::fs::write, catch any errors
-        let file_path = std::env::temp_dir().join("purchase_form.html");
-        match std::fs::write(&file_path, template) {
-            Ok(_) => {
-                // open the file in the default browser
-                if let Err(e) = open_html_file(file_path) {
-                    eprintln!("Failed to open the file: {}", e);
-                    let _ = Notification::new()
-                        .summary("Failed to load temporary form file")
-                        .appname("Casdesk")
-                        .show();
-                }
-            }
-            Err(e) => {
-                eprintln!("Failed to write the file: {}", e);
-                let _ = Notification::new()
-                    .summary("Failed to create temporary form file")
-                    .appname("Casdesk")
-                    .show();
-            }
-        }
-    });
+    let filled_template = replace_placeholders(&template, &replacements);
+    generate_and_open_form(filled_template, "purchase_form.html".to_string());
 }
