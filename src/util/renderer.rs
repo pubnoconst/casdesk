@@ -1,4 +1,5 @@
 use dioxus::html::template;
+use notify_rust::Notification;
 
 use super::*;
 use std::path::PathBuf;
@@ -78,10 +79,18 @@ pub fn sales_form(customer: Customer, device: SellableDevice, date: String, staf
                 // open the file in the default browser
                 if let Err(e) = open_html_file(file_path) {
                     eprintln!("Failed to open the file: {}", e);
+                    let _ = Notification::new()
+                                .summary("Failed to load temporary form file")
+                                .appname("Casdesk")
+                                .show();
                 }
             }
             Err(e) => {
                 eprintln!("Failed to write the file: {}", e);
+                let _ = Notification::new()
+                                .summary("Failed to create temporary form file")
+                                .appname("Casdesk")
+                                .show();
             }
         }
     }); 

@@ -27,9 +27,8 @@
         }
 
         table {
-            width: 100%;
             border-collapse: collapse;
-            font-size: 12pt;
+            font-size: 10pt;
         }
 
         th,
@@ -37,11 +36,15 @@
             border: none;
             padding: 8px;
             text-align: left;
+            word-wrap: break-word;
+            max-width: 80ch;
+            white-space: normal;
         }
 
         th {
             padding-right: 5px;
             font-weight: normal;
+            min-width: 25ch;
         }
 
         td {
@@ -116,7 +119,7 @@
         </tr>
         <tr>
             <th><b>Customer Signature</b></th>
-            <td>: ___________________
+            <td>:
             <td><b>ID Num. of Buyer</b>: __CUSTOMER_ID</td>
             </td>
         </tr>
