@@ -1,11 +1,12 @@
 use std::collections::HashMap;
 
+use crate::util;
+use crate::util::*;
+use crate::Route;
 use dioxus::prelude::*;
 use dioxus_free_icons::icons::fi_icons::FiChevronLeft;
 use dioxus_free_icons::Icon;
-use crate::util;
-use crate::Route;
-use crate::util::*;
+use notify_rust::Notification;
 
 #[derive(PartialEq, Eq, Clone, Copy)]
 enum Tab {
@@ -25,7 +26,7 @@ pub fn Forms() -> Element {
                 button {
                     class: "back-button",
                     onclick: move |_| {
-                        nav.push(Route::Home {}); 
+                        nav.push(Route::Home {});
                     },
                     Icon {
                         icon: FiChevronLeft
@@ -83,11 +84,11 @@ fn SaleForm() -> Element {
         h2 { "Sale Form" }
         form {
             class: "form-div",
-            onsubmit: move |e| {
+            onsubmit: move |e: Event<FormData>| {
                 e.prevent_default();
                 let data: HashMap<String, FormValue> = e.data().values();
 
-                fn extract_data(data: &std::collections::HashMap<String, FormValue>) -> Option<(Customer, SellableDevice, String, String, String)> {
+                fn extract_data(data: &HashMap<String, FormValue>) -> Option<(Customer, SellableDevice, String, String, String)> {
                     let customer_name = data.get("customer_name")?.get(0)?;
                     let device_model = data.get("device_model")?.get(0)?;
                     let device_color = data.get("device_color")?.get(0)?;
@@ -101,20 +102,19 @@ fn SaleForm() -> Element {
                     let stuff_name = data.get("stuff_name")?.get(0)?.to_owned();
                     let date_of_sale = data.get("date_of_sale")?.get(0)?.to_owned();
                     let payment_method = data.get("payment_method")?.get(0)?;
-                
+
                     let customer = Customer::new(customer_name, customers_contact_number, customer_addr, customer_id);
                     let device = SellableDevice::new(device_model, device_color, device_provider, device_imei, device_price);
-                
+
                     Some((customer, device, stuff_name, date_of_sale, payment_method.to_owned()))
-                }           
+                }
                 if let Some((customer, device, stuff_name, date_of_sale, payment_method)) = extract_data(&data) {
-                    println!("Customer: {:?}", customer);
-                    println!("Device: {:?}", device);
-                    println!("Staff: {}", stuff_name);
-                    println!("Date: {}", date_of_sale);
                     util::renderer::sales_form(customer, device, date_of_sale, stuff_name, payment_method);
                 } else {
-                    eprintln!("Error: Could not extract data from the sales form");
+                    let _ = Notification::new()
+                                .summary("Failed to load form data")
+                                .appname("Casdesk")
+                                .show();
                 }
 
             },
@@ -180,11 +180,11 @@ fn SaleForm() -> Element {
             }
             div {
                 class: "form-submit-button-container",
-                button { 
+                button {
                     class: "encouraged-button",
                     class: "form-submit-button",
-                    r#type: "submit", 
-                    "Confirm" 
+                    r#type: "submit",
+                    "Confirm"
                 }
             }
         }
@@ -197,8 +197,37 @@ fn PurchaseForm() -> Element {
         h2 { "Purchase Form" }
         form {
             class: "form-div",
-            onsubmit: move |_| {
+            onsubmit: move |e: Event<FormData>| {
+                let data: HashMap<String, FormValue> = e.data().values();
 
+                fn extract_data(data: HashMap<String, FormValue>) -> Option<(Customer, PurchasedDevice, String, String, String)> {
+                    let seller_name = data.get("seller_name")?.get(0)?;
+                    let seller_address = data.get("seller_addr")?.get(0)?;
+                    let seller_contact = data.get("sellers_contact_number")?.get(0)?;
+                    let seller_ID = data.get("seller_id")?.get(0)?;
+                    
+                    let device_model = data.get("device_model")?.get(0)?;
+                    let device_color = data.get("device_color")?.get(0)?;
+                    let device_imei = data.get("device_imei")?.get(0)?;
+                    let device_provider = data.get("device_provider")?.get(0)?;
+                    
+                    let purchase_price = data.get("purchase_price")?.get(0)?.to_owned();
+                    let staff_name = data.get("staff_name")?.get(0)?.to_owned();
+                    let date = data.get("date_of_sale")?.get(0)?.to_owned();
+                    
+                    let customer = Customer::new(seller_name, seller_contact, seller_address, seller_ID);
+                    let device = PurchasedDevice::new(device_model, device_color, device_provider, device_imei);
+
+                    Some((customer, device, purchase_price, staff_name, date))
+                }
+                if let Some((customer, device, price, staff, date)) = extract_data(data) {
+                    // util::renderer::purchase_form(customer, device, price, staff, date)
+                } else {
+                    let _ = Notification::new()
+                        .summary("Failed to load form data")
+                        .appname("Casdesk")
+                        .show();
+                }
             },
             div {
                 class: "form-row",
@@ -248,7 +277,7 @@ fn PurchaseForm() -> Element {
             div {
                 class: "form-row",
                 label { "Staff name:" }
-                input { r#type: "text", name: "stuff_name", placeholder: "Enter staff name" }
+                input { r#type: "text", name: "staff_name", placeholder: "Enter staff name" }
             }
             div {
                 class: "form-row",
@@ -257,11 +286,11 @@ fn PurchaseForm() -> Element {
             }
             div {
                 class: "form-submit-button-container",
-                button { 
+                button {
                     class: "encouraged-button",
                     class: "form-submit-button",
-                    r#type: "submit", 
-                    "Confirm" 
+                    r#type: "submit",
+                    "Confirm"
                 }
             }
         }
@@ -275,7 +304,7 @@ fn LeaseForm() -> Element {
         form {
             class: "form-div",
             onsubmit: move |_| {
-                
+
             },
             // div {
             //     h4 {
@@ -344,11 +373,11 @@ fn LeaseForm() -> Element {
             }
             div {
                 class: "form-submit-button-container",
-                button { 
+                button {
                     class: "encouraged-button",
                     class: "form-submit-button",
-                    r#type: "submit", 
-                    "Confirm" 
+                    r#type: "submit",
+                    "Confirm"
                 }
             }
         }
