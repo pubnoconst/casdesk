@@ -87,14 +87,41 @@ fn replace_placeholders<S: AsRef<str>>(template: &str, replacements: &[(&str, S)
     template
 }
 
-pub fn sales_form(
+pub fn refurbished_device_sale_form(
     customer: Customer,
     device: SellableDevice,
     date: String,
     staff: String,
     payment_method: String,
 ) {
-    let template = include_str!("../../assets/mockups/sales_form.html").to_string();
+    let template = include_str!("../../assets/mockups/refurbished_device_sale_form.html").to_string();
+    let replacements = vec![
+        ("__CUSTOMER_NAME", &customer.name as &str),
+        ("__CUSTOMER_CONTACT", &customer.contact as &str),
+        ("__CUSTOMER_ADDRESS", &customer.address as &str),
+        ("__CUSTOMER_ID", &customer.id_num as &str),
+        ("__DEVICE_NAME", &device.name as &str),
+        ("__DEVICE_COLOR", &device.color as &str),
+        ("__DEVICE_LOCKED", &device.locked as &str),
+        ("__DEVICE_IMEI", &device.imei as &str),
+        ("__DEVICE_PRICE", &device.price as &str),
+        ("__PAYMENT_METHOD", &payment_method as &str),
+        ("__DATE", &date as &str),
+        ("__STAFF", &staff as &str),
+    ];
+
+    let filled_template = replace_placeholders(&template, &replacements);
+    generate_and_open_form(filled_template, "sales_form.html".to_string());
+}
+
+pub fn new_device_sale_form(
+    customer: Customer,
+    device: SellableDevice,
+    date: String,
+    staff: String,
+    payment_method: String,
+) {
+    let template = include_str!("../../assets/mockups/new_device_sale_form.html").to_string();
     let replacements = vec![
         ("__CUSTOMER_NAME", &customer.name as &str),
         ("__CUSTOMER_CONTACT", &customer.contact as &str),
