@@ -112,6 +112,7 @@ fn SaleForm() -> Element {
                     println!("Device: {:?}", device);
                     println!("Staff: {}", stuff_name);
                     println!("Date: {}", date_of_sale);
+                    util::renderer::sales_form(customer, device, stuff_name, date_of_sale);
                 } else {
                     eprintln!("Error: Could not extract data from the sales form");
                 }

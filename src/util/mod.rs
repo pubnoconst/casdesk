@@ -1,6 +1,6 @@
 use std::rc::Rc;
 
-mod pdf;
+pub mod renderer;
 
 trait ShortString {
     fn cut_30(&self) -> String;
