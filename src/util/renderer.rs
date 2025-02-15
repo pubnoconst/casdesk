@@ -51,7 +51,7 @@ fn open_html_file(file_path: PathBuf) -> Result<(), std::io::Error> {
     Ok(())
 }
 
-pub fn sales_form(customer: Customer, device: SellableDevice, date: String, staff: String) {
+pub fn sales_form(customer: Customer, device: SellableDevice, date: String, staff: String, payment_method: String) {
     let template = include_str!("../../assets/mockups/sales_form.html").to_string();
     let template = template.replace("__CUSTOMER_NAME", &customer.name);
     let template = template.replace("__CUSTOMER_CONTACT", &customer.contact);
@@ -62,7 +62,7 @@ pub fn sales_form(customer: Customer, device: SellableDevice, date: String, staf
     let template = template.replace("__DEVICE_LOCKED", &device.locked);
     let template = template.replace("__DEVICE_IMEI", &device.imei);
     let template = template.replace("__DEVICE_PRICE", &device.price);
-    let template = template.replace("__PAYMENT_METHOD", &device.payment_method);
+    let template = template.replace("__PAYMENT_METHOD", &payment_method);
     let template = template.replace("__DATE", &date);
     let template = template.replace("__STAFF", &staff);
 
