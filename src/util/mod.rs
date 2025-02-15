@@ -76,7 +76,7 @@ impl PurchasedDevice {
         Self {
             name: name.cut_30().into(),
             color: color.cut_30().into(),
-            memory: color.cut_30().into(),
+            memory: memory.cut_30().into(),
             locked: locked.cut_30().into(),
             imei: imei.cut_30().into(),
         }
