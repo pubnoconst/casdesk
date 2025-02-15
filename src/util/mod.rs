@@ -66,15 +66,17 @@ impl SellableDevice {
 pub struct PurchasedDevice {
     name: Rc<str>,
     color: Rc<str>,
+    memory: Rc<str>,
     locked: Rc<str>,
     imei: Rc<str>,
 }
 
 impl PurchasedDevice {
-    pub fn new(name: &str, color: &str, locked: &str, imei: &str) -> Self {
+    pub fn new(name: &str, color: &str, memory: &str, locked: &str, imei: &str) -> Self {
         Self {
             name: name.cut_30().into(),
             color: color.cut_30().into(),
+            memory: color.cut_30().into(),
             locked: locked.cut_30().into(),
             imei: imei.cut_30().into(),
         }

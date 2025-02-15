@@ -103,3 +103,57 @@ pub fn sales_form(
         }
     });
 }
+
+pub fn purchase_form(
+    customer: Customer,
+    device: PurchasedDevice,
+    price: String,
+    staff: String,
+    date: String,
+    notes: String,
+) {
+    let template = include_str!("../../assets/mockups/purchase_form.html").to_string();
+    let template = template.replace("__LOGO_BANNER", &rbase64::encode(LOGO_BANNER));
+    let template = template.replace("__SELLER_NAME", &customer.name);
+    let template = template.replace("__PRICE", &price);
+    let template = template.replace("__SELLER_CONTACT", &customer.contact);
+    let template = template.replace("__SELLER_ADDRESS", &customer.address);
+    let template = template.replace("__SELLER_ID", &customer.id_num);
+    let template = template.replace("__DEVICE_NAME", &device.name);
+    let template = template.replace("__DEVICE_MEMORY", &device.memory);
+    let template = template.replace("__DEVICE_COLOR", &device.color);
+    let template = template.replace("__DEVICE_LOCKED", &device.locked);
+    let template = template.replace("__DEVICE_IMEI", &device.imei);
+    let template = template.replace("__DEVICE_PRICE", &price);
+    let template = template.replace("__NOTES", &notes);
+    let template = template.replace("__DATE", &date);
+    let template = template.replace("__STAFF", &staff);
+
+    // start a new thread and create the html_file in env::temp_dir()
+    // then call open_html_file() to open the file in the default browser
+    // if failes, print the error
+
+    std::thread::spawn(move || {
+        // create the file using std::fs::write, catch any errors
+        let file_path = std::env::temp_dir().join("sales_form.html");
+        match std::fs::write(&file_path, template) {
+            Ok(_) => {
+                // open the file in the default browser
+                if let Err(e) = open_html_file(file_path) {
+                    eprintln!("Failed to open the file: {}", e);
+                    let _ = Notification::new()
+                        .summary("Failed to load temporary form file")
+                        .appname("Casdesk")
+                        .show();
+                }
+            }
+            Err(e) => {
+                eprintln!("Failed to write the file: {}", e);
+                let _ = Notification::new()
+                    .summary("Failed to create temporary form file")
+                    .appname("Casdesk")
+                    .show();
+            }
+        }
+    });
+}

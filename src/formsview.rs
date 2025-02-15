@@ -200,7 +200,7 @@ fn PurchaseForm() -> Element {
             onsubmit: move |e: Event<FormData>| {
                 let data: HashMap<String, FormValue> = e.data().values();
 
-                fn extract_data(data: HashMap<String, FormValue>) -> Option<(Customer, PurchasedDevice, String, String, String)> {
+                fn extract_data(data: HashMap<String, FormValue>) -> Option<(Customer, PurchasedDevice, String, String, String, String)> {
                     let seller_name = data.get("seller_name")?.get(0)?;
                     let seller_address = data.get("seller_addr")?.get(0)?;
                     let seller_contact = data.get("sellers_contact_number")?.get(0)?;
@@ -208,20 +208,22 @@ fn PurchaseForm() -> Element {
                     
                     let device_model = data.get("device_model")?.get(0)?;
                     let device_color = data.get("device_color")?.get(0)?;
+                    let device_memory = data.get("device_memory")?.get(0)?;
                     let device_imei = data.get("device_imei")?.get(0)?;
                     let device_provider = data.get("device_provider")?.get(0)?;
                     
                     let purchase_price = data.get("purchase_price")?.get(0)?.to_owned();
                     let staff_name = data.get("staff_name")?.get(0)?.to_owned();
                     let date = data.get("date_of_sale")?.get(0)?.to_owned();
+                    let notes = data.get("notes")?.get(0)?.to_owned();
                     
                     let customer = Customer::new(seller_name, seller_contact, seller_address, seller_ID);
-                    let device = PurchasedDevice::new(device_model, device_color, device_provider, device_imei);
+                    let device = PurchasedDevice::new(device_model, device_color, device_memory, device_provider, device_imei);
 
-                    Some((customer, device, purchase_price, staff_name, date))
+                    Some((customer, device, purchase_price, staff_name, date, notes))
                 }
-                if let Some((customer, device, price, staff, date)) = extract_data(data) {
-                    // util::renderer::purchase_form(customer, device, price, staff, date)
+                if let Some((customer, device, price, staff, date, notes)) = extract_data(data) {
+                    util::renderer::purchase_form(customer, device, price, staff, date, notes);
                 } else {
                     let _ = Notification::new()
                         .summary("Failed to load form data")
@@ -246,6 +248,11 @@ fn PurchaseForm() -> Element {
             }
             div {
                 class: "form-row",
+                label { "Memory (in GB):" }
+                input { r#type: "number", name: "device_memory", placeholder: "256" }
+            }
+            div {
+                class: "form-row",
                 label { "IMEI (or the like):" }
                 input { r#type: "text", name: "device_imei", placeholder: "*#06*#" }
             }
@@ -257,7 +264,7 @@ fn PurchaseForm() -> Element {
             div {
                 class: "form-row",
                 label { "Purchase price AUD $:" }
-                input { r#type: "text", name: "purchase_price", placeholder: "Enter purchase price" }
+                input { r#type: "number", name: "purchase_price", placeholder: "Enter purchase price" }
             }
             div {
                 class: "form-row",
@@ -283,6 +290,11 @@ fn PurchaseForm() -> Element {
                 class: "form-row",
                 label { "Date:" }
                 input { r#type: "text", name: "date_of_sale", placeholder: "MM/DD/YY" }
+            }
+            div {
+                class: "form-row",
+                label { "Notes for Office (repairs required):" }
+                input { r#type: "text", name: "notes", placeholder: "" }
             }
             div {
                 class: "form-submit-button-container",
