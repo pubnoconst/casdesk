@@ -135,7 +135,7 @@ pub fn purchase_form(
 
     std::thread::spawn(move || {
         // create the file using std::fs::write, catch any errors
-        let file_path = std::env::temp_dir().join("sales_form.html");
+        let file_path = std::env::temp_dir().join("purchase_form.html");
         match std::fs::write(&file_path, template) {
             Ok(_) => {
                 // open the file in the default browser
