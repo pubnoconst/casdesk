@@ -1,3 +1,4 @@
+#![windows_subsystem = "windows"]
 use dioxus::prelude::*;
 use dioxus_free_icons::icons::fi_icons::*;
 use dioxus_free_icons::Icon;
