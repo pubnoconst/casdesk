@@ -12,7 +12,6 @@ dioxus = { version = "0.6.0", features = ["router", "launch"] }
 dioxus-free-icons = { version = "0.9", features = ["feather"] }
 notify-rust = "4.11.4"
 rbase64 = "2.0.3"
-regex = "1.11.1"
 rust_decimal = "1.36.0"
 rust_decimal_macros = "1.36.0"
 

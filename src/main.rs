@@ -6,6 +6,8 @@ mod formsview;
 use formsview::*;
 mod quoteview;
 use quoteview::*;
+mod adjustview;
+use adjustview::*;
 mod util;
 
 static CSS: Asset = asset!("/assets/main.css", CssAssetOptions::new().with_minify(true));
@@ -18,6 +20,8 @@ pub enum Route {
     Forms {},
     #[route("/quote")]
     Quote {},
+    #[route("/adjust")]
+    Adjust {}
 }
 
 fn main() {
@@ -57,16 +61,23 @@ fn Home() -> Element {
                     button {
                         onclick: move |_| { nav.push(Route::Forms {}); },
                         Icon {
-                            icon: FiFileText
+                            icon: FiPenTool
                         },
                         "Forms"
                     }
                     button {
                         onclick: move |_| { nav.push(Route::Quote {}); },
                         Icon {
-                            icon: FiDollarSign
+                            icon: FiList
                         },
                         "Quote"
+                    }
+                    button {  
+                        onclick: move |_| { nav.push(Route::Adjust { }); },
+                        Icon {
+                            icon: FiSliders
+                        },
+                        "Adjust POS"
                     }
                 }
             }
