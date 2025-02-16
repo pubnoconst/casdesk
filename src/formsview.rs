@@ -118,7 +118,7 @@ fn SaleRefurbishedForm() -> Element {
                     util::renderer::refurbished_device_sale_form(customer, device, date_of_sale, stuff_name, payment_method);
                 } else {
                     let _ = Notification::new()
-                                .summary("Failed to load form data")
+                                .summary("Failed to read form data")
                                 .appname("Casdesk")
                                 .show();
                 }
@@ -231,7 +231,7 @@ fn SaleNewForm() -> Element {
                     util::renderer::new_device_sale_form(customer, device, date_of_sale, stuff_name, payment_method);
                 } else {
                     let _ = Notification::new()
-                                .summary("Failed to load form data")
+                                .summary("Failed to read form data")
                                 .appname("Casdesk")
                                 .show();
                 }
@@ -345,7 +345,7 @@ fn PurchaseForm() -> Element {
                     util::renderer::purchase_form(customer, device, price, staff, date, notes);
                 } else {
                     let _ = Notification::new()
-                        .summary("Failed to load form data")
+                        .summary("Failed to read form data")
                         .appname("Casdesk")
                         .show();
                 }
@@ -434,14 +434,39 @@ fn LeaseForm() -> Element {
         h2 { "Lease Form" }
         form {
             class: "form-div",
-            onsubmit: move |_| {
+            onsubmit: move |e: Event<FormData>| {
+                e.prevent_default();
+                let data: HashMap<String, FormValue> = e.data.values();
+                
+                fn extract_data(data: &HashMap<String, FormValue>) -> Option<(Customer, LeasedDevice, String, String, String)> {
+                    let customer_name = data.get("borrower_name")?.get(0)?;
+                    let device_model = data.get("device_model")?.get(0)?;
+                    let device_storage = data.get("device_storage")?.get(0)?;
+                    let device_color = data.get("device_color")?.get(0)?;
+                    let device_imei = data.get("device_imei")?.get(0)?;
+                    let device_condition = data.get("device_condition")?.get(0)?;
+                    let customers_contact_number = data.get("borrower_contact_number")?.get(0)?;
+                    let customer_addr = data.get("borrower_addr")?.get(0)?;
+                    let customer_id = data.get("borrower_id")?.get(0)?;
 
+                    let accessories = data.get("accessories")?.get(0)?.to_owned();
+                    let staff_name = data.get("staff_name")?.get(0)?.to_owned();
+                    let date_of_sale = data.get("date")?.get(0)?.to_owned();
+
+                    let customer = Customer::new(customer_name, customers_contact_number, customer_addr, customer_id);
+                    let device = LeasedDevice::new(device_model, device_storage, device_color, device_imei, device_condition);
+
+                    Some((customer, device, accessories, staff_name, date_of_sale))
+                }
+                if let Some((customer, device, accessories, staff, date)) = extract_data(&data) {
+                    util::renderer::lease_form(&customer, &device, accessories, staff, date);
+                } else {
+                    let _ = Notification::new()
+                        .summary("Failed to read form data")
+                        .appname("Casdesk")
+                        .show();
+                }
             },
-            // div {
-            //     h4 {
-            //         "Device information"
-            //     }
-            // }
             div {
                 class: "form-row",
                 label { "Device:" }
@@ -451,6 +476,11 @@ fn LeaseForm() -> Element {
                 class: "form-row",
                 label { "Device Color:" }
                 input { r#type: "text", name: "device_color", placeholder: "Enter device color" }
+            }
+            div {
+                class: "form-row",
+                label { "Device Storage (GB):" }
+                input { r#type: "number", name: "device_storage", placeholder: "64" }
             }
             div {
                 class: "form-row",
@@ -467,40 +497,35 @@ fn LeaseForm() -> Element {
                 label { "Accessories:" }
                 input { r#type: "text", name: "accessories", placeholder: "None/Case/Screen Protector" }
             }
-            // div {
-            //     h4 {
-            //         "Borrower's information"
-            //     }
-            // }
             div {
                 class: "form-row",
-                label { "Borrower's Name:" }
+                label { "Borrower's name:" }
                 input { r#type: "text", name: "borrower_name", placeholder: "Enter borrower name" }
             }
             div {
                 class: "form-row",
                 label { "Borrower's contact number:" }
-                input { r#type: "text", name: "borrowers_contact_number", placeholder: "Enter phone number" }
+                input { r#type: "text", name: "borrower_contact_number", placeholder: "Enter phone number" }
             }
             div {
                 class: "form-row",
                 label { "Borrower's address:" }
-                input { r#type: "text", name: "seller_addr", placeholder: "Enter seller's address" }
+                input { r#type: "text", name: "borrower_addr", placeholder: "Enter borrower's address" }
             }
             div {
                 class: "form-row",
                 label { "Borrower's ID number:" }
-                input { r#type: "text", name: "seller_id", placeholder: "Enter customer ID" }
+                input { r#type: "text", name: "borrower_id", placeholder: "Enter borrower's ID" }
             }
             div {
                 class: "form-row",
                 label { "Staff name:" }
-                input { r#type: "text", name: "stuff_name", placeholder: "Enter staff name" }
+                input { r#type: "text", name: "staff_name", placeholder: "Enter staff name" }
             }
             div {
                 class: "form-row",
                 label { "Date:" }
-                input { r#type: "text", name: "date_of_sale", placeholder: "MM/DD/YY" }
+                input { r#type: "text", name: "date", placeholder: "MM/DD/YY" }
             }
             div {
                 class: "form-submit-button-container",

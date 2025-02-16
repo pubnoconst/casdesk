@@ -86,21 +86,19 @@ impl PurchasedDevice {
 #[derive(Debug)]
 pub struct LeasedDevice {
     name: Rc<str>,
+    storage: Rc<str>,
     color: Rc<str>,
-    locked: Rc<str>,
     imei: Rc<str>,
-    accessories: Rc<str>,
     condition: Rc<str>
 }
 
 impl LeasedDevice {
-    pub fn new(name: &str, color: &str, locked: &str, imei: &str, accessories: &str, condition: &str) -> Self {
+    pub fn new(name: &str, storage: &str, color: &str, imei: &str, condition: &str) -> Self {
         Self {
             name: name.cut_30().into(),
+            storage: storage.cut_30().into(),
             color: color.cut_30().into(),
-            locked: locked.cut_30().into(),
             imei: imei.cut_30().into(),
-            accessories: accessories.cut_30().into(),
             condition: condition.cut_30().into()
         }
     }

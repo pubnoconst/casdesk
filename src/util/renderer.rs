@@ -94,7 +94,8 @@ pub fn refurbished_device_sale_form(
     staff: String,
     payment_method: String,
 ) {
-    let template = include_str!("../../assets/mockups/refurbished_device_sale_form.html").to_string();
+    let template =
+        include_str!("../../assets/mockups/refurbished_device_sale_form.html").to_string();
     let replacements = vec![
         ("__CUSTOMER_NAME", &customer.name as &str),
         ("__CUSTOMER_CONTACT", &customer.contact as &str),
@@ -132,9 +133,9 @@ pub fn new_device_sale_form(
         ("__DEVICE_LOCKED", &device.locked as &str),
         ("__DEVICE_IMEI", &device.imei as &str),
         ("__DEVICE_PRICE", &device.price as &str),
-        ("__PAYMENT_METHOD", &payment_method as &str),
-        ("__DATE", &date as &str),
-        ("__STAFF", &staff as &str),
+        ("__PAYMENT_METHOD", &payment_method),
+        ("__DATE", &date),
+        ("__STAFF", &staff),
     ];
 
     let filled_template = replace_placeholders(&template, &replacements);
@@ -162,11 +163,36 @@ pub fn purchase_form(
         ("__DEVICE_LOCKED", &device.locked as &str),
         ("__DEVICE_IMEI", &device.imei as &str),
         ("__DEVICE_PRICE", &price as &str),
-        ("__NOTES", &notes as &str),
-        ("__DATE", &date as &str),
-        ("__STAFF", &staff as &str),
+        ("__NOTES", &notes),
+        ("__DATE", &date),
+        ("__STAFF", &staff),
     ];
 
     let filled_template = replace_placeholders(&template, &replacements);
     generate_and_open_form(filled_template, "purchase_form.html".to_string());
+}
+
+pub fn lease_form(
+    borrower: &Customer,
+    device: &LeasedDevice,
+    accessories: String,
+    staff: String,
+    date: String,
+) {
+    let template = include_str!("../../assets/mockups/lease_device_form.html");
+    let replacements = vec![
+        ("__BORROWER_NAME", &borrower.name as &str),
+        ("__DEVICE_STORAGE", &device.storage as &str),
+        ("__DEVICE_COLOR", &device.color as &str),
+        ("__DEVICE_IMEI", &device.imei as &str),
+        ("__DEVICE_CONDITION", &device.condition as &str),
+        ("__ACCESSORIES", &accessories),
+        ("__BORROWER_ADDRESS", &borrower.address),
+        ("__BORROWER_CONTACT", &borrower.contact),
+        ("__BORROWER_ID", &borrower.id_num),
+        ("__DATE", &date),
+        ("__STAFF", &staff),
+    ];
+    let filled_template = replace_placeholders(template, &replacements);
+    generate_and_open_form(filled_template, "leaseform.html".to_string());
 }
