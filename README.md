@@ -4,7 +4,7 @@
 
 **Casdesk** is designed to assist you with various tasks, including printing forms, performing calculations, and generating job quotes. This project is **not sponsored by any for-profit entity** and is provided as-is, under heavy construction. Use it at your own risk.
 
-![Image](https://i.imgur.com/FGjqzyb.png)
+![Image](https://i.imgur.com/IkWf7n4.png)
 
 ---
 
