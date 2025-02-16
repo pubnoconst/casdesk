@@ -3,7 +3,7 @@ use std::str::FromStr;
 use crate::Route;
 use dioxus::prelude::*;
 use dioxus_free_icons::icons::fi_icons::{
-    FiChevronLeft, FiCreditCard, FiFrown, FiMonitor, FiSmile,
+    FiAlertTriangle, FiCheck, FiCheckCircle, FiChevronLeft, FiCreditCard, FiFrown, FiMonitor, FiSmile
 };
 use dioxus_free_icons::Icon;
 use rust_decimal::Decimal;
@@ -20,7 +20,7 @@ pub fn Adjust() -> Element {
 
     let missing_extra = use_memo(move || {
         (*extra.read() - *extra.read() * dec!(0.009))
-            .round_dp_with_strategy(2, rust_decimal::RoundingStrategy::AwayFromZero)
+            .round_dp(2)
     });
 
     let missing_lost = use_memo(move || dec!(-1) * *missing_extra.read());
@@ -92,12 +92,12 @@ pub fn Adjust() -> Element {
                 if *eftpos.read() > *mybug.read() {
                     div { "You are missing ${missing_extra} sale from the EFTPOS" }
                     Icon {
-                        icon: FiSmile
+                        icon: FiCheckCircle
                     }
-                } else {
+                } else if *eftpos.read() < *mybug.read() {
                     div { "You have ${missing_lost} extraneous sale in mybug" }
                     Icon {
-                        icon: FiFrown
+                        icon: FiAlertTriangle
                     }
                 }
             }
