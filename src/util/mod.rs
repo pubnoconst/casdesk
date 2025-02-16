@@ -105,3 +105,75 @@ impl LeasedDevice {
 }
 
 
+mod date {
+    use std::time::{SystemTime, UNIX_EPOCH};
+
+    pub fn get_today() -> String {
+        // Get the current system time
+        let now = SystemTime::now();
+
+        // Calculate the duration since the UNIX epoch
+        let duration = now.duration_since(UNIX_EPOCH).expect("Time went backwards");
+
+        // Convert the duration to seconds
+        let secs = duration.as_secs();
+
+        // Calculate the number of days since the epoch, adjusting for the current time of day
+        let days_since_epoch = (secs + 86400 / 2) / 86400; // Add 12 hours to round to the nearest day
+
+        // Calculate the current year, month, and day
+        let (year, month, day) = days_to_ymd(days_since_epoch);
+
+        // Format the date as DD/MM/YYYY
+        format!("{:02}/{:02}/{:04}", day, month, year)
+    }
+
+    fn days_to_ymd(mut days_since_epoch: u64) -> (u64, u64, u64) {
+        let mut year = 1970;
+        let mut month = 1;
+
+        // Iterate through years
+        loop {
+            let is_leap_year = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+            let days_in_year = if is_leap_year { 366 } else { 365 };
+
+            if days_since_epoch >= days_in_year {
+                days_since_epoch -= days_in_year;
+                year += 1;
+            } else {
+                break;
+            }
+        }
+
+        // Iterate through months
+        let is_leap_year = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        let days_in_month = [
+            31,
+            if is_leap_year { 29 } else { 28 },
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31,
+        ];
+
+        for &days in &days_in_month {
+            if days_since_epoch >= days {
+                days_since_epoch -= days;
+                month += 1;
+            } else {
+                break;
+            }
+        }
+
+        // Calculate the day
+        let day = days_since_epoch + 1;
+
+        (year, month, day)
+    }
+}

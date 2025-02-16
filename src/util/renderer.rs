@@ -197,3 +197,28 @@ pub fn lease_form(
     let filled_template = replace_placeholders(template, &replacements);
     generate_and_open_form(filled_template, "leaseform.html".to_string());
 }
+
+pub fn fragile_screen_form(customer_name: &str, device_model: &str) {
+    let template = include_str!("../../assets/mockups/fragile_screen_form.html");
+    let today = date::get_today();
+    let replacements = vec![
+        ("__CUSTOMER_NAME", customer_name),
+        ("__DEVICE_MODEL", device_model),
+        ("__DATE", &today),
+    ];
+    let filled_template = replace_placeholders(template, &replacements);
+    generate_and_open_form(filled_template, "fragile_screen_form.html".to_string());
+}
+
+
+pub fn back_glass_form(customer_name: &str, device_model: &str) {
+    let template = include_str!("../../assets/mockups/back_glass_form.html");
+    let today = date::get_today();
+    let replacements = vec![
+        ("__CUSTOMER_NAME", customer_name),
+        ("__DEVICE_MODEL", device_model),
+        ("__DATE", &today),
+    ];
+    let filled_template = replace_placeholders(template, &replacements);
+    generate_and_open_form(filled_template, "back_glass_form.html".to_string());
+}

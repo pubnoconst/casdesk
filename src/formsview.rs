@@ -14,6 +14,8 @@ enum Tab {
     SaleRefurbished,
     Purchase,
     Lease,
+    FragileScreen,
+    BackGlass
 }
 
 #[component]
@@ -70,14 +72,24 @@ fn FormBody() -> Element {
                     onclick: move |_| current_tab.set(Tab::Lease),
                     "Lease a device"
                 }
+                button {
+                    onclick: move |_| current_tab.set(Tab::FragileScreen),
+                    "Fragile screen form"
+                }
+                button {
+                    onclick: move |_| current_tab.set(Tab::BackGlass),
+                    "Back glass form"
+                }
             }
             div {
                 class: "form-container",
                 match *(current_tab.read()) {
                     Tab::SaleRefurbished => rsx! { SaleRefurbishedForm {} },
-                    Tab::SaleNew => rsx! { SaleNewForm{} },
+                    Tab::SaleNew => rsx! { SaleNewForm {} },
                     Tab::Purchase => rsx! { PurchaseForm {} },
                     Tab::Lease => rsx! { LeaseForm {} },
+                    Tab::FragileScreen => rsx! { FragileScreenForm {} },
+                    Tab::BackGlass => rsx! { BackGlassForm {} }
                 }
             }
         }
@@ -526,6 +538,102 @@ fn LeaseForm() -> Element {
                 class: "form-row",
                 label { "Date:" }
                 input { r#type: "text", name: "date", placeholder: "MM/DD/YY" }
+            }
+            div {
+                class: "form-submit-button-container",
+                button {
+                    class: "encouraged-button",
+                    class: "form-submit-button",
+                    r#type: "submit",
+                    "Confirm"
+                }
+            }
+        }
+    }
+}
+
+#[component]
+fn FragileScreenForm() -> Element {
+    rsx! {
+        h2 { "Fragile Screen Risk Acknowledgement Form" }
+        form {
+            class: "form-div",
+            onsubmit: move |e: Event<FormData>| {
+                e.prevent_default();
+                let data: HashMap<String, FormValue> = e.data().values();
+                
+                fn extract_data(data: HashMap<String, FormValue>) -> Option<(String, String)>{
+                    let cn = data.get("customer_name")?.first()?.into();
+                    let dm = data.get("device_model")?.first()?.into();
+                    Some((cn, dm))
+                }
+
+                if let Some((customer, device)) = extract_data(data) {
+                    util::renderer::fragile_screen_form(&customer, &device);
+                } else {
+                    let _ = Notification::new()
+                                .summary("Failed to read form data")
+                                .appname("Casdesk")
+                                .show();
+                }
+            },
+            div {
+                class: "form-row",
+                label { "Customer Name:" }
+                input { r#type: "text", name: "customer_name" }
+            }
+            div {
+                class: "form-row",
+                label { "Device:" }
+                input { r#type: "text", name: "device_model" }
+            }
+            div {
+                class: "form-submit-button-container",
+                button {
+                    class: "encouraged-button",
+                    class: "form-submit-button",
+                    r#type: "submit",
+                    "Confirm"
+                }
+            }
+        }
+    }
+}
+
+#[component]
+fn BackGlassForm() -> Element {
+    rsx! {
+        h2 { "Back Glass Risk Acknowledgement Form" }
+        form {
+            class: "form-div",
+            onsubmit: move |e: Event<FormData>| {
+                e.prevent_default();
+                let data: HashMap<String, FormValue> = e.data().values();
+                
+                fn extract_data(data: HashMap<String, FormValue>) -> Option<(String, String)>{
+                    let cn = data.get("customer_name")?.first()?.into();
+                    let dm = data.get("device_model")?.first()?.into();
+                    Some((cn, dm))
+                }
+
+                if let Some((customer, device)) = extract_data(data) {
+                    util::renderer::back_glass_form(&customer, &device);
+                } else {
+                    let _ = Notification::new()
+                                .summary("Failed to read form data")
+                                .appname("Casdesk")
+                                .show();
+                }
+            },
+            div {
+                class: "form-row",
+                label { "Customer Name:" }
+                input { r#type: "text", name: "customer_name" }
+            }
+            div {
+                class: "form-row",
+                label { "Device:" }
+                input { r#type: "text", name: "device_model" }
             }
             div {
                 class: "form-submit-button-container",
