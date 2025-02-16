@@ -8,7 +8,7 @@ mod quoteview;
 use quoteview::*;
 mod util;
 
-static CSS: Asset = asset!("/assets/main.css");
+static CSS: Asset = asset!("/assets/main.css", CssAssetOptions::new().with_minify(true));
 
 #[derive(Routable, Clone, PartialEq)]
 pub enum Route {

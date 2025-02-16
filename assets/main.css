@@ -114,7 +114,6 @@ button:focus {
     position: absolute;
     top: 0;
     left: 3%;
-    /* right: 3%; */
 }
 
 #empty-table-card {
@@ -133,7 +132,6 @@ button:focus {
     border: 1px solid #ddd;
     border-radius: 6px;
     background: white;
-    /* padding-top: 10px; */
 }
 
 thead {
@@ -226,7 +224,6 @@ tr:last-child td:last-child {
 
 .encouraged-button {
     background: #0078D4;
-    /* Fluent blue */
     color: white;
     border: none;
     padding: 5px 8px;
