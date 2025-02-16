@@ -3,7 +3,7 @@ use std::str::FromStr;
 use crate::Route;
 use dioxus::prelude::*;
 use dioxus_free_icons::icons::fi_icons::{
-    FiAlertTriangle, FiCheck, FiCheckCircle, FiChevronLeft, FiCreditCard, FiFrown, FiMonitor, FiSmile
+    FiAlertTriangle, FiCheckCircle, FiChevronLeft, FiCreditCard, FiMonitor, 
 };
 use dioxus_free_icons::Icon;
 use rust_decimal::Decimal;
