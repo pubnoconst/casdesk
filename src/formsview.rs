@@ -95,19 +95,19 @@ fn SaleRefurbishedForm() -> Element {
                 let data: HashMap<String, FormValue> = e.data().values();
 
                 fn extract_data(data: &HashMap<String, FormValue>) -> Option<(Customer, SellableDevice, String, String, String)> {
-                    let customer_name = data.get("customer_name")?.get(0)?;
-                    let device_model = data.get("device_model")?.get(0)?;
-                    let device_color = data.get("device_color")?.get(0)?;
-                    let device_imei = data.get("device_imei")?.get(0)?;
-                    let device_provider = data.get("device_provider")?.get(0)?;
-                    let device_price = data.get("device_price")?.get(0)?;
-                    let customers_contact_number = data.get("customers_contact_number")?.get(0)?;
-                    let customer_addr = data.get("customer_addr")?.get(0)?;
-                    let customer_id = data.get("customer_id")?.get(0)?;
+                    let customer_name = data.get("customer_name")?.first()?;
+                    let device_model = data.get("device_model")?.first()?;
+                    let device_color = data.get("device_color")?.first()?;
+                    let device_imei = data.get("device_imei")?.first()?;
+                    let device_provider = data.get("device_provider")?.first()?;
+                    let device_price = data.get("device_price")?.first()?;
+                    let customers_contact_number = data.get("customers_contact_number")?.first()?;
+                    let customer_addr = data.get("customer_addr")?.first()?;
+                    let customer_id = data.get("customer_id")?.first()?;
 
-                    let stuff_name = data.get("stuff_name")?.get(0)?.to_owned();
-                    let date_of_sale = data.get("date_of_sale")?.get(0)?.to_owned();
-                    let payment_method = data.get("payment_method")?.get(0)?;
+                    let stuff_name = data.get("stuff_name")?.first()?.to_owned();
+                    let date_of_sale = data.get("date_of_sale")?.first()?.to_owned();
+                    let payment_method = data.get("payment_method")?.first()?;
 
                     let customer = Customer::new(customer_name, customers_contact_number, customer_addr, customer_id);
                     let device = SellableDevice::new(device_model, device_color, device_provider, device_imei, device_price);
@@ -208,19 +208,19 @@ fn SaleNewForm() -> Element {
                 let data: HashMap<String, FormValue> = e.data().values();
 
                 fn extract_data(data: &HashMap<String, FormValue>) -> Option<(Customer, SellableDevice, String, String, String)> {
-                    let customer_name = data.get("customer_name")?.get(0)?;
-                    let device_model = data.get("device_model")?.get(0)?;
-                    let device_color = data.get("device_color")?.get(0)?;
-                    let device_imei = data.get("device_imei")?.get(0)?;
-                    let device_provider = data.get("device_provider")?.get(0)?;
-                    let device_price = data.get("device_price")?.get(0)?;
-                    let customers_contact_number = data.get("customers_contact_number")?.get(0)?;
-                    let customer_addr = data.get("customer_addr")?.get(0)?;
-                    let customer_id = data.get("customer_id")?.get(0)?;
+                    let customer_name = data.get("customer_name")?.first()?;
+                    let device_model = data.get("device_model")?.first()?;
+                    let device_color = data.get("device_color")?.first()?;
+                    let device_imei = data.get("device_imei")?.first()?;
+                    let device_provider = data.get("device_provider")?.first()?;
+                    let device_price = data.get("device_price")?.first()?;
+                    let customers_contact_number = data.get("customers_contact_number")?.first()?;
+                    let customer_addr = data.get("customer_addr")?.first()?;
+                    let customer_id = data.get("customer_id")?.first()?;
 
-                    let stuff_name = data.get("stuff_name")?.get(0)?.to_owned();
-                    let date_of_sale = data.get("date_of_sale")?.get(0)?.to_owned();
-                    let payment_method = data.get("payment_method")?.get(0)?;
+                    let stuff_name = data.get("stuff_name")?.first()?.to_owned();
+                    let date_of_sale = data.get("date_of_sale")?.first()?.to_owned();
+                    let payment_method = data.get("payment_method")?.first()?;
 
                     let customer = Customer::new(customer_name, customers_contact_number, customer_addr, customer_id);
                     let device = SellableDevice::new(device_model, device_color, device_provider, device_imei, device_price);
@@ -320,21 +320,21 @@ fn PurchaseForm() -> Element {
                 let data: HashMap<String, FormValue> = e.data().values();
 
                 fn extract_data(data: HashMap<String, FormValue>) -> Option<(Customer, PurchasedDevice, String, String, String, String)> {
-                    let seller_name = data.get("seller_name")?.get(0)?;
-                    let seller_address = data.get("seller_addr")?.get(0)?;
-                    let seller_contact = data.get("sellers_contact_number")?.get(0)?;
-                    let seller_ID = data.get("seller_id")?.get(0)?;
+                    let seller_name = data.get("seller_name")?.first()?;
+                    let seller_address = data.get("seller_addr")?.first()?;
+                    let seller_contact = data.get("sellers_contact_number")?.first()?;
+                    let seller_ID = data.get("seller_id")?.first()?;
                     
-                    let device_model = data.get("device_model")?.get(0)?;
-                    let device_color = data.get("device_color")?.get(0)?;
-                    let device_memory = data.get("device_memory")?.get(0)?;
-                    let device_imei = data.get("device_imei")?.get(0)?;
-                    let device_provider = data.get("device_provider")?.get(0)?;
+                    let device_model = data.get("device_model")?.first()?;
+                    let device_color = data.get("device_color")?.first()?;
+                    let device_memory = data.get("device_memory")?.first()?;
+                    let device_imei = data.get("device_imei")?.first()?;
+                    let device_provider = data.get("device_provider")?.first()?;
                     
-                    let purchase_price = data.get("purchase_price")?.get(0)?.to_owned();
-                    let staff_name = data.get("staff_name")?.get(0)?.to_owned();
-                    let date = data.get("date_of_sale")?.get(0)?.to_owned();
-                    let notes = data.get("notes")?.get(0)?.to_owned();
+                    let purchase_price = data.get("purchase_price")?.first()?.to_owned();
+                    let staff_name = data.get("staff_name")?.first()?.to_owned();
+                    let date = data.get("date_of_sale")?.first()?.to_owned();
+                    let notes = data.get("notes")?.first()?.to_owned();
                     
                     let customer = Customer::new(seller_name, seller_contact, seller_address, seller_ID);
                     let device = PurchasedDevice::new(device_model, device_color, device_memory, device_provider, device_imei);
@@ -439,19 +439,19 @@ fn LeaseForm() -> Element {
                 let data: HashMap<String, FormValue> = e.data.values();
                 
                 fn extract_data(data: &HashMap<String, FormValue>) -> Option<(Customer, LeasedDevice, String, String, String)> {
-                    let customer_name = data.get("borrower_name")?.get(0)?;
-                    let device_model = data.get("device_model")?.get(0)?;
-                    let device_storage = data.get("device_storage")?.get(0)?;
-                    let device_color = data.get("device_color")?.get(0)?;
-                    let device_imei = data.get("device_imei")?.get(0)?;
-                    let device_condition = data.get("device_condition")?.get(0)?;
-                    let customers_contact_number = data.get("borrower_contact_number")?.get(0)?;
-                    let customer_addr = data.get("borrower_addr")?.get(0)?;
-                    let customer_id = data.get("borrower_id")?.get(0)?;
+                    let customer_name = data.get("borrower_name")?.first()?;
+                    let device_model = data.get("device_model")?.first()?;
+                    let device_storage = data.get("device_storage")?.first()?;
+                    let device_color = data.get("device_color")?.first()?;
+                    let device_imei = data.get("device_imei")?.first()?;
+                    let device_condition = data.get("device_condition")?.first()?;
+                    let customers_contact_number = data.get("borrower_contact_number")?.first()?;
+                    let customer_addr = data.get("borrower_addr")?.first()?;
+                    let customer_id = data.get("borrower_id")?.first()?;
 
-                    let accessories = data.get("accessories")?.get(0)?.to_owned();
-                    let staff_name = data.get("staff_name")?.get(0)?.to_owned();
-                    let date_of_sale = data.get("date")?.get(0)?.to_owned();
+                    let accessories = data.get("accessories")?.first()?.to_owned();
+                    let staff_name = data.get("staff_name")?.first()?.to_owned();
+                    let date_of_sale = data.get("date")?.first()?.to_owned();
 
                     let customer = Customer::new(customer_name, customers_contact_number, customer_addr, customer_id);
                     let device = LeasedDevice::new(device_model, device_storage, device_color, device_imei, device_condition);

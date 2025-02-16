@@ -12,7 +12,7 @@ fn open_html_file(file_path: PathBuf) -> Result<(), std::io::Error> {
     #[cfg(target_os = "windows")]
     {
         Command::new("cmd")
-            .args(&[
+            .args([
                 "/C",
                 "start",
                 "msedge",
@@ -182,6 +182,7 @@ pub fn lease_form(
     let template = include_str!("../../assets/mockups/lease_device_form.html");
     let replacements = vec![
         ("__BORROWER_NAME", &borrower.name as &str),
+        ("__DEVICE_NAME", &device.name as &str),
         ("__DEVICE_STORAGE", &device.storage as &str),
         ("__DEVICE_COLOR", &device.color as &str),
         ("__DEVICE_IMEI", &device.imei as &str),

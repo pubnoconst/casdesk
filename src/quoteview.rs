@@ -26,8 +26,8 @@ fn quote(part_cost: f64) -> f64 {
 #[component]
 pub fn Quote() -> Element {
     let nav = navigator();
-    let mut items = use_signal(|| Vec::<Item>::new());
-    let mut input = use_signal(|| String::new());
+    let mut items = use_signal(Vec::<Item>::new);
+    let mut input = use_signal(String::new);
     let sum = items
         .read()
         .iter()
@@ -95,7 +95,7 @@ pub fn Quote() -> Element {
                                                     id: "quote-item-delete-btn",
                                                     class: "danger-button",
                                                     onclick: {
-                                                        let id = item.id.clone();
+                                                        let id = item.id;
                                                         move |_| {
                                                             items.write().retain(|x| x.id != id);
                                                         }
@@ -127,7 +127,7 @@ pub fn Quote() -> Element {
                             onclick: move |_| {
                                 if let Ok(num) = input.clone().read().parse::<f64>() {
                                     let id = SystemTime::now().duration_since(UNIX_EPOCH).expect("Time went backwards").as_millis();
-                                    items.write().push(Item { id: id, value: num });
+                                    items.write().push(Item { id, value: num });
                                 }
                                 input.set(String::new());
                             },
@@ -149,7 +149,7 @@ pub fn Quote() -> Element {
                                     id: "copy-sum-button",
                                     onclick: move |_| {
                                         if let Ok(mut cb) = Clipboard::new() {
-                                            if let Ok(_) = cb.set_text(format!("{:.2}", sum)) {
+                                            if cb.set_text(format!("{:.2}", sum)).is_ok() {
                                                 let _ = Notification::new()
                                                     .summary("Copy successful")
                                                     .body(&format!("Successfully copied {:.2} to the clipboard", sum))
@@ -174,7 +174,7 @@ pub fn Quote() -> Element {
                                     id: "copy-deposit-button",
                                     onclick: move |_| {
                                         if let Ok(mut cb) = Clipboard::new() {
-                                            if let Ok(_) = cb.set_text(format!("{:.2}", sum/2.)) {
+                                            if cb.set_text(format!("{:.2}", sum/2.)).is_ok() {
                                                 let _ = Notification::new()
                                                     .summary("Copy successful")
                                                     .body(&format!("Successfully copied {:.2} to the clipboard", sum))
