@@ -29,7 +29,7 @@ fn main() {
         .with_cfg(
             dioxus::desktop::Config::default()
                 .with_menu(None)
-                .with_window(dioxus::desktop::WindowBuilder::new().with_title("Casdesk")),
+                .with_window(dioxus::desktop::WindowBuilder::new().with_title("Casdesk 1.0.0")),
         )
         .launch(App);
 }
