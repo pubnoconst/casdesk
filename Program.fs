@@ -3,11 +3,12 @@ open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Themes.Fluent
 open Avalonia.FuncUI.Hosts
 open Avalonia.FuncUI.Elmish
+open Avalonia.FuncUI.Types
 open Elmish
 
 open Pages
 
-type Model = {CurrentPage: Page}
+type Model = {CurrentPage: Page} 
 
 type Msg =  
     | NavigateTo of Page
@@ -23,10 +24,10 @@ let update msg model =
 
 let view (model: Model) dispatch =
     match model.CurrentPage with
-    | Home -> Home.view (fun page -> dispatch (NavigateTo page))
-    | Quote -> Quote.view (fun _ -> dispatch BackToHome)
-    | Adjust -> Adjust.view (fun _ -> dispatch BackToHome)
-    | Forms -> Forms.view (fun _ -> dispatch BackToHome)
+    | Home -> Home.view (fun page -> dispatch (NavigateTo page)) :> IView
+    | Quote -> Quote.view (fun _ -> dispatch BackToHome) :> IView
+    | Adjust -> Adjust.view (fun _ -> dispatch BackToHome) :> IView
+    | Forms -> Forms.view (fun _ -> dispatch BackToHome) :> IView
 
 type MainWindow() as this =
     inherit HostWindow()
@@ -42,7 +43,7 @@ type App() =
 
     override this.Initialize() =
         this.Styles.Add (FluentTheme())
-        this.RequestedThemeVariant <- Styling.ThemeVariant.Light
+        this.RequestedThemeVariant <- Styling.ThemeVariant.Default
 
     override this.OnFrameworkInitializationCompleted() =
         match this.ApplicationLifetime with
