@@ -14,18 +14,18 @@ import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
 import scalafx.Includes._
 import javafx.application.Application
-import atlantafx.base.theme.PrimerLight
+import atlantafx.base.theme._
 
 object MainApp extends JFXApp3:
   override def start(): Unit = 
-    Application.setUserAgentStylesheet(PrimerLight().getUserAgentStylesheet())
+    Application.setUserAgentStylesheet(CupertinoLight().getUserAgentStylesheet())
     val formsScene = new Forms()
     val homeScene = new Home()
     stage = new JFXApp3.PrimaryStage:
       title = "Casdesk"
       scene = homeScene
-      minWidth = 600
-      minHeight = 600
+      width = 700
+      height = 700
 
     homeScene.formsBtn.onAction = (e: ActionEvent) => stage.scene = formsScene
     formsScene.backBtn.onAction = (e: ActionEvent) => stage.scene = homeScene
