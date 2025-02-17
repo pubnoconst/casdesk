@@ -8,10 +8,11 @@ open Pages
 let view (navigateTo: Page -> unit) =
     Grid.create [
         Grid.rowDefinitions "Auto, *"
-        Grid.margin 25
+        Grid.margin 20
         Grid.children [
             // nav grid
             Grid.create [
+                Grid.row 0
                 Grid.verticalAlignment VerticalAlignment.Center
                 Grid.columnDefinitions "Auto, *, Auto"
                 Grid.children [
@@ -33,7 +34,51 @@ let view (navigateTo: Page -> unit) =
             ]
             // content grid
             Grid.create [
-
+                Grid.row 1
+                Grid.margin 0
+                Grid.columnDefinitions "Auto,*"
+                Grid.children [
+                    TabControl.create [
+                        TabControl.tabStripPlacement Dock.Left
+                        TabControl.viewItems [
+                            TabItem.create [
+                                TabItem.header "Sale of a refubished Device"
+                                TabItem.content (TextBlock.create [
+                                    TextBlock.text "Refurbished Device Sale Form"
+                                    TextBlock.margin 5 
+                                ])
+                            ]
+                            TabItem.create [
+                                TabItem.header "Sale of a new device"
+                                TabItem.content (TextBlock.create [
+                                    TextBlock.text "New Device Sale Form"
+                                    TextBlock.margin 5
+                                ])
+                            ]
+                            TabItem.create [
+                                TabItem.header "Device purchase"
+                                TabItem.content (TextBlock.create [
+                                    TextBlock.text "Device Purcahse Form"
+                                    TextBlock.margin 5
+                                ])
+                            ]
+                            TabItem.create [
+                                TabItem.header "Fragile Screen"
+                                TabItem.content (TextBlock.create [
+                                    TextBlock.text "Fragile Screen Form"
+                                    TextBlock.margin 5
+                                ])
+                            ]
+                            TabItem.create [
+                                TabItem.header "Back Glass"
+                                TabItem.content (TextBlock.create [
+                                    TextBlock.text "Back Glass Form"
+                                    TextBlock.margin 5
+                                ])
+                            ]
+                        ]
+                    ]
+                ]
             ]
         ]
     ]
