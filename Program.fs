@@ -14,7 +14,7 @@ type Msg =
     | NavigateTo of Page
     | BackToHome
 
-let init () = {CurrentPage = Home}, Cmd.none
+let init () = {CurrentPage = Forms}, Cmd.none
 
 let update msg model =
     match msg with

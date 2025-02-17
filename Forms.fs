@@ -5,9 +5,15 @@ open Avalonia.FuncUI.DSL
 open Avalonia.Layout
 open Pages
 
+let refurbished_form () =
+    Grid.create [
+        
+    ] 
+
+
 let view (navigateTo: Page -> unit) =
     Grid.create [
-        Grid.rowDefinitions "Auto, *"
+        Grid.rowDefinitions "Auto, 25, *"
         Grid.margin 20
         Grid.children [
             // nav grid
@@ -32,9 +38,12 @@ let view (navigateTo: Page -> unit) =
                     ]
                 ]
             ]
-            // content grid
             Grid.create [
                 Grid.row 1
+            ]
+            // content grid
+            Grid.create [
+                Grid.row 2
                 Grid.margin 0
                 Grid.columnDefinitions "Auto,*"
                 Grid.children [
@@ -42,35 +51,52 @@ let view (navigateTo: Page -> unit) =
                         TabControl.tabStripPlacement Dock.Left
                         TabControl.viewItems [
                             TabItem.create [
-                                TabItem.header "Sale of a refubished Device"
-                                TabItem.content (TextBlock.create [
-                                    TextBlock.text "Refurbished Device Sale Form"
-                                    TextBlock.margin 5 
-                                ])
+                                TabItem.header (TextBlock.create [ 
+                                        TextBlock.text "Sale of a refurbished device" 
+                                        TextBlock.fontSize 18
+                                    ]
+                                )
+                                TabItem.content (refurbished_form ()) 
                             ]
                             TabItem.create [
-                                TabItem.header "Sale of a new device"
+                                TabItem.header (TextBlock.create [ 
+                                        TextBlock.text "Sale of a new device" 
+                                        TextBlock.fontSize 18
+                                    ]
+                                )
                                 TabItem.content (TextBlock.create [
                                     TextBlock.text "New Device Sale Form"
                                     TextBlock.margin 5
                                 ])
                             ]
                             TabItem.create [
-                                TabItem.header "Device purchase"
+                                TabItem.header (TextBlock.create [ 
+                                        TextBlock.text "Purchase of a device" 
+                                        TextBlock.fontSize 18
+                                    ]
+                                )
                                 TabItem.content (TextBlock.create [
                                     TextBlock.text "Device Purcahse Form"
                                     TextBlock.margin 5
                                 ])
                             ]
                             TabItem.create [
-                                TabItem.header "Fragile Screen"
+                                TabItem.header (TextBlock.create [ 
+                                        TextBlock.text "Fragile screen" 
+                                        TextBlock.fontSize 18
+                                    ]
+                                )
                                 TabItem.content (TextBlock.create [
                                     TextBlock.text "Fragile Screen Form"
                                     TextBlock.margin 5
                                 ])
                             ]
                             TabItem.create [
-                                TabItem.header "Back Glass"
+                                TabItem.header (TextBlock.create [ 
+                                        TextBlock.text "Back glass" 
+                                        TextBlock.fontSize 18
+                                    ]
+                                )
                                 TabItem.content (TextBlock.create [
                                     TextBlock.text "Back Glass Form"
                                     TextBlock.margin 5
@@ -82,3 +108,4 @@ let view (navigateTo: Page -> unit) =
             ]
         ]
     ]
+
