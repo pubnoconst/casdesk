@@ -26,7 +26,7 @@ let view (navigateTo: Page -> unit) =
                     ]
                     TextBlock.create [
                         Grid.column 2
-                        TextBlock.text "Forms"
+                        TextBlock.text "Quote"
                         TextBlock.fontSize 24
                     ]
                 ]
