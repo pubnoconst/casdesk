@@ -10,7 +10,8 @@ mod adjustview;
 use adjustview::*;
 mod util;
 
-static CSS: Asset = asset!("/assets/main.css", CssAssetOptions::new().with_minify(true));
+// static CSS: Asset = asset!("/assets/main.css", CssAssetOptions::new().with_minify(true));
+const CSS: &str = include_str!("../assets/main.css");
 
 #[derive(Routable, Clone, PartialEq)]
 pub enum Route {
@@ -37,8 +38,9 @@ fn main() {
 #[component]
 fn App() -> Element {
     rsx! {
-        document::Stylesheet{href: CSS}
-        Router::<Route> {}
+        // document::Stylesheet{href: CSS}
+        Router::<Route> {},
+        style { "{CSS}" }
     }
 }
 
