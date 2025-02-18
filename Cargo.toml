@@ -1,6 +1,6 @@
 [package]
 name = "casdesk"
-version = "1.0.0"
+version = "1.1.1"
 authors = ["pubnoconst <noconst@email.com>"]
 edition = "2021"
 
