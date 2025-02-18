@@ -1,3 +1,8 @@
 /target
 **/*.rs.bk
 Cargo.lock
+*.exe
+*.bsp
+*.metals
+*.vscode
+*.scala-build
