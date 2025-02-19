@@ -555,7 +555,7 @@ fn LeaseForm() -> Element {
 #[component]
 fn FragileScreenForm() -> Element {
     rsx! {
-        h2 { "Fragile Screen Risk Acknowledgement Form" }
+        h2 { "Fragile Screen Form" }
         form {
             class: "form-div",
             onsubmit: move |e: Event<FormData>| {
@@ -603,7 +603,7 @@ fn FragileScreenForm() -> Element {
 #[component]
 fn BackGlassForm() -> Element {
     rsx! {
-        h2 { "Back Glass Risk Acknowledgement Form" }
+        h2 { "Back Glass Form" }
         form {
             class: "form-div",
             onsubmit: move |e: Event<FormData>| {
