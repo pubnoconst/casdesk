@@ -333,7 +333,7 @@ input {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    max-height: 22rem;
+    max-height: 25rem;
     overflow-y: auto;
     padding-bottom: 2rem;
 }
