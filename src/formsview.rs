@@ -24,7 +24,6 @@ pub fn Forms() -> Element {
     rsx! {
         div {
             class: "primary-body",
-            id: "formsview-body",
             div {
                 class: "primary-navigator",
                 button {
