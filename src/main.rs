@@ -1,4 +1,5 @@
 #![windows_subsystem = "windows"]
+use dioxus::desktop::LogicalSize;
 use dioxus::prelude::*;
 use dioxus_free_icons::icons::fi_icons::*;
 use dioxus_free_icons::Icon;
@@ -27,7 +28,11 @@ fn main() {
         .with_cfg(
             dioxus::desktop::Config::default()
                 .with_menu(None)
-                .with_window(dioxus::desktop::WindowBuilder::new().with_title("Casdesk 1.1.2")),
+                .with_window(
+                    dioxus::desktop::WindowBuilder::new()
+                        .with_title("Casdesk 1.1.2")
+                        .with_inner_size(LogicalSize::new(1400.0, 750.0)),
+                ),
         )
         .launch(App);
 }
