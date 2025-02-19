@@ -154,7 +154,7 @@ fn SaleRefurbishedForm() -> Element {
             div {
                 class: "form-row",
                 label { "IMEI (or the like):" }
-                input { r#type: "text", name: "device_imei", placeholder: "*#06*#" }
+                input { r#type: "text", name: "device_imei", placeholder: "*#06#" }
             }
             div {
                 class: "form-row",
@@ -267,7 +267,7 @@ fn SaleNewForm() -> Element {
             div {
                 class: "form-row",
                 label { "IMEI (or the like):" }
-                input { r#type: "text", name: "device_imei", placeholder: "*#06*#" }
+                input { r#type: "text", name: "device_imei", placeholder: "*#06#" }
             }
             div {
                 class: "form-row",
@@ -385,7 +385,7 @@ fn PurchaseForm() -> Element {
             div {
                 class: "form-row",
                 label { "IMEI (or the like):" }
-                input { r#type: "text", name: "device_imei", placeholder: "*#06*#" }
+                input { r#type: "text", name: "device_imei", placeholder: "*#06#" }
             }
             div {
                 class: "form-row",
@@ -497,7 +497,7 @@ fn LeaseForm() -> Element {
             div {
                 class: "form-row",
                 label { "IMEI/Serial number:" }
-                input { r#type: "text", name: "device_imei", placeholder: "*#06*#" }
+                input { r#type: "text", name: "device_imei", placeholder: "*#06#" }
             }
             div {
                 class: "form-row",
