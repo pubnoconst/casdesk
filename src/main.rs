@@ -10,9 +10,6 @@ mod adjustview;
 use adjustview::*;
 mod util;
 
-// static CSS: Asset = asset!("/assets/main.css", CssAssetOptions::new().with_minify(true));
-const CSS: &str = include_str!("../assets/main.css");
-
 #[derive(Routable, Clone, PartialEq)]
 pub enum Route {
     #[route("/")]
@@ -35,12 +32,25 @@ fn main() {
         .launch(App);
 }
 
+// debug build only
+#[cfg(debug_assertions)]
+static CSS: Asset = asset!("/assets/main.css", CssAssetOptions::new().with_minify(true));
+
+// release build only
+#[cfg(not(debug_assertions))]
+const CSS: &str = include_str!("../assets/main.css");
+
 #[component]
 fn App() -> Element {
+    let stylesheet = if cfg!(debug_assertions) {
+        rsx! { document::Stylesheet { href: CSS } }
+    } else {
+        rsx! { style { "{CSS}" } }
+    };
+
     rsx! {
-        // document::Stylesheet{href: CSS}
-        Router::<Route> {},
-        style { "{CSS}" }
+        {stylesheet}
+        Router::<Route> {}
     }
 }
 
