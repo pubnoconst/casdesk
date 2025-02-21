@@ -2,23 +2,22 @@ import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Label, Tab, TabPane}
 import scalafx.geometry.{Insets, Pos, Side}
 import scalafx.scene.layout.{VBox, HBox, Priority}
+import scalafx.scene.text.Text
+import scalafx.scene.layout.Region
 
-class Forms extends Scene:
-  val backBtn = new Button("Back")
-
+class Forms extends BaseScene("Forms"):
   // First HBox (should not grow)
-  val firstHBox = new HBox {
-    spacing = 10
-    alignment = Pos.Center
-    children = Seq(backBtn, new Label("Forms"))
-  }
+  // val firstHBoxSpacer = new Region()
+  // HBox.setHgrow(firstHBoxSpacer, Priority.ALWAYS)
+  // val firstHBox = new HBox {
+  //   spacing = 10
+  //   alignment = Pos.Center
+  //   children = Seq(homeBtn, firstHBoxSpacer, Label("Forms"))
+  // }
 
   // Styled function to create better tab headers
   def createTab(labelText: String, contentText: String): Tab = new Tab {
-    graphic = new HBox {
-      alignment = Pos.Center
-      children = Seq(new Label(labelText))
-    }
+    graphic = new Text(labelText)
     content = new Label(contentText)
     closable = false
   }
@@ -26,15 +25,17 @@ class Forms extends Scene:
   // Second HBox (should take remaining space)
   val secondHBox = new HBox {
     children = Seq(new TabPane {
-      side = Side.LEFT
-      tabMinHeight = 100
       tabs = Seq(
-        createTab("Sale", "Sale Form"),
-        createTab("Purchase", "Purchase Form"),
-        createTab("Loan", "Loan Form")
+        createTab("Refurbsihsed device sale form", "Sale Pre-owned device Form"),
+        createTab("New device sale form", "Sale New Device Form"),
+        createTab("Purchase of a device", "Purchase Form"),
+        createTab("Lease device", "Device lease Form"),
+        createTab("Fragile glass form", "Fragile glass"),
+        createTab("Back glass form", "Back glass"),
       )
     })
   }
+  secondHBox.setAlignment(Pos.Center)
   VBox.setVgrow(secondHBox, Priority.ALWAYS) // Make second HBox expand
 
   // Root VBox (should take full scene)
@@ -42,5 +43,5 @@ class Forms extends Scene:
     spacing = 20
     alignment = Pos.Center
     padding = Insets(25)
-    children = Seq(firstHBox, secondHBox)
+    children = Seq(navHbox, secondHBox)
   }

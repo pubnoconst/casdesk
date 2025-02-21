@@ -7,3 +7,9 @@ Cargo.lock
 *.scala-build
 *.vscode
 .fake
+*bin
+*obj
+
+
+*.exe
+*.dmg
