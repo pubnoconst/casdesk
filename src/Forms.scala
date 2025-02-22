@@ -18,7 +18,7 @@ import atlantafx.base.theme.Styles
 abstract class FormTab(
     val headerText: String,
     val formGrid: GridPane,
-    val submitBtn: Button = new Button("Confirm") 
+    val submitBtn: Button = new Button("Confirm")
 ) extends Tab {
   closable = false
   text = headerText // Set the tab header text
@@ -107,7 +107,10 @@ abstract class DeviceSaleTab(header: String)
       "Customer Address" -> customerAddressField.text.value,
       "Customer ID Number" -> customerIdField.text.value,
       "Staff Name" -> staffNameField.text.value,
-      "Date" -> dateField.value.value.toString
+      "Date" -> {
+        try dateField.value.value.toString
+        catch case _ => ""
+      }
     )
     println(s"$header form submitted with data:")
     formData.foreach { case (key, value) => println(s"$key: $value") }
@@ -202,7 +205,10 @@ class DevicePurchaseTab
       "Seller's Address" -> sellerAddressField.text.value,
       "Seller's ID Number" -> sellerIdField.text.value,
       "Staff Name" -> staffNameField.text.value,
-      "Date" -> dateField.value.value.toString,
+      "Date" -> {
+        try dateField.value.value.toString
+        catch case _ => ""
+      },
       "Note for Office" -> noteField.text.value
     )
 
@@ -286,7 +292,10 @@ class LeaseFormTab
       "Borrower's Contact Number" -> borrowerContactField.text.value,
       "Borrower's ID Number" -> borrowerIdField.text.value,
       "Staff Name" -> staffNameField.text.value,
-      "Date" -> dateField.value.value.toString
+      "Date" -> {
+        try dateField.value.value.toString
+        catch case _ => ""
+      }
     )
 
     // Print the form data to the console
