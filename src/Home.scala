@@ -8,6 +8,8 @@ import scalafx.scene.layout.HBox
 
 class Home extends Scene:
     val formsBtn = new Button("Forms")
+    val quoteBtn = new Button("Quote")
+    val adjustBtn = new Button("Adjust POS")
     root = new VBox {
         spacing = 20
         alignment = Pos.Center
@@ -20,10 +22,8 @@ class Home extends Scene:
                 alignment = Pos.Center
                 children = Seq(
                     formsBtn,
-                    new Button("Quotes") {
-                    },
-                    new Button("Adjust") {
-                    }
+                    quoteBtn,
+                    adjustBtn
                 )
             }
         )

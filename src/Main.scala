@@ -20,7 +20,10 @@ object MainApp extends JFXApp3:
   override def start(): Unit = 
     Application.setUserAgentStylesheet(CupertinoLight().getUserAgentStylesheet())
     val formsScene = new Forms()
+    val quoteScene = new Quote()
     val homeScene = new Home()
+    val adjustScene = new Adjust()
+
     stage = new JFXApp3.PrimaryStage:
       title = "Casdesk"
       scene = homeScene
@@ -28,4 +31,8 @@ object MainApp extends JFXApp3:
       height = 700
 
     homeScene.formsBtn.onAction = (e: ActionEvent) => stage.scene = formsScene
+    homeScene.quoteBtn.onAction = (e: ActionEvent) => stage.scene = quoteScene
+    homeScene.adjustBtn.onAction = (e: ActionEvent) => stage.scene = adjustScene
     formsScene.homeBtn.onAction = (e: ActionEvent) => stage.scene = homeScene
+    quoteScene.homeBtn.onAction = (e: ActionEvent) => stage.scene = homeScene
+    adjustScene.homeBtn.onAction = (e: ActionEvent) => stage.scene = homeScene
