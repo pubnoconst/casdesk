@@ -23,6 +23,8 @@ abstract class FormTab(
   closable = false
   text = headerText // Set the tab header text
 
+  submitBtn.getStyleClass().add(Styles.ACCENT)
+
   // Wrap the formGrid in an HBox to center it horizontally
   protected val centeredContent = new HBox {
     alignment = Pos.Center // Center the content horizontally
