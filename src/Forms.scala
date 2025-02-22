@@ -13,11 +13,12 @@ import scalafx.scene.control.DatePicker
 import scalafx.scene.control.ScrollPane
 
 import scalafx.scene.layout.HBox
+import atlantafx.base.theme.Styles
 
 abstract class FormTab(
     val headerText: String,
     val formGrid: GridPane,
-    val submitBtn: Button
+    val submitBtn: Button = new Button("Confirm") 
 ) extends Tab {
   closable = false
   text = headerText // Set the tab header text
@@ -348,7 +349,9 @@ class Forms extends BaseScene("Forms"):
         RefurbishedDeviceSaleTab(),
         NewDeviceSaleTab(),
         DevicePurchaseTab(),
-        LeaseFormTab()
+        LeaseFormTab(),
+        FragileScreenFormTab(),
+        BackGlassFormTab()
       )
     })
   }
