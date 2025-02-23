@@ -7,9 +7,18 @@ import scalafx.Includes._
 import scala.math.BigDecimal.RoundingMode
 import scalafx.scene.layout.Priority
 import atlantafx.base.theme.Styles
+import scalafx.scene.input.ClipboardContent
+
+class CopyButton() extends Button("Copy"):
+  def copyToClipBoard(text: String) =
+    val cb = javafx.scene.input.Clipboard.getSystemClipboard()
+    val content = new ClipboardContent()
+    content.putString(text)
+    cb.setContent(content)
+    notifyOS(s"Copied ${text} to the clipboard")
+
 
 class Quote extends BaseScene("Quote") {
-
   // --- Data Model ---
   case class QuoteRow(cost: BigDecimal) {
     def costRounded: String = cost.setScale(2, RoundingMode.UP).toString
@@ -44,7 +53,7 @@ class Quote extends BaseScene("Quote") {
   // --- Named Pane ---
   def namedPane(title: String, content: scalafx.scene.Node): VBox =
     new VBox {
-      spacing = 5
+      spacing = 28
       padding = Insets(10)
       children = Seq(
         new Label(title) {
@@ -151,14 +160,20 @@ class Quote extends BaseScene("Quote") {
     fitToHeight = true
     maxWidth = Double.MaxValue
   }
+  val totalCopyBtn = CopyButton()
+  totalCopyBtn.onAction = _ => 
+    totalCopyBtn.copyToClipBoard(totalValueLabel.getText())
 
-  val totalHBox = new HBox(5, new Label("Total: "), totalValueLabel) {
-    padding = Insets(10)
+  val totalHBox = new HBox(5, new Label("Total: "), totalValueLabel, totalCopyBtn) {
+    padding = Insets(30)
     maxWidth = Double.MaxValue
     alignment = Pos.Center
   }
+  val depositCopyBtn = CopyButton()
+  depositCopyBtn.onAction = _ => 
+    depositCopyBtn.copyToClipBoard(depositValueLabel.getText())
 
-  val depositHBox = new HBox(5, new Label("Deposit: "), depositValueLabel) {
+  val depositHBox = new HBox(5, new Label("Deposit: "), depositValueLabel, depositCopyBtn) {
     padding = Insets(10)
     maxWidth = Double.MaxValue
     alignment = Pos.Center

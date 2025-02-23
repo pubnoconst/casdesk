@@ -8,9 +8,11 @@ import scalafx.scene.control.Label
 import scalafx.scene.Node
 import scalafx.scene.layout.VBox
 import scalafx.geometry.Insets
+import atlantafx.base.theme.Styles
 
 abstract class BaseScene(name: String) extends Scene:
     var homeBtn = Button("Back")
+    homeBtn.getStyleClass().add(Styles.BUTTON_OUTLINED)
     private val spacer = new Region()
     HBox.setHgrow(spacer, Priority.Always)
     val navHbox = new HBox {
