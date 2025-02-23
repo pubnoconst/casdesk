@@ -17,7 +17,7 @@ def notifyOS(message: String): Unit =
         try 
           val tray = SystemTray.getSystemTray
           tray.add(trayIcon)
-          trayIcon.displayMessage("Casdesk", message, TrayIcon.MessageType.NONE)
+          trayIcon.displayMessage("", message, TrayIcon.MessageType.NONE)
           Thread.sleep(5000)
           tray.remove(trayIcon)
         catch case e: Exception => println("Error displaying Windows notification: " + e.getMessage)
