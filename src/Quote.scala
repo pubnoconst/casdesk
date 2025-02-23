@@ -57,13 +57,12 @@ class Quote extends BaseScene("Quote") {
       padding = Insets(10)
       children = Seq(
         new Label(title) {
-          style = "-fx-font-weight: bold; -fx-font-size: 14px;"
+          style = "-fx-font-weight: bold; -fx-font-size: 18px;"
           alignment = Pos.Center
         },
         content
       )
-      style =
-        "-fx-border-color: gray; -fx-padding: 10; -fx-background-color: #f9f9f9;"
+      // style = "-fx-border-color: gray;"
       maxWidth = Double.MaxValue
       alignment = Pos.Center
     }
