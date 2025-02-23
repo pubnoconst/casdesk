@@ -26,7 +26,9 @@ class Quote extends BaseScene("Quote") {
 
   // --- Auto-Update Total and Deposit ---
   def updateTotalAndDeposit(): Unit = {
-    val total = quoteData.foldLeft(BigDecimal(0))((acc, row) => acc + row.cost).setScale(2, RoundingMode.UP)
+    val total = quoteData
+      .foldLeft(BigDecimal(0))((acc, row) => acc + row.cost)
+      .setScale(2, RoundingMode.UP)
     totalValueLabel.text = total.toString
     depositValueLabel.text = (total / 2).setScale(2, RoundingMode.UP).toString
   }
@@ -45,7 +47,8 @@ class Quote extends BaseScene("Quote") {
         },
         content
       )
-      style = "-fx-border-color: gray; -fx-padding: 10; -fx-background-color: #f9f9f9;"
+      style =
+        "-fx-border-color: gray; -fx-padding: 10; -fx-background-color: #f9f9f9;"
       maxWidth = Double.MaxValue
       alignment = Pos.Center
     }
@@ -54,7 +57,7 @@ class Quote extends BaseScene("Quote") {
   def buildQuotePane(labelText: String, onAdd: BigDecimal => Unit): VBox = {
     val input = new TextField { promptText = "Enter cost" }
     val addButton = new Button("Add") {
-      onAction = handle {
+      onAction = _ => {
         parseAndRound(input.text.value) match {
           case Some(value) =>
             onAdd(value)
@@ -76,10 +79,13 @@ class Quote extends BaseScene("Quote") {
     }
   }
 
-  val calcQuotePane = buildQuotePane("Calculate Quote", value => quoteData += QuoteRow(value))
-  val directQuotePane = buildQuotePane("Direct Quote", value => quoteData += QuoteRow(value))
+  val calcQuotePane =
+    buildQuotePane("Quotation rule will be applied", value => quoteData += QuoteRow(value))
+  val directQuotePane =
+    buildQuotePane("Manually add a quote", value => quoteData += QuoteRow(value))
 
-  val leftVBox = new VBox(10,
+  val leftVBox = new VBox(
+    10,
     namedPane("Calculate Quote", calcQuotePane),
     namedPane("Direct Quote", directQuotePane)
   ) {
@@ -103,22 +109,26 @@ class Quote extends BaseScene("Quote") {
     prefWidth = 100
   }
 
-  val deleteCellFactory: TableColumn[QuoteRow, QuoteRow] => TableCell[QuoteRow, QuoteRow] =
-    (col: TableColumn[QuoteRow, QuoteRow]) => new TableCell[QuoteRow, QuoteRow] {
-      val deleteButton = new Button("Delete") {
-        onAction = handle {
-          if (item.value != null) quoteData -= item.value
+  val deleteCellFactory
+      : TableColumn[QuoteRow, QuoteRow] => TableCell[QuoteRow, QuoteRow] =
+    (col: TableColumn[QuoteRow, QuoteRow]) =>
+      new TableCell[QuoteRow, QuoteRow] {
+        val deleteButton = new Button("Delete") {
+          onAction = _ => {
+            if (item.value != null) quoteData -= item.value
+          }
+        }
+        item.onChange { (_, _, newValue) =>
+          graphic = if (newValue == null) null else deleteButton
         }
       }
-      item.onChange { (_, _, newValue) =>
-        graphic = if (newValue == null) null else deleteButton
-      }
-    }
   deleteColumn.cellFactory = deleteCellFactory
 
   val tableView = new TableView[QuoteRow](quoteData) {
     columns.setAll(costColumn, deleteColumn) // Ensure only 2 columns exist
-    columnResizePolicy = TableView.ConstrainedResizePolicy // Prevent extra columns
+    // WARNING CODE SMELL: CALLING JAVAFX
+    columnResizePolicy =
+      javafx.scene.control.TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN
     maxWidth = Double.MaxValue
     minHeight = 150
   }
