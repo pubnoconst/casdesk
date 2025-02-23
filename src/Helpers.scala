@@ -36,18 +36,3 @@ def notifyOS(message: String): Unit =
     else println("Unsupported OS: " + osName)
   )
 
-
-inline def includeStr(inline fileName: String): String = 
-  ${ includeFileImpl('fileName) }
-
-private def includeFileImpl(fileNameExpr: Expr[String])(using Quotes): Expr[String] = {
-  // Extract the file name from the inline expression
-  val fileName = fileNameExpr.valueOrError
-  // Read the file content at compile time
-  val source = scala.io.Source.fromFile(fileName)
-  try {
-    Expr(source.mkString)
-  } finally {
-    source.close()
-  }
-}
