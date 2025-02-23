@@ -29,8 +29,8 @@ class Adjust extends BaseScene("Adjust POS"):
       val difference = (eftposTotal - machineTotal).setScale(2, BigDecimal.RoundingMode.HALF_UP)
       val adjustedDifference = (difference - (difference * 0.009)).setScale(2, BigDecimal.RoundingMode.HALF_UP)
 
-      if (difference > 0) s"You are missing $$ ${adjustedDifference.formatted("%.2f")} sales from the EFTPOS machine"
-      else if (difference < 0) s"You have recorded $$ ${adjustedDifference.abs.formatted("%.2f")} extra sales in Mybug"
+      if (difference > 0) s"You have recorded $$ ${adjustedDifference.formatted("%.2f")} extraneous sales in Mybug !"
+      else if (difference < 0) s"You are $$ ${adjustedDifference.abs.formatted("%.2f")} sales from the EFTPOS machine :)"
       else "No discrepancy detected"
     },
     eftposTotalField.text, machineTotalField.text
