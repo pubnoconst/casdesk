@@ -17,7 +17,6 @@ class CopyButton() extends Button("Copy"):
     cb.setContent(content)
     notifyOS(s"Copied ${text} to the clipboard")
 
-
 class Quote extends BaseScene("Quote") {
   // --- Data Model ---
   case class QuoteRow(cost: BigDecimal) {
@@ -116,22 +115,35 @@ class Quote extends BaseScene("Quote") {
   }
 
   // --- Table and Totals ---
-  val costColumn = new TableColumn[QuoteRow, String]("Cost") {
+  val costColumn = new TableColumn[QuoteRow, String]() {
+    graphic = new Label("Quote") {
+      alignment = Pos.Center
+      maxWidth = Double.MaxValue
+    }
+    style = "-fx-alignment: CENTER;"
     cellValueFactory = { cellData =>
       new StringProperty(cellData.value, "cost", cellData.value.costRounded)
     }
   }
 
-  val deleteColumn = new TableColumn[QuoteRow, QuoteRow]("Action") {
+  val deleteColumn = new TableColumn[QuoteRow, QuoteRow]() {
+    graphic = new Label("Quote") {
+      alignment = Pos.Center
+      maxWidth = Double.MaxValue
+    }
+    style = "-fx-alignment: CENTER;"
     cellValueFactory = { cellData =>
       new ObjectProperty[QuoteRow](this, "cell", cellData.value)
     }
   }
 
+// Custom cell factory for the delete button remains unchanged:
   val deleteCellFactory
       : TableColumn[QuoteRow, QuoteRow] => TableCell[QuoteRow, QuoteRow] =
     (col: TableColumn[QuoteRow, QuoteRow]) =>
       new TableCell[QuoteRow, QuoteRow] {
+        // Center the button within the cell
+        alignment = Pos.Center
         val deleteButton = new Button("Delete") {
           onAction = _ => {
             if (item.value != null) quoteData -= item.value
@@ -160,23 +172,25 @@ class Quote extends BaseScene("Quote") {
     maxWidth = Double.MaxValue
   }
   val totalCopyBtn = CopyButton()
-  totalCopyBtn.onAction = _ => 
+  totalCopyBtn.onAction = _ =>
     totalCopyBtn.copyToClipBoard(totalValueLabel.getText())
 
-  val totalHBox = new HBox(5, new Label("Total: "), totalValueLabel, totalCopyBtn) {
-    padding = Insets(30)
-    maxWidth = Double.MaxValue
-    alignment = Pos.Center
-  }
+  val totalHBox =
+    new HBox(5, new Label("Total: "), totalValueLabel, totalCopyBtn) {
+      padding = Insets(30)
+      maxWidth = Double.MaxValue
+      alignment = Pos.Center
+    }
   val depositCopyBtn = CopyButton()
-  depositCopyBtn.onAction = _ => 
+  depositCopyBtn.onAction = _ =>
     depositCopyBtn.copyToClipBoard(depositValueLabel.getText())
 
-  val depositHBox = new HBox(5, new Label("Deposit: "), depositValueLabel, depositCopyBtn) {
-    padding = Insets(10)
-    maxWidth = Double.MaxValue
-    alignment = Pos.Center
-  }
+  val depositHBox =
+    new HBox(5, new Label("Deposit: "), depositValueLabel, depositCopyBtn) {
+      padding = Insets(10)
+      maxWidth = Double.MaxValue
+      alignment = Pos.Center
+    }
 
   val rightVBox = new VBox(10, scrollPane, totalHBox, depositHBox) {
     padding = Insets(10)

@@ -109,7 +109,10 @@ abstract class DeviceSaleTab(header: String)
       "Staff Name" -> staffNameField.text.value,
       "Date" -> {
         try dateField.value.value.toString
-        catch case _ => ""
+        catch case _ => {
+          notifyOS("Invalid date")
+          ""
+        }
       }
     )
     println(s"$header form submitted with data:")
@@ -207,7 +210,10 @@ class DevicePurchaseTab
       "Staff Name" -> staffNameField.text.value,
       "Date" -> {
         try dateField.value.value.toString
-        catch case _ => ""
+        catch case _ => {
+          notifyOS("Invalid OS")
+          ""
+        }
       },
       "Note for Office" -> noteField.text.value
     )
@@ -294,7 +300,10 @@ class LeaseFormTab
       "Staff Name" -> staffNameField.text.value,
       "Date" -> {
         try dateField.value.value.toString
-        catch case _ => ""
+        catch case _ =>  {
+          notifyOS("Invalid OS")
+          ""
+        }
       }
     )
 
