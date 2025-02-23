@@ -6,6 +6,7 @@ import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.Includes._
 import scala.math.BigDecimal.RoundingMode
 import scalafx.scene.layout.Priority
+import atlantafx.base.theme.Styles
 
 class Quote extends BaseScene("Quote") {
 
@@ -15,6 +16,11 @@ class Quote extends BaseScene("Quote") {
   }
 
   val quoteData = new ObservableBuffer[QuoteRow]()
+
+  def quoteMarkup(value: BigDecimal): BigDecimal =
+    if value < 200 then value + 140
+    else if value <= 350 then value + 180
+    else value + 250
 
   def parseAndRound(input: String): Option[BigDecimal] =
     try Some(BigDecimal(input).setScale(2, RoundingMode.UP))
@@ -66,6 +72,7 @@ class Quote extends BaseScene("Quote") {
         }
       }
     }
+    addButton.getStyleClass().add(Styles.ACCENT)
 
     val centeredAddButton = new HBox(addButton) {
       alignment = Pos.Center
@@ -80,9 +87,15 @@ class Quote extends BaseScene("Quote") {
   }
 
   val calcQuotePane =
-    buildQuotePane("Quotation rule will be applied", value => quoteData += QuoteRow(value))
+    buildQuotePane(
+      "Quotation rule will be applied",
+      value => quoteData += QuoteRow(quoteMarkup(value))
+    )
   val directQuotePane =
-    buildQuotePane("Manually add a quote", value => quoteData += QuoteRow(value))
+    buildQuotePane(
+      "Manually add a quote",
+      value => quoteData += QuoteRow(value)
+    )
 
   val leftVBox = new VBox(
     10,
@@ -99,14 +112,12 @@ class Quote extends BaseScene("Quote") {
     cellValueFactory = { cellData =>
       new StringProperty(cellData.value, "cost", cellData.value.costRounded)
     }
-    prefWidth = 150
   }
 
   val deleteColumn = new TableColumn[QuoteRow, QuoteRow]("Action") {
     cellValueFactory = { cellData =>
       new ObjectProperty[QuoteRow](this, "cell", cellData.value)
     }
-    prefWidth = 100
   }
 
   val deleteCellFactory
@@ -118,6 +129,7 @@ class Quote extends BaseScene("Quote") {
             if (item.value != null) quoteData -= item.value
           }
         }
+        deleteButton.getStyleClass().add(Styles.DANGER)
         item.onChange { (_, _, newValue) =>
           graphic = if (newValue == null) null else deleteButton
         }
