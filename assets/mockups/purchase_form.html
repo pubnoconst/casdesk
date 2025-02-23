@@ -1,156 +1,163 @@
 <!DOCTYPE html>
-
+<html>
 <head>
-    <style>
-        @page {
-            size: A4;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <title>Contract of Sale of Device</title>
+  <style>
+    /* Remove browser-supplied print margins */
+    @page {
+      size: A4;
+      margin: 0;
+    }
 
-        .logo {
-            max-width: 40%;
-            height: auto;
-        }
+    /* Reset margins/padding and use flexbox for layout */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-size: 10pt;
+    }
 
-        body {
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            font-size: 10pt;
-            margin: 50px 50px 50px 50px;
-            padding: 0;
+    /* The wrapper applies our 50px margin on all sides */
+    .wrapper {
+      margin: 50px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
-        }
+    /* The content area expands to push the footer down */
+    .content {
+      flex: 1;
+    }
 
-        h1 {
-            font-size: 16pt;
-            text-align: center;
-            font-weight: normal;
-        }
+    .logo {
+      max-width: 40%;
+      height: auto;
+    }
 
-        h4 {
-            font-size: 12pt;
-        }
+    h1 {
+      font-size: 16pt;
+      text-align: center;
+      font-weight: normal;
+    }
 
-        #termstext {
-            font-size: 10pt;
-        }
+    h4 {
+      font-size: 12pt;
+    }
 
-        table {
-            border-collapse: collapse;
-        }
+    #termstext {
+      font-size: 10pt;
+    }
 
-        th,
-        td {
-            border: none;
-            padding: 8px;
-            text-align: left;
-            word-wrap: break-word;
-            max-width: 80ch;
-            white-space: normal;
-        }
+    table {
+      border-collapse: collapse;
+    }
 
-        th {
-            padding-right: 5px;
-            font-weight: normal;
-            min-width: 25ch;
-        }
+    th,
+    td {
+      border: none;
+      padding: 8px;
+      text-align: left;
+      word-wrap: break-word;
+      max-width: 80ch;
+      white-space: normal;
+    }
 
-        td {
-            padding-left: 5px;
-        }
+    th {
+      padding-right: 5px;
+      font-weight: normal;
+      min-width: 25ch;
+    }
 
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            margin: 50px 50px 50px 50px;
-        }
-    </style>
+    td {
+      padding-left: 5px;
+    }
 
+    /* Anchor footer to bottom left of the wrapper */
+    footer {
+      align-self: flex-start;
+      font-size: 10pt;
+    }
+  </style>
 </head>
-
 <body onload="window.print();">
-    <img src="data:image/png;base64,__LOGO_BANNER" class="logo" alt="Logo">
-    <h1>Contract of Sale of Device
-    </h1>
-    I (the seller) __SELLER_NAME agree to sell my device __DEVICE_NAME to Casphone (the buyer) for
-    the amount of $__PRICE (AUD).<br>
-    I confirm that the said Device is MINE and I surrender ownership to Casphone for the said price above.<br><br>
-    I agree to the following terms and conditions of sale:
-    The Seller hereby conveys to the Buyer full ownership and title to the product described on cover page. Seller
-    acknowledges that after receiving the mutually agreed purchase price no claims apply, neither concerning the
-    product nor the data stored thereon. The phone becomes Casphone&apos;s property upon the payment of the
-    purchase price, no further claims apply.<br>
-    Saving data from the product is Seller&apos;s responsibility. No posterior saving of any data is possible. Purchase price
-    is mutually agreed, no further claim applies on behalf of the Seller. Seller acknowledges that the phone may be
-    resold, used as parts or even fully destroyed.<br>
-    Seller acknowledges that after selling the appliance they may not report it to any telecommunications companies
-    as "stolen" or "lost". Casphone shall check the ownership of each appliance. Therefore, if any suspicion of
-    insurance fraud arises Casphone shall immediately report it to the telecommunication service provider and the
-    POLICE department. Casphone disclaims any liability, all legal consequences are borne by Seller. To ensure this,
-    Casphone requires ID Card for the sale, and a copy of this ID card remains in Casphone&apos;s files. The data on ID
-    card shall be used only for this purpose.<br>
-    Seller agrees to provide accurate information concerning the condition of the phone. The phone shall be subject
-    to a quality check before the purchase by Casphone staff. The price offer shall be made thereafter.<br><br>
-    Both parties hereby agree that this is an "as-is" sale, with no warranties of any kind expressed or implied.<br>
-    This agreement shall be governed by the laws of the State of Queensland and the County of Australia.<br><br>
-    <table>
+  <div class="wrapper">
+    <div class="content">
+      <img src="data:image/png;base64,__LOGO_BANNER" class="logo" alt="Logo">
+      <h1>Contract of Sale of Device</h1>
+      <p>
+        I (the seller) __SELLER_NAME agree to sell my device __DEVICE_NAME to Casphone (the buyer) for the amount of $__PRICE (AUD).<br>
+        I confirm that the said Device is MINE and I surrender ownership to Casphone for the said price above.<br><br>
+        I agree to the following terms and conditions of sale: The Seller hereby conveys to the Buyer full ownership and title to the product described on cover page. Seller acknowledges that after receiving the mutually agreed purchase price no claims apply, neither concerning the product nor the data stored thereon. The phone becomes Casphone&apos;s property upon the payment of the purchase price, no further claims apply.<br>
+        Saving data from the product is Seller&apos;s responsibility. No posterior saving of any data is possible. Purchase price is mutually agreed, no further claim applies on behalf of the Seller. Seller acknowledges that the phone may be resold, used as parts or even fully destroyed.<br>
+        Seller acknowledges that after selling the appliance they may not report it to any telecommunications companies as "stolen" or "lost". Casphone shall check the ownership of each appliance. Therefore, if any suspicion of insurance fraud arises Casphone shall immediately report it to the telecommunication service provider and the POLICE department. Casphone disclaims any liability, all legal consequences are borne by Seller. To ensure this, Casphone requires ID Card for the sale, and a copy of this ID card remains in Casphone&apos;s files. The data on ID card shall be used only for this purpose.<br>
+        Seller agrees to provide accurate information concerning the condition of the phone. The phone shall be subject to a quality check before the purchase by Casphone staff. The price offer shall be made thereafter.<br><br>
+        Both parties hereby agree that this is an "as-is" sale, with no warranties of any kind expressed or implied.<br>
+        This agreement shall be governed by the laws of the State of Queensland and the County of Australia.<br><br>
+      </p>
+      <table>
         <tr>
-            <th><b>Device</b> <small>(Brand, Model, Model Number)</small></th>
-            <td>: __DEVICE_NAME</td>
+          <th><b>Device</b> <small>(Brand, Model, Model Number)</small></th>
+          <td>: __DEVICE_NAME</td>
         </tr>
         <tr>
-            <th><b>Memory </b><small>(in GB)</small></th>
-            <td>: __DEVICE_MEMORY</td>
+          <th><b>Memory </b><small>(in GB)</small></th>
+          <td>: __DEVICE_MEMORY</td>
         </tr>
         <tr>
-            <th><b>Color of the Device</b></th>
-            <td>: __DEVICE_COLOR</td>
+          <th><b>Color of the Device</b></th>
+          <td>: __DEVICE_COLOR</td>
         </tr>
         <tr>
-            <th><b>Locked to a Provider</b> <small>(e.g. Optus)</small></th>
-            <td>: __DEVICE_LOCKED</td>
+          <th><b>Locked to a Provider</b> <small>(e.g. Optus)</small></th>
+          <td>: __DEVICE_LOCKED</td>
         </tr>
         <tr>
-            <th><b>IMEI (or the like)</b></th>
-            <td>: __DEVICE_IMEI</td>
+          <th><b>IMEI (or the like)</b></th>
+          <td>: __DEVICE_IMEI</td>
         </tr>
         <tr>
-            <th><b>Contact Number of the Seller</b></th>
-            <td>: __SELLER_CONTACT</td>
+          <th><b>Contact Number of the Seller</b></th>
+          <td>: __SELLER_CONTACT</td>
         </tr>
         <tr>
-            <th><b>Address of the Seller</b></th>
-            <td>: __SELLER_ADDRESS</td>
+          <th><b>Address of the Seller</b></th>
+          <td>: __SELLER_ADDRESS</td>
         </tr>
         <tr>
-            <th><b>Customer Signature</b></th>
-            <td>: ____________________________________
-            <td><b>ID Num. of Buyer</b>: __CUSTOMER_ID</td>
-            </td>
+          <th><b>Customer Signature</b></th>
+          <td>: ____________________________________</td>
+          <td><b>ID Num. of Buyer</b>: __CUSTOMER_ID</td>
         </tr>
         <tr>
-            <th><b>Date</b></th>
-            <td>: __DATE
-            <td><b>Staff Name</b>: __STAFF</td>
-            </td>
+          <th><b>Date</b></th>
+          <td>: __DATE</td>
+          <td><b>Staff Name</b>: __STAFF</td>
         </tr>
         <tr>
-            <th><b>For Office</b></th>
-            <td></td>
+          <th><b>For Office</b></th>
+          <td></td>
         </tr>
         <tr>
-            <th><b>Notes </b><small>(what repairs need to be done)</small></th>
-            <td>: __NOTES</td>
+          <th><b>Notes </b><small>(what repairs need to be done)</small></th>
+          <td>: __NOTES</td>
         </tr>
-    </table>
-</body>
-<footer>
-    <small><small>ABN 44 143 740 943 </small><br>
+      </table>
+    </div>
+    <footer>
+      <small>
+        <small>ABN 44 143 740 943 </small><br>
         <small>(07) 3392 0995 </small><br>
         <small>info@casphone.com.au </small><br>
         <small>148 Ipswich Road, Woolloongabba </small><br>
-        <small>Brisbane QLD 4102 </small></small><br>
-    casphone.com.au
-</footer>
-
+        <small>Brisbane QLD 4102 </small>
+      </small><br>
+      casphone.com.au
+    </footer>
+  </div>
+</body>
 </html>

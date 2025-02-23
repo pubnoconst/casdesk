@@ -1,149 +1,162 @@
 <!DOCTYPE html>
-
+<html>
 <head>
-    <style>
-        @page {
-            size: A4;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <title>Contract of Sale of Device</title>
+  <style>
+    /* Remove browser-supplied print margins */
+    @page {
+      size: A4;
+      margin: 0;
+    }
 
-        .logo {
-            max-width: 40%;
-            height: auto;
-        }
+    /* Use flexbox on the body to control layout */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        body {
-            font-family: 'Times New Roman', serif, sans-serif;
-            font-size: 12pt;
-            margin: 50px 50px 50px 50px;
-            padding: 0;
-        }
+    /* The wrapper applies our desired 50px margin on all sides */
+    .wrapper {
+      margin: 50px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
-        h1 {
-            font-size: 18pt;
-        }
+    /* The content area grows to fill available space so that the footer stays at the bottom */
+    .content {
+      flex: 1;
+    }
 
-        h4 {
-            font-size: 12pt;
-        }
+    /* Styling for the logo and text elements */
+    .logo {
+      max-width: 40%;
+      height: auto;
+    }
 
-        #termstext {
-            font-size: 10pt;
-        }
+    h1 {
+      font-size: 18pt;
+    }
 
-        table {
-            border-collapse: collapse;
-            font-size: 10pt;
-        }
+    h4 {
+      font-size: 12pt;
+    }
 
-        th,
-        td {
-            border: none;
-            padding: 8px;
-            text-align: left;
-            word-wrap: break-word;
-            max-width: 80ch;
-            white-space: normal;
-        }
+    #termstext {
+      font-size: 10pt;
+    }
 
-        th {
-            padding-right: 5px;
-            font-weight: normal;
-            min-width: 25ch;
-        }
+    table {
+      border-collapse: collapse;
+      font-size: 10pt;
+    }
 
-        td {
-            padding-left: 5px;
-        }
+    th,
+    td {
+      border: none;
+      padding: 8px;
+      text-align: left;
+      word-wrap: break-word;
+      max-width: 80ch;
+      white-space: normal;
+    }
 
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            margin: 50px 50px 50px 50px;
-        }
-    </style>
+    th {
+      padding-right: 5px;
+      font-weight: normal;
+      min-width: 25ch;
+    }
 
+    td {
+      padding-left: 5px;
+    }
+
+    /* Ensure the footer stays at the bottom left of the wrapper */
+    footer {
+      align-self: flex-start;
+      font-size: 10pt;
+    }
+  </style>
 </head>
-
 <body onload="window.print();">
-    <img src="data:image/png;base64,__LOGO_BANNER" class="logo" alt="Logo">
-    <h1>Contract of Sale of Device
-    </h1>
-    <h4>I __CUSTOMER_NAME (the buyer) agree to the following terms and conditions of
-        PURCHASING a refurbished device. </h4>
-    <p id="termstext">I confirm, that a Casphone staff member has informed me, that the following device I purchase is a
-        second hand, fully refurbished product. <br>
-        I have inspected the item and agree it is in good working condition and functions without defect.
-        It has been fully explained how to use the purchased device and I understand Casphone is not
-        responsible for any problems that occur due to misuse of the product after the purchase. <br>
-        I understand that if any problems occur after the purchase a service fee will be charged for inspection
-        unless management deem otherwise. <br>
-        I confirm that I am older than 16 years old, eligible to purchase and able to provide ID to confirm this.
-        I understand and agree that this purchase comes with a 30-days warranty; any problems or defects
-        outside this term will not be the responsibility of Casphone to fix. If a problem or defect is found in this
-        30-day period that it not due to misuse, I understand that Capshone will repair the problem within a 7
-        working day period or replace the item with another if available. <br>
-        Casphone is not required to give a refund on this purchase. <br>
-        This agreement shall be governed by the laws of the State of Queensland and the Country of Australia. </p>
-    <table>
+  <div class="wrapper">
+    <div class="content">
+      <img src="data:image/png;base64,__LOGO_BANNER" class="logo" alt="Logo">
+      <h1>Contract of Sale of Device</h1>
+      <h4>
+        I __CUSTOMER_NAME (the buyer) agree to the following terms and conditions of PURCHASING a refurbished device.
+      </h4>
+      <p id="termstext">
+        I confirm, that a Casphone staff member has informed me, that the following device I purchase is a second hand, fully refurbished product.<br>
+        I have inspected the item and agree it is in good working condition and functions without defect. It has been fully explained how to use the purchased device and I understand Casphone is not responsible for any problems that occur due to misuse of the product after the purchase.<br>
+        I understand that if any problems occur after the purchase a service fee will be charged for inspection unless management deem otherwise.<br>
+        I confirm that I am older than 16 years old, eligible to purchase and able to provide ID to confirm this. I understand and agree that this purchase comes with a 30-days warranty; any problems or defects outside this term will not be the responsibility of Casphone to fix. If a problem or defect is found in this 30-day period that is not due to misuse, I understand that Casphone will repair the problem within a 7 working day period or replace the item with another if available.<br>
+        Casphone is not required to give a refund on this purchase.<br>
+        This agreement shall be governed by the laws of the State of Queensland and the Country of Australia.
+      </p>
+      <table>
         <tr>
-            <th><b>Device</b> <small>(Brand, Model, Model Number)</small></th>
-            <td>: __DEVICE_NAME</td>
+          <th><b>Device</b> <small>(Brand, Model, Model Number)</small></th>
+          <td>: __DEVICE_NAME</td>
         </tr>
         <tr>
-            <th><b>Color of the Device</b></th>
-            <td>: __DEVICE_COLOR</td>
+          <th><b>Color of the Device</b></th>
+          <td>: __DEVICE_COLOR</td>
         </tr>
         <tr>
-            <th><b>Locked to a Provider</b> <small>(e.g. Optus)</small></th>
-            <td>: __DEVICE_LOCKED</td>
+          <th><b>Locked to a Provider</b> <small>(e.g. Optus)</small></th>
+          <td>: __DEVICE_LOCKED</td>
         </tr>
         <tr>
-            <th><b>IMEI (or the like)</b></th>
-            <td>: __DEVICE_IMEI</td>
+          <th><b>IMEI (or the like)</b></th>
+          <td>: __DEVICE_IMEI</td>
         </tr>
         <tr>
-            <th><b>Price for the Device </b><small>(AUD)</small></th>
-            <td>: $ __DEVICE_PRICE</td>
+          <th><b>Price for the Device</b> <small>(AUD)</small></th>
+          <td>: $ __DEVICE_PRICE</td>
         </tr>
         <tr>
-            <th><b>Payment Method</b></th>
-            <td>: __PAYMENT_METHOD</td>
+          <th><b>Payment Method</b></th>
+          <td>: __PAYMENT_METHOD</td>
         </tr>
         <tr>
-            <th><b>Name of Buyer</b></th>
-            <td>: __CUSTOMER_NAME</td>
+          <th><b>Name of Buyer</b></th>
+          <td>: __CUSTOMER_NAME</td>
         </tr>
         <tr>
-            <th><b>Contact Number of the Buyer</b></th>
-            <td>: __CUSTOMER_CONTACT</td>
+          <th><b>Contact Number of the Buyer</b></th>
+          <td>: __CUSTOMER_CONTACT</td>
         </tr>
         <tr>
-            <th><b>Address of the Buyer</b></th>
-            <td>: __CUSTOMER_ADDRESS</td>
+          <th><b>Address of the Buyer</b></th>
+          <td>: __CUSTOMER_ADDRESS</td>
         </tr>
         <tr>
-            <th><b>Customer Signature</b></th>
-            <td>: ____________________________________
-            <td><b>ID Num. of Buyer</b>: __CUSTOMER_ID</td>
-            </td>
+          <th><b>Customer Signature</b></th>
+          <td>: ____________________________________</td>
+          <td><b>ID Num. of Buyer</b>: __CUSTOMER_ID</td>
         </tr>
         <tr>
-            <th><b>Date</b></th>
-            <td>: __DATE
-            <td><b>Staff Name</b>: __STAFF</td>
-            </td>
+          <th><b>Date</b></th>
+          <td>: __DATE</td>
+          <td><b>Staff Name</b>: __STAFF</td>
         </tr>
-    </table>
+      </table>
+    </div>
+    <footer>
+      <small>
+        ABN 44 143 740 943<br>
+        (07) 3392 0995<br>
+        info@casphone.com.au<br>
+        148 Ipswich Road, Woolloongabba<br>
+        Brisbane QLD 4102<br>
+        casphone.com.au
+      </small>
+    </footer>
+  </div>
 </body>
-<footer>
-    <small><small>ABN 44 143 740 943 </small><br>
-        <small>(07) 3392 0995 </small><br>
-        <small>info@casphone.com.au </small><br>
-        <small>148 Ipswich Road, Woolloongabba </small><br>
-        <small>Brisbane QLD 4102 </small></small><br>
-    casphone.com.au
-</footer>
-
 </html>
