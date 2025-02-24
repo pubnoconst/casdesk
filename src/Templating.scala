@@ -2,7 +2,7 @@ import scala.quoted.*
 import java.nio.file.{Files, Paths}
 import java.nio.charset.StandardCharsets
 
-inline def compileTimeRender(
+private inline def compileTimeRender(
     inline path: String,
     inline replacements: Map[String, String]
 ): String =
@@ -32,3 +32,5 @@ private def compileTimeRenderImpl(
   )
 
   Expr(rendered)
+
+
