@@ -1,19 +1,19 @@
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Label, Tab, TabPane}
-import scalafx.geometry.{Insets, Pos, Side}
-import scalafx.scene.layout.{VBox, HBox, Priority}
-import scalafx.scene.text.Text
-import scalafx.scene.layout.Region
-import scalafx.scene.layout.GridPane
+import scalafx.geometry.{Insets, Pos}
+import scalafx.scene.layout.{VBox, HBox, GridPane}
 import scalafx.scene.control.TextField
-import scalafx.scene.control.TextFormatter
-import scalafx.util.converter.BigDecimalStringConverter
 import scalafx.scene.control.DatePicker
-
 import scalafx.scene.control.ScrollPane
-
-import scalafx.scene.layout.HBox
 import atlantafx.base.theme.Styles
+
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
+// Returns the current date as a string in "dd/MM/yyyy" format.
+def currentDateString(): String =
+  val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+  LocalDate.now.format(formatter)
 
 abstract class FormTab(
     val headerText: String,
@@ -27,15 +27,15 @@ abstract class FormTab(
 
   // Wrap the formGrid in an HBox to center it horizontally
   protected val centeredContent = new HBox {
-    alignment = Pos.Center // Center the content horizontally
+    alignment = Pos.Center
     children = formGrid
   }
 
   // Wrap the centered content in a ScrollPane
   content = new ScrollPane {
     content = centeredContent
-    fitToWidth = true // Ensures the content fits the width of the ScrollPane
-    fitToHeight = true // Ensures the content fits the height of the ScrollPane
+    fitToWidth = true
+    fitToHeight = true
   }
 }
 
@@ -45,18 +45,18 @@ abstract class DeviceSaleTab(header: String)
   formGrid.hgap = 10
   formGrid.vgap = 10
 
-  protected val customerNameField = new TextField()
-  protected val deviceField = new TextField()
-  protected val deviceColorField = new TextField()
-  protected val deviceImeiField = new TextField()
-  protected val deviceProviderField = new TextField()
-  protected val devicePriceField = new TextField()
-  protected val paymentMethodField = new TextField()
+  protected val customerNameField    = new TextField()
+  protected val deviceField          = new TextField()
+  protected val deviceColorField     = new TextField()
+  protected val deviceImeiField      = new TextField()
+  protected val deviceProviderField  = new TextField()
+  protected val devicePriceField     = new TextField()
+  protected val paymentMethodField   = new TextField()
   protected val customerContactField = new TextField()
   protected val customerAddressField = new TextField()
-  protected val customerIdField = new TextField()
-  protected val staffNameField = new TextField()
-  protected val dateField = new DatePicker()
+  protected val customerIdField      = new TextField()
+  protected val staffNameField       = new TextField()
+  protected val dateField            = new DatePicker()
 
   formGrid.add(new Label("Customer Name"), 0, 0)
   formGrid.add(customerNameField, 1, 0)
@@ -94,64 +94,84 @@ abstract class DeviceSaleTab(header: String)
   formGrid.add(new Label("Date"), 0, 11)
   formGrid.add(dateField, 1, 11)
 
+  // Default submit handler (can be overridden by subclasses)
   submitBtn.onAction = _ => {
-    val formData = Map(
-      "Customer Name" -> customerNameField.text.value,
-      "Device" -> deviceField.text.value,
-      "Device Color" -> deviceColorField.text.value,
-      "Device IMEI" -> deviceImeiField.text.value,
-      "Device Provider" -> deviceProviderField.text.value,
-      "Device Price" -> devicePriceField.text.value,
-      "Payment Method" -> paymentMethodField.text.value,
-      "Customer Contact Number" -> customerContactField.text.value,
-      "Customer Address" -> customerAddressField.text.value,
-      "Customer ID Number" -> customerIdField.text.value,
-      "Staff Name" -> staffNameField.text.value,
-      "Date" -> {
-        try dateField.value.value.toString
-        catch case _ => {
-          notifyOS("Invalid date")
-          ""
-        }
-      }
-    )
-    println(s"$header form submitted with data:")
-    formData.foreach { case (key, value) => println(s"$key: $value") }
+    val dateStr = Option(dateField.value.value).map(_.toString).getOrElse(currentDateString())
+    println(s"$headerText form submitted with data:")
+    println(s"Customer Name: ${customerNameField.text.value}")
+    // Additional processing can be done here.
   }
 
   formGrid.add(submitBtn, 1, 12)
 
-class RefurbishedDeviceSaleTab extends DeviceSaleTab("Refurbished Device Sale")
+class RefurbishedDeviceSaleTab extends DeviceSaleTab("Refurbished Device Sale"):
+  // On submit, call the templating function on a virtual thread.
+  submitBtn.onAction = _ =>
+    val dateStr = Option(dateField.value.value).map(_.toString).getOrElse(currentDateString())
+    Thread.startVirtualThread { () =>
+      // Call the refurbishedDeviceSaleForm function from Templating.scala.
+      refurbishedDeviceSaleForm(
+        customerNameField.text.value,
+        deviceField.text.value,
+        deviceColorField.text.value,
+        deviceProviderField.text.value,
+        deviceImeiField.text.value,
+        devicePriceField.text.value,
+        paymentMethodField.text.value,
+        customerContactField.text.value,
+        customerAddressField.text.value,
+        customerIdField.text.value,
+        dateStr,
+        staffNameField.text.value
+      )
+    }
+    println("Refurbished Device Sale form submitted.")
 
-class NewDeviceSaleTab extends DeviceSaleTab("New Device Sale")
+class NewDeviceSaleTab extends DeviceSaleTab("New Device Sale"):
+  submitBtn.onAction = _ =>
+    val dateStr = Option(dateField.value.value).map(_.toString).getOrElse(currentDateString())
+    Thread.startVirtualThread { () =>
+      newDeviceSaleForm(
+        customerNameField.text.value,
+        deviceField.text.value,
+        deviceColorField.text.value,
+        deviceProviderField.text.value,
+        deviceImeiField.text.value,
+        devicePriceField.text.value,
+        paymentMethodField.text.value,
+        customerContactField.text.value,
+        customerAddressField.text.value,
+        customerIdField.text.value,
+        dateStr,
+        staffNameField.text.value
+      )
+    }
+    println("New Device Sale form submitted.")
 
 class DevicePurchaseTab
     extends FormTab(
-      headerText = "Device Purchase", // Tab header text
-      formGrid = new GridPane, // GridPane for the form layout
-      submitBtn = new Button("Submit") // Submit button
+      headerText = "Device Purchase",
+      formGrid = new GridPane,
+      submitBtn = new Button("Submit")
     ) {
-  // Set padding and gaps for the form grid
   formGrid.padding = Insets(10)
   formGrid.hgap = 10
   formGrid.vgap = 10
 
-  // Define form fields
-  protected val sellerNameField = new TextField()
-  protected val deviceField = new TextField()
-  protected val deviceColorField = new TextField()
-  protected val memoryField = new TextField()
-  protected val imeiField = new TextField()
-  protected val deviceProviderField = new TextField()
+  protected val sellerNameField    = new TextField()
+  protected val deviceField        = new TextField()
+  protected val deviceColorField   = new TextField()
+  protected val memoryField        = new TextField()
+  protected val imeiField          = new TextField()
+  protected val deviceProviderField= new TextField()
   protected val purchasePriceField = new TextField()
   protected val sellerContactField = new TextField()
   protected val sellerAddressField = new TextField()
-  protected val sellerIdField = new TextField()
-  protected val staffNameField = new TextField()
-  protected val dateField = new DatePicker()
-  protected val noteField = new TextField()
+  protected val sellerIdField      = new TextField()
+  protected val staffNameField     = new TextField()
+  protected val dateField          = new DatePicker()
+  protected val noteField          = new TextField()
 
-  // Add fields to the form grid
   formGrid.add(new Label("Seller's Name"), 0, 0)
   formGrid.add(sellerNameField, 1, 0)
 
@@ -191,64 +211,53 @@ class DevicePurchaseTab
   formGrid.add(new Label("Note for Office"), 0, 12)
   formGrid.add(noteField, 1, 12)
 
-  // Add the submit button to the form grid
   formGrid.add(submitBtn, 1, 13)
 
-  // Define the action for the submit button
-  submitBtn.onAction = _ => {
-    val formData = Map(
-      "Seller's Name" -> sellerNameField.text.value,
-      "Device" -> deviceField.text.value,
-      "Device Color" -> deviceColorField.text.value,
-      "Memory" -> memoryField.text.value,
-      "IMEI" -> imeiField.text.value,
-      "Device Provider" -> deviceProviderField.text.value,
-      "Purchase Price" -> purchasePriceField.text.value,
-      "Seller's Contact Number" -> sellerContactField.text.value,
-      "Seller's Address" -> sellerAddressField.text.value,
-      "Seller's ID Number" -> sellerIdField.text.value,
-      "Staff Name" -> staffNameField.text.value,
-      "Date" -> {
-        try dateField.value.value.toString
-        catch case _ => {
-          notifyOS("Invalid OS")
-          ""
-        }
-      },
-      "Note for Office" -> noteField.text.value
-    )
-
-    // Print the form data to the console
-    println(s"Device Purchase form submitted with data:")
-    formData.foreach { case (key, value) => println(s"$key: $value") }
-  }
+  submitBtn.onAction = _ =>
+    val dateStr = Option(dateField.value.value).map(_.toString).getOrElse(currentDateString())
+    Thread.startVirtualThread { () =>
+      purchaseForm(
+        sellerNameField.text.value,
+        deviceField.text.value,
+        purchasePriceField.text.value,
+        memoryField.text.value,
+        deviceColorField.text.value,
+        deviceProviderField.text.value,
+        imeiField.text.value,
+        sellerContactField.text.value,
+        sellerAddressField.text.value,
+        sellerIdField.text.value,
+        dateStr,
+        staffNameField.text.value,
+        noteField.text.value
+      )
+    }
+    println("Device Purchase form submitted.")
 }
 
 class LeaseFormTab
     extends FormTab(
-      headerText = "Lease Form", // Tab header text
-      formGrid = new GridPane, // GridPane for the form layout
-      submitBtn = new Button("Submit") // Submit button
+      headerText = "Lease Form",
+      formGrid = new GridPane,
+      submitBtn = new Button("Submit")
     ) {
-  // Set padding and gaps for the form grid
   formGrid.padding = Insets(10)
   formGrid.hgap = 10
   formGrid.vgap = 10
 
-  // Define form fields
-  protected val deviceField = new TextField()
-  protected val deviceColorField = new TextField()
-  protected val deviceStorageField = new TextField()
-  protected val imeiSerialField = new TextField()
-  protected val deviceConditionField = new TextField()
-  protected val accessoriesField = new TextField()
-  protected val borrowerNameField = new TextField()
-  protected val borrowerContactField = new TextField()
-  protected val borrowerIdField = new TextField()
-  protected val staffNameField = new TextField()
-  protected val dateField = new DatePicker()
+  protected val deviceField         = new TextField()
+  protected val deviceColorField    = new TextField()
+  protected val deviceStorageField  = new TextField()
+  protected val imeiSerialField     = new TextField()
+  protected val deviceConditionField= new TextField()
+  protected val accessoriesField    = new TextField()
+  protected val borrowerNameField   = new TextField()
+  protected val borrowerContactField= new TextField()
+  protected val borrowerAddressField= new TextField()
+  protected val borrowerIdField     = new TextField()
+  protected val staffNameField      = new TextField()
+  protected val dateField           = new DatePicker()
 
-  // Add fields to the form grid
   formGrid.add(new Label("Device"), 0, 0)
   formGrid.add(deviceField, 1, 0)
 
@@ -273,45 +282,41 @@ class LeaseFormTab
   formGrid.add(new Label("Borrower's Contact Number"), 0, 7)
   formGrid.add(borrowerContactField, 1, 7)
 
-  formGrid.add(new Label("Borrower's ID Number"), 0, 8)
-  formGrid.add(borrowerIdField, 1, 8)
+  formGrid.add(new Label("Borrower's Address"), 0, 8)
+  formGrid.add(borrowerAddressField, 1, 8)
 
-  formGrid.add(new Label("Staff Name"), 0, 9)
-  formGrid.add(staffNameField, 1, 9)
+  formGrid.add(new Label("Borrower's ID Number"), 0, 9)
+  formGrid.add(borrowerIdField, 1, 9)
 
-  formGrid.add(new Label("Date"), 0, 10)
-  formGrid.add(dateField, 1, 10)
+  formGrid.add(new Label("Staff Name"), 0, 10)
+  formGrid.add(staffNameField, 1, 10)
 
-  // Add the submit button to the form grid
-  formGrid.add(submitBtn, 1, 11)
+  formGrid.add(new Label("Date"), 0, 11)
+  formGrid.add(dateField, 1, 11)
 
-  // Define the action for the submit button
+  formGrid.add(submitBtn, 1, 12)
   submitBtn.onAction = _ => {
-    val formData = Map(
-      "Device" -> deviceField.text.value,
-      "Device Color" -> deviceColorField.text.value,
-      "Device Storage" -> deviceStorageField.text.value,
-      "IMEI/Serial Number" -> imeiSerialField.text.value,
-      "Device Condition" -> deviceConditionField.text.value,
-      "Accessories" -> accessoriesField.text.value,
-      "Borrower's Name" -> borrowerNameField.text.value,
-      "Borrower's Contact Number" -> borrowerContactField.text.value,
-      "Borrower's ID Number" -> borrowerIdField.text.value,
-      "Staff Name" -> staffNameField.text.value,
-      "Date" -> {
-        try dateField.value.value.toString
-        catch case _ =>  {
-          notifyOS("Invalid OS")
-          ""
-        }
-      }
-    )
-
-    // Print the form data to the console
-    println(s"Lease Form submitted with data:")
-    formData.foreach { case (key, value) => println(s"$key: $value") }
+    val dateStr = Option(dateField.value.value).map(_.toString).getOrElse(currentDateString())
+    Thread.startVirtualThread { () =>
+      leaseDeviceForm(
+        borrowerName = borrowerNameField.text.value,
+        deviceName = deviceField.text.value,
+        deviceStorage = deviceStorageField.text.value,
+        deviceColor = deviceColorField.text.value,
+        deviceImei = imeiSerialField.text.value,
+        deviceCondition = deviceConditionField.text.value,
+        accessories = accessoriesField.text.value,
+        borrowerAddress = borrowerAddressField.text.value,
+        borrowerContact = borrowerContactField.text.value,
+        borrowerId = borrowerIdField.text.value,
+        date = dateStr,
+        staff = staffNameField.text.value
+      )
+    }
+    println("Lease Form submitted.")
   }
 }
+
 
 abstract class RiskFormTab(
     headerText: String
@@ -320,47 +325,46 @@ abstract class RiskFormTab(
       formGrid = new GridPane,
       submitBtn = new Button("Submit")
     ) {
-  // Set padding and gaps for the form grid
   formGrid.padding = Insets(10)
   formGrid.hgap = 10
   formGrid.vgap = 10
 
-  // Common fields for all risk forms
+  // Only common fields for risk forms
   protected val customerNameField = new TextField()
-  protected val deviceField = new TextField()
+  protected val deviceField       = new TextField()
 
-  // Add common fields to the form grid
   formGrid.add(new Label("Customer Name"), 0, 0)
   formGrid.add(customerNameField, 1, 0)
 
   formGrid.add(new Label("Device"), 0, 1)
   formGrid.add(deviceField, 1, 1)
 
-  // Add the submit button to the form grid
   formGrid.add(submitBtn, 1, 2)
-
-  // Define the action for the submit button
-  submitBtn.onAction = _ => {
-    val formData = Map(
-      "Customer Name" -> customerNameField.text.value,
-      "Device" -> deviceField.text.value
-    )
-
-    // Print the form data to the console
-    println(s"$headerText form submitted with data:")
-    formData.foreach { case (key, value) => println(s"$key: $value") }
-  }
 }
 
-class FragileScreenFormTab
-    extends RiskFormTab(
-      headerText = "Fragile Screen Form"
-    )
+class FragileScreenFormTab extends RiskFormTab("Fragile Screen Form"):
+  // No date input; use currentDateString() automatically.
+  submitBtn.onAction = _ =>
+    Thread.startVirtualThread { () =>
+      fragileScreen(
+        deviceField.text.value,
+        customerNameField.text.value,
+        currentDateString()
+      )
+    }
+    println("Fragile Screen Form submitted.")
 
-class BackGlassFormTab
-    extends RiskFormTab(
-      headerText = "Back Glass Form"
-    )
+class BackGlassFormTab extends RiskFormTab("Back Glass Form"):
+  // No date input; use currentDateString() automatically.
+  submitBtn.onAction = _ =>
+    Thread.startVirtualThread { () =>
+      backGlass(
+        deviceField.text.value,
+        customerNameField.text.value,
+        currentDateString()
+      )
+    }
+    println("Back Glass Form submitted.")
 
 class Forms extends BaseScene("Forms"):
   val tabBox = new VBox {
