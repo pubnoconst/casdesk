@@ -45,17 +45,17 @@ abstract class DeviceSaleTab(header: String)
   formGrid.hgap = 10
   formGrid.vgap = 10
 
-  protected val customerNameField    = new TextField()
-  protected val deviceField          = new TextField()
-  protected val deviceColorField     = new TextField()
-  protected val deviceImeiField      = new TextField()
-  protected val deviceProviderField  = new TextField()
-  protected val devicePriceField     = new TextField()
-  protected val paymentMethodField   = new TextField()
-  protected val customerContactField = new TextField()
-  protected val customerAddressField = new TextField()
-  protected val customerIdField      = new TextField()
-  protected val staffNameField       = new TextField()
+  protected val customerNameField    = new TextField() { promptText = "Name" }
+  protected val deviceField          = new TextField() { promptText = "Device name and model" }
+  protected val deviceColorField     = new TextField() { promptText = "Blue/Red/Purple..." }
+  protected val deviceImeiField      = new TextField() { promptText = "*#06#" }
+  protected val deviceProviderField  = new TextField() { promptText = "Unlocked/Optus..."}
+  protected val devicePriceField     = new TextField() { promptText = "Exact amount in AUD" }
+  protected val paymentMethodField   = new TextField() { promptText = "EFTPOS/Cash/Stripe" }
+  protected val customerContactField = new TextField() { promptText = "04XY XYZ XYZ" }
+  protected val customerAddressField = new TextField() { promptText = "1/23 John Whiteway Dr, Nth Avoca, NSW 2257" }
+  protected val customerIdField      = new TextField() { promptText = "2323452" }
+  protected val staffNameField       = new TextField() { promptText = "Your name" }
   protected val dateField            = new DatePicker()
 
   formGrid.add(new Label("Customer Name"), 0, 0)
@@ -158,19 +158,19 @@ class DevicePurchaseTab
   formGrid.hgap = 10
   formGrid.vgap = 10
 
-  protected val sellerNameField    = new TextField()
-  protected val deviceField        = new TextField()
-  protected val deviceColorField   = new TextField()
-  protected val memoryField        = new TextField()
-  protected val imeiField          = new TextField()
-  protected val deviceProviderField= new TextField()
-  protected val purchasePriceField = new TextField()
-  protected val sellerContactField = new TextField()
-  protected val sellerAddressField = new TextField()
-  protected val sellerIdField      = new TextField()
-  protected val staffNameField     = new TextField()
+  protected val sellerNameField    = new TextField() { promptText = "Name" } 
+  protected val deviceField        = new TextField() { promptText = "Device name and model" }
+  protected val deviceColorField   = new TextField() { promptText = "Blue/Red/Purple" }
+  protected val memoryField        = new TextField() { promptText = "In GB" }
+  protected val imeiField          = new TextField() { promptText = "*#06#" }
+  protected val deviceProviderField= new TextField() { promptText = "Unlocked/Optus..." }
+  protected val purchasePriceField = new TextField() { promptText = "The exact ammount in AUD" } 
+  protected val sellerContactField = new TextField() { promptText = "04XY XYZ XYZ" } 
+  protected val sellerAddressField = new TextField() { promptText = "1/23 John Whiteway Dr, Nth Avoca, NSW 2257" }
+  protected val sellerIdField      = new TextField() { promptText = "2323452" }
+  protected val staffNameField     = new TextField() { promptText = "Your name" }
   protected val dateField          = new DatePicker()
-  protected val noteField          = new TextField()
+  protected val noteField          = new TextField() { promptText = "Any notes/repairs if required" }
 
   formGrid.add(new Label("Seller's Name"), 0, 0)
   formGrid.add(sellerNameField, 1, 0)
@@ -245,17 +245,17 @@ class LeaseFormTab
   formGrid.hgap = 10
   formGrid.vgap = 10
 
-  protected val deviceField         = new TextField()
-  protected val deviceColorField    = new TextField()
-  protected val deviceStorageField  = new TextField()
-  protected val imeiSerialField     = new TextField()
-  protected val deviceConditionField= new TextField()
-  protected val accessoriesField    = new TextField()
-  protected val borrowerNameField   = new TextField()
-  protected val borrowerContactField= new TextField()
-  protected val borrowerAddressField= new TextField()
-  protected val borrowerIdField     = new TextField()
-  protected val staffNameField      = new TextField()
+  protected val deviceField         = new TextField() { promptText = "Device name and model" }
+  protected val deviceColorField    = new TextField() { promptText = "Blue/Red/Purple..." }
+  protected val deviceStorageField  = new TextField() { promptText = "512 GB" } 
+  protected val imeiSerialField     = new TextField() { promptText = "*#06#" }
+  protected val deviceConditionField= new TextField() { promptText = "Mint/Telstra only..." }
+  protected val accessoriesField    = new TextField() { promptText = "Screen protector/case..." }
+  protected val borrowerNameField   = new TextField() { promptText = "Name" }
+  protected val borrowerContactField= new TextField() { promptText = "04XY XYZ XYZ" }
+  protected val borrowerAddressField= new TextField() { promptText = "1/23 John Whiteway Dr, Nth Avoca, NSW 2257" }
+  protected val borrowerIdField     = new TextField() { promptText = "2323452" }
+  protected val staffNameField      = new TextField() { promptText = "Your name" }
   protected val dateField           = new DatePicker()
 
   formGrid.add(new Label("Device"), 0, 0)
@@ -330,8 +330,8 @@ abstract class RiskFormTab(
   formGrid.vgap = 10
 
   // Only common fields for risk forms
-  protected val customerNameField = new TextField()
-  protected val deviceField       = new TextField()
+  protected val customerNameField = new TextField() { promptText = "Name" }
+  protected val deviceField       = new TextField() { promptText = "iPhone 14 Pro Max" }
 
   formGrid.add(new Label("Customer Name"), 0, 0)
   formGrid.add(customerNameField, 1, 0)
