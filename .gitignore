@@ -1,0 +1,15 @@
+/target
+**/*.rs.bk
+Cargo.lock
+
+*.bsp
+*.metals
+*.scala-build
+*.vscode
+.fake
+*bin
+*obj
+
+
+*.exe
+*.dmg
