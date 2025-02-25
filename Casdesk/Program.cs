@@ -130,7 +130,7 @@ namespace Casdesk
                 Spacing = 10
             };
 
-            var button1 = new Button
+            var formsBtn = new Button
             {
                 Content = new TextBlock
                 {
@@ -140,9 +140,9 @@ namespace Casdesk
                 },
                 Width = 100
             };
-            button1.Click += (_, _) => parentWindow.Content = new FormsScene(parentWindow);
+            formsBtn.Click += (_, _) => parentWindow.Content = new FormsScene(parentWindow);
 
-            var button2 = new Button
+            var quoteBtn = new Button
             {
                 Content = new TextBlock
                 {
@@ -152,9 +152,9 @@ namespace Casdesk
                 },
                 Width = 100
             };
-            button2.Click += (_, _) => parentWindow.Content = new QuoteScene(parentWindow);
+            quoteBtn.Click += (_, _) => parentWindow.Content = new QuoteScene(parentWindow);
 
-            var button3 = new Button
+            var adjustBtn = new Button
             {
 
                 Content = new TextBlock
@@ -165,11 +165,11 @@ namespace Casdesk
                 },
                 Width = 100
             };
-            button3.Click += (_, _) => parentWindow.Content = new AdjustScene(parentWindow);
+            adjustBtn.Click += (_, _) => parentWindow.Content = new AdjustScene(parentWindow);
 
-            buttonPanel.Children.Add(button1);
-            buttonPanel.Children.Add(button2);
-            buttonPanel.Children.Add(button3);
+            buttonPanel.Children.Add(formsBtn);
+            buttonPanel.Children.Add(quoteBtn);
+            buttonPanel.Children.Add(adjustBtn);
 
             stackPanel.Children.Add(textBlock);
             stackPanel.Children.Add(buttonPanel);
