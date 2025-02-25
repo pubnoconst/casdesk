@@ -2,6 +2,8 @@
 using Avalonia.Controls;
 using Avalonia.Themes.Fluent;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Media;
+using Avalonia.Layout;
 
 namespace Casdesk
 {
@@ -19,18 +21,23 @@ namespace Casdesk
 
             var backButton = new Button
             {
-                Content = new TextBlock { Text = "Back", HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, TextAlignment = Avalonia.Media.TextAlignment.Center },
+                Content = new TextBlock
+                {
+                    Text = "Back",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    TextAlignment = TextAlignment.Center
+                },
                 Width = 75
             };
             backButton.Click += (_, _) => parentWindow.Content = new MainScene(parentWindow);
 
-            var spacer = new StackPanel { HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch };
+            var spacer = new StackPanel { HorizontalAlignment = HorizontalAlignment.Stretch };
 
             var titleText = new TextBlock
             {
                 Text = title,
-                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Right,
-                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                VerticalAlignment = VerticalAlignment.Center,
                 FontSize = 24
             };
 
@@ -43,12 +50,12 @@ namespace Casdesk
 
             ContentPanel = new Panel
             {
-                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Stretch
+                VerticalAlignment = VerticalAlignment.Stretch
             };
 
             var mainStack = new StackPanel
             {
-                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Stretch
+                VerticalAlignment = VerticalAlignment.Stretch
             };
 
             mainStack.Children.Add(navBar);
@@ -63,7 +70,12 @@ namespace Casdesk
     {
         public FormsScene(Window parentWindow) : base("Forms", parentWindow)
         {
-            ContentPanel.Children.Add(new TextBlock { Text = "Forms Content" });
+            ContentPanel.Children.Add(
+                new TextBlock
+                {
+                    Text = "Forms Content"
+                }
+            );
         }
     }
 
@@ -71,7 +83,12 @@ namespace Casdesk
     {
         public QuoteScene(Window parentWindow) : base("Quote", parentWindow)
         {
-            ContentPanel.Children.Add(new TextBlock { Text = "Quote Content" });
+            ContentPanel.Children.Add(
+                new TextBlock
+                {
+                    Text = "Quote Content"
+                }
+            );
         }
     }
 
@@ -79,7 +96,12 @@ namespace Casdesk
     {
         public AdjustScene(Window parentWindow) : base("Adjust", parentWindow)
         {
-            ContentPanel.Children.Add(new TextBlock { Text = "Adjust Content" });
+            ContentPanel.Children.Add(
+                new TextBlock
+                {
+                    Text = "Adjust Content"
+                }
+            );
         }
     }
 
@@ -89,32 +111,60 @@ namespace Casdesk
         {
             var stackPanel = new StackPanel
             {
-                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
-                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
                 Spacing = 20
             };
 
             var textBlock = new TextBlock
             {
                 Text = "Casdesk",
-                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
                 FontSize = 64
             };
 
             var buttonPanel = new StackPanel
             {
-                Orientation = Avalonia.Layout.Orientation.Horizontal,
-                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
                 Spacing = 10
             };
 
-            var button1 = new Button { Content = new TextBlock { Text = "Forms", HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, TextAlignment = Avalonia.Media.TextAlignment.Center }, Width = 100 };
+            var button1 = new Button
+            {
+                Content = new TextBlock
+                {
+                    Text = "Forms",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    TextAlignment = TextAlignment.Center
+                },
+                Width = 100
+            };
             button1.Click += (_, _) => parentWindow.Content = new FormsScene(parentWindow);
 
-            var button2 = new Button { Content = new TextBlock { Text = "Quote", HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, TextAlignment = Avalonia.Media.TextAlignment.Center }, Width = 100 };
+            var button2 = new Button
+            {
+                Content = new TextBlock
+                {
+                    Text = "Quote",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    TextAlignment = TextAlignment.Center
+                },
+                Width = 100
+            };
             button2.Click += (_, _) => parentWindow.Content = new QuoteScene(parentWindow);
 
-            var button3 = new Button { Content = new TextBlock { Text = "Adjust", HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, TextAlignment = Avalonia.Media.TextAlignment.Center }, Width = 100 };
+            var button3 = new Button
+            {
+
+                Content = new TextBlock
+                {
+                    Text = "Adjust",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    TextAlignment = TextAlignment.Center
+                },
+                Width = 100
+            };
             button3.Click += (_, _) => parentWindow.Content = new AdjustScene(parentWindow);
 
             buttonPanel.Children.Add(button1);
