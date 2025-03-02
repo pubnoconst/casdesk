@@ -7,7 +7,7 @@ pub fn Home() -> Element {
     rsx! {
         style  { "{CSS}" }
         div {
-            id: "main",
+            id: "home-body",
             p { "Casdesk" }
             div {
                 id: "button-row",
