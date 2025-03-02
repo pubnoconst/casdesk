@@ -1,3 +1,5 @@
+use std::{collections::HashMap, sync::Arc};
+
 use dioxus::prelude::*;
 
 #[derive(PartialEq, Clone)]
@@ -10,6 +12,20 @@ pub enum RiskFormType {
 pub struct RiskFormProps {
     #[props(into)]
     pub kind: RiskFormType,
+}
+
+pub struct RiskFormArgs {
+    customer_name: Arc<str>,
+    device_model: Arc<str>,
+}
+
+impl RiskFormArgs {
+    pub fn parse(data: HashMap<String, FormValue>) -> Option<Self> {
+        Some(Self {
+            customer_name: data.get("customer_name")?.first()?.as_str().into(),
+            device_model: data.get("device_model")?.first()?.as_str().into(),
+        })
+    }
 }
 
 #[component]

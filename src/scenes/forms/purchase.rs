@@ -1,4 +1,42 @@
+use std::{collections::HashMap, sync::Arc};
+
 use dioxus::prelude::*;
+
+pub struct PurchaseFormArgs {
+    seller_name: Arc<str>,
+    device_model: Arc<str>,
+    device_color: Arc<str>,
+    device_memory: Arc<str>,
+    device_imei: Arc<str>,
+    device_provider: Arc<str>,
+    purchase_price: Arc<str>,
+    sellers_contact_number: Arc<str>,
+    seller_addr: Arc<str>,
+    seller_id: Arc<str>,
+    staff_name: Arc<str>,
+    date_of_sale: Arc<str>,
+    notes: Arc<str>,
+}
+
+impl PurchaseFormArgs {
+    pub fn parse(data: HashMap<String, FormValue>) -> Option<Self> {
+        Some(Self {
+            seller_name: data.get("seller_name")?.first()?.as_str().into(),
+            device_model: data.get("device_model")?.first()?.as_str().into(),
+            device_color: data.get("device_color")?.first()?.as_str().into(),
+            device_memory: data.get("device_memory")?.first()?.as_str().into(),
+            device_imei: data.get("device_imei")?.first()?.as_str().into(),
+            device_provider: data.get("device_provider")?.first()?.as_str().into(),
+            purchase_price: data.get("purchase_price")?.first()?.as_str().into(),
+            sellers_contact_number: data.get("sellers_contact_number")?.first()?.as_str().into(),
+            seller_addr: data.get("seller_addr")?.first()?.as_str().into(),
+            seller_id: data.get("seller_id")?.first()?.as_str().into(),
+            staff_name: data.get("staff_name")?.first()?.as_str().into(),
+            date_of_sale: data.get("date_of_sale")?.first()?.as_str().into(),
+            notes: data.get("notes")?.first()?.as_str().into(),
+        })
+    }
+}
 
 #[component]
 pub fn Purchase() -> Element {
