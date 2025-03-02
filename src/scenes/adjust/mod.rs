@@ -3,8 +3,12 @@ use dioxus::prelude::*;
 #[component]
 pub fn Adjust() -> Element {
     rsx! {
-        h1 { 
-            "Adjust"
+        div {
+            class: "frame",
+            super::NavBar { page_title: "Adjust POS" }
+            div {
+                "placeholder"
+            }
         }
     }
 }

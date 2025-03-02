@@ -1,24 +1,40 @@
 use dioxus::prelude::*;
-
 const CSS :&str  = include_str!("home.css");
+
 
 #[component]
 pub fn Home() -> Element {
+    let nv = navigator();
     rsx! {
         style  { "{CSS}" }
         div {
-            id: "home-body",
-            p { "Casdesk" }
+            class: "frame",
             div {
-                id: "button-row",
-                button { 
-                    "Forms"
+                id: "home-body",
+                div { 
+                    id: "title",
+                    "Casdesk" 
                 }
-                button { 
-                    "Quote"
-                }
-                button { 
-                    "Adjust POS"
+                div {
+                    id: "button-row",
+                    button { 
+                        onclick: move |_| {
+                            nv.push("/forms");
+                        },
+                        "Forms"
+                    }
+                    button {
+                        onclick: move |_| {
+                            nv.push("/quote");
+                        }, 
+                        "Quote"
+                    }
+                    button { 
+                        onclick: move |_| {
+                            nv.push("/adjust");
+                        },
+                        "Adjust POS"
+                    }
                 }
             }
         }

@@ -13,6 +13,13 @@ html, body {
     color: #EAEAEA;
 }
 
+.frame {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
 button {
     background-color: #242424;
     color: #FFFFFF;
@@ -39,4 +46,16 @@ button:focus {
         0 0 0 2px rgba(0, 122, 255, 0.6),  
         0 0 6px 3px rgba(0, 122, 255, 0.4);
     border-color: rgba(0, 122, 255, 0.8);
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar-right {
+    font-size: 20px;
 }

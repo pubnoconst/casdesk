@@ -3,8 +3,12 @@ use dioxus::prelude::*;
 #[component]
 pub fn Forms() -> Element {
     rsx! {
-        h1 { 
-            "Forms"
+        div {
+            class: "frame",
+            super::NavBar { page_title: "Forms" }
+            div {
+                "placeholder"
+            }
         }
     }
 }
