@@ -1,0 +1,25 @@
+[package]
+name = "casdesk"
+version = "1.2.0"
+edition = "2021"
+
+[dependencies]
+dioxus = { version = "0.6.3", features = ["router", "launch"] }
+dioxus-free-icons = { version = "0.9", features = ["lucide"] }
+notify-rust = "4.11.5"
+
+[features]
+default = ["desktop"]
+desktop = ["dioxus/desktop"]
+
+[profile]
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"
