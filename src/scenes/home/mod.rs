@@ -1,7 +1,6 @@
 use dioxus::prelude::*;
 const CSS :&str  = include_str!("home.css");
 
-
 #[component]
 pub fn Home() -> Element {
     let nv = navigator();

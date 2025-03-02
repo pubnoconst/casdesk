@@ -1,5 +1,6 @@
 use std::rc::Rc;
 use dioxus::prelude::*;
+use dioxus_free_icons::{icons::ld_icons::LdArrowLeft, Icon};
 
 pub mod home;
 pub mod forms;
@@ -21,11 +22,16 @@ pub fn NavBar(props: NavBarProps) -> Element {
         div {
             class: "navbar",
             div {
-                class: "navbar-left",
+                // class: "navbar-left",
                 button { 
+                    // class: "back-button",
                     onclick: move |_| {
                         nv.push("/");
                     },
+                    Icon {
+                        icon: LdArrowLeft,
+                        height: 13,
+                    }
                     "Home"
                 }
             }
