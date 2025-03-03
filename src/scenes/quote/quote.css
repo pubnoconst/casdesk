@@ -1,0 +1,65 @@
+/* Form input and button styling */
+.input-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+input[type="number"] {
+    flex: 1;
+}
+
+#reset-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* Summary section styling */
+.summary-amounts {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.summary-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.summary-row > button {
+    width: 8rem;
+}
+
+/* Label and value styling for vertical alignment */
+.label {
+    flex: 1;
+}
+
+.value {
+    flex: 1;
+    text-align: right;
+}
+
+/* Table styling */
+#quotes-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+#quotes-table th,
+#quotes-table td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+#quotes-table th {
+    background-color: #f2f2f2;
+}
