@@ -80,7 +80,7 @@ pub fn Purchase() -> Element {
             onsubmit: move |e| {
                 match PurchaseFormArgs::parse(e.data().values()) {
                     Some(args) => {
-                        if let Err(_) = args.print() {
+                        if args.print().is_err() {
                             let _ = notify_rust::Notification::new()
                                         .appname("Casdesk")
                                         .body("Error creating contract form")

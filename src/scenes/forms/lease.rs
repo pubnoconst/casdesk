@@ -81,7 +81,7 @@ pub fn Lease() -> Element {
             onsubmit: move |e| {
                 match LeaseFormArgs::parse(e.data().values()) {
                     Some(args) => {
-                        if let Err(_) = args.print() {
+                        if args.print().is_err() {
                             let _ = notify_rust::Notification::new()
                                         .appname("Casdesk")
                                         .body("Error creating contract form")

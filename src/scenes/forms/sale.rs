@@ -105,7 +105,7 @@ pub fn Sale(props: SaleFormProps) -> Element {
             onsubmit: move |e| {
                 match SaleFormArgs::parse(e.data().values()) {
                     Some(args) => {
-                        if let Err(_) = args.print(props.kind) {
+                        if args.print(props.kind).is_err() {
                             let _ = notify_rust::Notification::new()
                                         .appname("Casdesk")
                                         .body("Error creating contract form")

@@ -16,7 +16,7 @@ struct QuoteEntry {
 
 #[component]
 pub fn Quote() -> Element {
-    let mut quotes = use_signal(|| Vec::<QuoteEntry>::new());
+    let mut quotes = use_signal(Vec::<QuoteEntry>::new);
     let total: Memo<Decimal> = use_memo(move || quotes.read().iter().map(|q| q.value).sum());
     let deposit: Memo<Decimal> = use_memo(move || *total.read() / Decimal::TWO);
 
