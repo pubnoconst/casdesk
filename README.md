@@ -4,15 +4,15 @@
 
 **Casdesk** is designed to assist you with various tasks, including printing forms, performing calculations, and generating job quotes. This project is **not sponsored by any for-profit entity** and is provided as-is, under heavy construction. Use it at your own risk.
 
-![Image](https://i.imgur.com/FGjqzyb.png)
+![Image](https://i.imgur.com/R3SJVgB.png)
 
 ---
 
 ## Features
 
 - **Form Printing**: Print certain forms with ease.
-- **Calculator**: Perform basic calculations.
 - **Job Quote Calculator**: Generate job quotes quickly and efficiently.
+- **Adjusting POS**: Helps you adjust your POS for missing sales
 - **More to come**
 
 ---
