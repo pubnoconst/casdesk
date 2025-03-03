@@ -67,7 +67,7 @@
     flex: 1;
 }
 
-.form-row > input {
+input {
     align-self: center;
     flex: 1;
     background: #181818;
@@ -81,7 +81,7 @@
     box-shadow: inset 0 0.5px 1px rgba(0, 0, 0, 0.1);  
 }
 
-.form-row > input:focus {
+input:focus {
     outline: 1px solid rgba(69, 161, 255, 0.4);
     outline-offset: 1px;
     border-color: rgba(69, 161, 255, 0.2);

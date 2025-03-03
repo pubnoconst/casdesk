@@ -1,6 +1,5 @@
 use dioxus::prelude::*;
 use std::{collections::HashMap, env, fs, sync::Arc};
-
 use super::io::open;
 
 #[derive(PartialEq, Clone, Copy)]
