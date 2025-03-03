@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Contract of Sale of Device</title>
+  <style>
+    /* Remove browser-supplied print margins */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    /* Reset margins and use flexbox for layout */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Times New Roman', serif, sans-serif;
+      font-size: 12pt;
+    }
+
+    /* Wrapper applies the 50px margin on all sides */
+    .wrapper {
+      margin: 50px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Content area expands to push the footer to the bottom */
+    .content {
+      flex: 1;
+    }
+
+    .logo {
+      max-width: 40%;
+      height: auto;
+    }
+
+    h1 {
+      font-size: 18pt;
+    }
+
+    h4 {
+      font-size: 12pt;
+    }
+
+    #termstext {
+      font-size: 10pt;
+    }
+
+    table {
+      border-collapse: collapse;
+      font-size: 10pt;
+    }
+
+    th,
+    td {
+      border: none;
+      padding: 8px;
+      text-align: left;
+      word-wrap: break-word;
+      max-width: 80ch;
+      white-space: normal;
+    }
+
+    th {
+      padding-right: 5px;
+      font-weight: normal;
+      min-width: 25ch;
+    }
+
+    td {
+      padding-left: 5px;
+    }
+
+    /* Anchor footer to the bottom left of the wrapper */
+    footer {
+      align-self: flex-start;
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body onload="window.print();">
+  <div class="wrapper">
+    <div class="content">
+      <img src="data:image/png;base64,%LOGO_BANNER%" class="logo" alt="Logo">
+      <h1>Contract of Sale of Device</h1>
+      <h4>I %CUSTOMER_NAME% (the buyer) agree to the following terms and conditions of PURCHASING a new device.</h4>
+      <p id="termstext">
+        I confirm that a Casphone staff member has informed me that the device I am purchasing is a brand new product.<br>
+        I have inspected the item and agree that it is in good working condition and functions without defect.<br>
+        It has been fully explained how to use the purchased device, and I understand that Casphone is not responsible for any problems that occur due to misuse of the product after the purchase.<br>
+        I understand that if any problems occur after the purchase, a service fee will be charged for inspection unless management deems otherwise.<br>
+        I confirm that I am older than 16 years old, eligible to purchase, and able to provide ID to confirm this.<br>
+        I understand and agree that this purchase comes with a 30-days warranty; any problems or defects outside this term will not be the responsibility of Casphone to fix. If a problem or defect is found within this 30-days period that is not due to misuse, I understand that Casphone will repair the problem within a 7 working day period or replace the item with another if available.<br>
+        Casphone is not required to give a refund on this purchase.<br>
+        This agreement shall be governed by the laws of the State of Queensland and the Country of Australia.
+      </p>
+      <table>
+        <tr>
+          <th><b>Device</b> <small>(Brand, Model, Model Number)</small></th>
+          <td>: %DEVICE_NAME%</td>
+        </tr>
+        <tr>
+          <th><b>Color of the Device</b></th>
+          <td>: %DEVICE_COLOR%</td>
+        </tr>
+        <tr>
+          <th><b>Locked to a Provider</b> <small>(e.g. Optus)</small></th>
+          <td>: %DEVICE_LOCKED%</td>
+        </tr>
+        <tr>
+          <th><b>IMEI (or the like)</b></th>
+          <td>: %DEVICE_IMEI%</td>
+        </tr>
+        <tr>
+          <th><b>Price for the Device </b><small>(AUD)</small></th>
+          <td>: $ %DEVICE_PRICE%</td>
+        </tr>
+        <tr>
+          <th><b>Payment Method</b></th>
+          <td>: %PAYMENT_METHOD%</td>
+        </tr>
+        <tr>
+          <th><b>Name of Buyer</b></th>
+          <td>: %CUSTOMER_NAME%</td>
+        </tr>
+        <tr>
+          <th><b>Contact Number of the Buyer</b></th>
+          <td>: %CUSTOMER_CONTACT%</td>
+        </tr>
+        <tr>
+          <th><b>Address of the Buyer</b></th>
+          <td>: %CUSTOMER_ADDRESS%</td>
+        </tr>
+        <tr>
+          <th><b>Customer Signature</b></th>
+          <td>: ____________________________________</td>
+          <td><b>ID Num. of Buyer</b>: %CUSTOMER_ID%</td>
+        </tr>
+        <tr>
+          <th><b>Date</b></th>
+          <td>: %DATE%</td>
+          <td><b>Staff Name</b>: %STAFF%</td>
+        </tr>
+      </table>
+    </div>
+    <footer>
+      <small>
+        <small>ABN 44 143 740 943 </small><br>
+        <small>(07) 3392 0995 </small><br>
+        <small>info@casphone.com.au </small><br>
+        <small>148 Ipswich Road, Woolloongabba </small><br>
+        <small>Brisbane QLD 4102 </small>
+      </small><br>
+      casphone.com.au
+    </footer>
+  </div>
+</body>
+</html>

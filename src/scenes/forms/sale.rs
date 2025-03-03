@@ -1,7 +1,9 @@
 use dioxus::prelude::*;
-use std::{collections::HashMap, sync::Arc};
+use std::{collections::HashMap, env, fs, sync::Arc};
 
-#[derive(PartialEq, Clone)]
+use super::io::open;
+
+#[derive(PartialEq, Clone, Copy)]
 pub enum SaleType {
     Refurbished,
     New,
@@ -13,7 +15,7 @@ pub struct SaleFormProps {
     kind: SaleType,
 }
 
-pub struct SaleFormArgs {
+struct SaleFormArgs {
     customer_name: Arc<str>,
     device_model: Arc<str>,
     device_color: Arc<str>,
@@ -29,7 +31,7 @@ pub struct SaleFormArgs {
 }
 
 impl SaleFormArgs {
-    pub fn parse(data: HashMap<String, FormValue>) -> Option<Self> {
+    fn parse(data: HashMap<String, FormValue>) -> Option<Self> {
         let customer_name = data.get("customer_name")?.first()?.as_str();
         let device_color = data.get("device_color")?.first()?.as_str();
         let device_model = data.get("device_model")?.first()?.as_str();
@@ -58,6 +60,42 @@ impl SaleFormArgs {
             date_of_sale: date_of_sale.into(),
         })
     }
+
+    fn print(&self, sale_type: SaleType) -> Result<(), Box<dyn std::error::Error>> {
+        // Read the HTML template at compile time
+        let template = match sale_type {
+            SaleType::Refurbished => include_str!("refurbished_device_sale_form.html"),
+            SaleType::New => include_str!("new_device_sale_form.html")
+        } ;
+
+        // Replace placeholders
+        let output_html = template
+            .replace("%LOGO_BANNER%", &super::io::logo_bytes())
+            .replace("%CUSTOMER_NAME%", &self.customer_name)
+            .replace("%DEVICE_NAME%", &self.device_model)
+            .replace("%DEVICE_COLOR%", &self.device_color)
+            .replace("%DEVICE_LOCKED%", &self.device_provider)
+            .replace("%DEVICE_IMEI%", &self.device_imei)
+            .replace("%DEVICE_PRICE%", &self.device_price)
+            .replace("%PAYMENT_METHOD%", &self.payment_method)
+            .replace("%CUSTOMER_CONTACT%", &self.customers_contact_number)
+            .replace("%CUSTOMER_ADDRESS%", &self.customer_addr)
+            .replace("%CUSTOMER_ID%", &self.customer_id)
+            .replace("%DATE%", &self.date_of_sale)
+            .replace("%STAFF%", &self.staff_name);
+
+        // Create a temp directory path
+        let mut temp_dir = env::temp_dir();
+        temp_dir.push("sale_contract.html");
+
+        // Write to the file
+        fs::write(&temp_dir, output_html)?;
+
+        // Open the file with the default system browser
+        open(&temp_dir)?;
+
+        Ok(())
+    }
 }
 
 #[component]
@@ -67,7 +105,14 @@ pub fn Sale(props: SaleFormProps) -> Element {
             class: "form",
             onsubmit: move |e| {
                 match SaleFormArgs::parse(e.data().values()) {
-                    Some(args) => {}
+                    Some(args) => {
+                        if let Err(_) = args.print(props.kind) {
+                            let _ = notify_rust::Notification::new()
+                                        .appname("Casdesk")
+                                        .body("Error creating contract form")
+                                        .show();
+                        }
+                    }
                     _ => {
                         let _ = notify_rust::Notification::new()
                             .appname("Casdesk")
@@ -134,7 +179,7 @@ pub fn Sale(props: SaleFormProps) -> Element {
             div {
                 class: "form-row",
                 label { "Date:" }
-                input { r#type: "text", name: "date_of_sale", placeholder: "MM/DD/YY" }
+                input { r#type: "text", name: "date_of_sale", placeholder: super::io::date::today().expect("").as_str() }
             }
             div {
                 class: "form-submit-button-container",

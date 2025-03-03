@@ -16,6 +16,7 @@ enum FormState {
 }
 
 const CSS :&str  = include_str!("forms.css");
+pub const LOGOBANNER: &[u8] = include_bytes!("../../../assets/logobanner.png");
 
 #[component]
 pub fn Forms() -> Element {

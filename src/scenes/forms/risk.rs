@@ -1,8 +1,8 @@
-use std::{collections::HashMap, sync::Arc};
-
+use std::{collections::HashMap, env, fs, sync::Arc};
 use dioxus::prelude::*;
+use super::io::open;
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Copy)]
 pub enum RiskFormType {
     FragileScreen,
     BackGlass,
@@ -11,20 +11,47 @@ pub enum RiskFormType {
 #[derive(PartialEq, Clone, Props)]
 pub struct RiskFormProps {
     #[props(into)]
-    pub kind: RiskFormType,
+    kind: RiskFormType,
 }
 
-pub struct RiskFormArgs {
+struct RiskFormArgs {
     customer_name: Arc<str>,
     device_model: Arc<str>,
 }
 
 impl RiskFormArgs {
-    pub fn parse(data: HashMap<String, FormValue>) -> Option<Self> {
+    fn parse(data: HashMap<String, FormValue>) -> Option<Self> {
         Some(Self {
             customer_name: data.get("customer_name")?.first()?.as_str().into(),
             device_model: data.get("device_model")?.first()?.as_str().into(),
         })
+    }
+
+    fn print(&self, risk_form_type: RiskFormType) -> Result<(), Box<dyn std::error::Error>> {
+        // Read the HTML template at compile time
+        let template = match risk_form_type {
+            RiskFormType::BackGlass => include_str!("back_glass_form.html"),
+            RiskFormType::FragileScreen => include_str!("fragile_screen_form.html")
+        };
+
+        // Replace placeholders
+        let output_html = template
+            .replace("%LOGO_BANNER%", &super::io::logo_bytes())
+            .replace("%DEVICE_MODEL%", &self.device_model)
+            .replace("%CUSTOMER_NAME%", &self.customer_name)
+            .replace("%DATE%", &super::io::date::today().expect(""));
+
+        // Create a temp directory path
+        let mut temp_dir = env::temp_dir();
+        temp_dir.push("risk_acknowledgement.html");
+
+        // Write to the file
+        fs::write(&temp_dir, output_html)?;
+
+        // Open the file with the default system browser
+        open(&temp_dir)?;
+
+        Ok(())
     }
 }
 
@@ -35,7 +62,14 @@ pub fn RiskForm(props: RiskFormProps) -> Element {
             class: "form",
             onsubmit: move |e| {
                 match RiskFormArgs::parse(e.data().values()) {
-                    Some(args) => {}
+                    Some(args) => {
+                        if let Err(_) = args.print(props.kind) {
+                            let _ = notify_rust::Notification::new()
+                                        .appname("Casdesk")
+                                        .body("Error creating contract form")
+                                        .show();
+                        }
+                    }
                     _ => {
                         let _ = notify_rust::Notification::new()
                             .appname("Casdesk")
@@ -54,13 +88,13 @@ pub fn RiskForm(props: RiskFormProps) -> Element {
                 label { "Device:" }
                 input { r#type: "text", placeholder: "Google Pixle 9 Pro", name: "device_model" }
             }
-        }
-        div {
-            class: "form-submit-button-container",
-            button {
-                class: "encouraged-button",
-                r#type: "submit",
-                "Confirm"
+            div {
+                class: "form-submit-button-container",
+                button {
+                    class: "encouraged-button",
+                    r#type: "submit",
+                    "Confirm"
+                }
             }
         }
     }

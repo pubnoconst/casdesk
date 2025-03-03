@@ -1,8 +1,8 @@
-use std::{collections::HashMap, sync::Arc};
-
+use std::{collections::HashMap, env, fs, sync::Arc};
 use dioxus::prelude::*;
+use super::io::open;
 
-pub struct PurchaseFormArgs {
+struct PurchaseFormArgs {
     seller_name: Arc<str>,
     device_model: Arc<str>,
     device_color: Arc<str>,
@@ -19,7 +19,7 @@ pub struct PurchaseFormArgs {
 }
 
 impl PurchaseFormArgs {
-    pub fn parse(data: HashMap<String, FormValue>) -> Option<Self> {
+    fn parse(data: HashMap<String, FormValue>) -> Option<Self> {
         Some(Self {
             seller_name: data.get("seller_name")?.first()?.as_str().into(),
             device_model: data.get("device_model")?.first()?.as_str().into(),
@@ -36,6 +36,40 @@ impl PurchaseFormArgs {
             notes: data.get("notes")?.first()?.as_str().into(),
         })
     }
+
+    fn print(&self) -> Result<(), Box<dyn std::error::Error>> {
+        // Read the HTML template at compile time
+        let template = include_str!("purchase_form.html");
+
+        // Replace placeholders
+        let output_html = template
+            .replace("%LOGO_BANNER%", &super::io::logo_bytes())
+            .replace("%SELLER_NAME%", &self.seller_name)
+            .replace("%DEVICE_NAME%", &self.device_model)
+            .replace("%DEVICE_COLOR%", &self.device_color)
+            .replace("%DEVICE_MEMORY%", &self.device_memory)
+            .replace("%DEVICE_LOCKED%", &self.device_provider)
+            .replace("%DEVICE_IMEI%", &self.device_imei)
+            .replace("%PRICE%", &self.purchase_price)
+            .replace("%SELLER_CONTACT%", &self.sellers_contact_number)
+            .replace("%SELLER_ADDRESS%", &self.seller_addr)
+            .replace("%CUSTOMER_ID%", &self.seller_id)
+            .replace("%DATE%", &self.date_of_sale)
+            .replace("%STAFF%", &self.staff_name)
+            .replace("%NOTES%", &self.notes);
+
+        // Create a temp directory path
+        let mut temp_dir = env::temp_dir();
+        temp_dir.push("purchase_contract.html");
+
+        // Write to the file
+        fs::write(&temp_dir, output_html)?;
+
+        // Open the file with the default system browser
+        open(&temp_dir)?;
+
+        Ok(())
+    }
 }
 
 #[component]
@@ -45,7 +79,14 @@ pub fn Purchase() -> Element {
             class: "form",
             onsubmit: move |e| {
                 match PurchaseFormArgs::parse(e.data().values()) {
-                    Some(args) => {}
+                    Some(args) => {
+                        if let Err(_) = args.print() {
+                            let _ = notify_rust::Notification::new()
+                                        .appname("Casdesk")
+                                        .body("Error creating contract form")
+                                        .show();
+                        }
+                    }
                     _ => {
                         let _ = notify_rust::Notification::new()
                             .appname("Casdesk")
@@ -112,7 +153,7 @@ pub fn Purchase() -> Element {
             div {
                 class: "form-row",
                 label { "Date:" }
-                input { r#type: "text", name: "date_of_sale", placeholder: "MM/DD/YY" }
+                input { r#type: "text", name: "date_of_sale", placeholder: super::io::date::today().expect("").as_str() }
             }
             div {
                 class: "form-row",
