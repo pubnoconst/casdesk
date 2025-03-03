@@ -8,6 +8,7 @@ pub mod quote;
 pub mod adjust;
 
 pub const GLOBAL_CSS :&str  = include_str!("global.css");
+pub const FONT_BYTES: &[u8] = include_bytes!("../../assets/Jost.ttf"); // Your font file
 
 #[derive(PartialEq, Clone, Props)]
 pub struct NavBarProps {

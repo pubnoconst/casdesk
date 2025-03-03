@@ -1,6 +1,6 @@
 use dioxus::{desktop::LogicalSize, prelude::*};
 mod scenes;
-use scenes::{home::*, forms::*, quote::*, adjust::*};
+use scenes::{adjust::*, forms::*, home::*, quote::*, GLOBAL_CSS};
 
 #[derive(Routable, Clone, PartialEq)]
 pub enum Route {
@@ -11,15 +11,21 @@ pub enum Route {
     #[route("/quote")]
     Quote {},
     #[route("/adjust")]
-    Adjust {}
+    Adjust {},
 }
 
 #[component]
 fn App() -> Element {
-     rsx! {
-        style { "{scenes::GLOBAL_CSS}"  }
-        Router::<Route> {}
-     }
+    let font_base64 = rbase64::encode(scenes::FONT_BYTES);
+    let font_face = format!(
+        "@font-face {{ font-family: 'Jost'; src: url('data:font/ttf;base64,{}') format('truetype'); }}",
+        font_base64
+    );
+    let global_css = format!("{}\n{}", font_face, GLOBAL_CSS);
+    rsx! {
+       style { "{global_css}"  }
+       Router::<Route> {}
+    }
 }
 
 fn main() {
