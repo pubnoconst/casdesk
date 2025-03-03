@@ -9,7 +9,8 @@
 }
 
 #button-row {
-    justify-self: flex-start;
+    justify-self: center;
+    align-self: center;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -17,6 +18,8 @@
 }
 
 #title {
+    justify-self: center;
+    align-self: center;
     margin-top: 30%;
     margin-bottom: 0px;
     font-size: 64px;
