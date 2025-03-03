@@ -30,7 +30,7 @@ fn main() {
                 .with_window(
                     dioxus::desktop::WindowBuilder::new()
                         .with_title("Casdesk 1.2.0")
-                        .with_inner_size(LogicalSize::new(750.0, 750.0)),
+                        .with_inner_size(LogicalSize::new(800.0, 800.0)),
                 ),
         )
         .launch(App);

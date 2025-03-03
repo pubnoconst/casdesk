@@ -35,7 +35,7 @@ pub fn Forms() -> Element {
                             onclick: move |_| {
                                 fs.set(FormState::RefurbsishedSale);
                             },
-                            class: "active-tab",
+                            class: "active-tab-header",
                             "Refurbished device sale",
                         }                                                   
                     } else {
@@ -51,7 +51,7 @@ pub fn Forms() -> Element {
                             onclick: move |_| {
                                 fs.set(FormState::NewSale);
                             },
-                            class: "active-tab",
+                            class: "active-tab-header",
                             "New device sale",
                         }
                     } else {
@@ -67,7 +67,7 @@ pub fn Forms() -> Element {
                             onclick: move |_| {
                                 fs.set(FormState::Purchase);
                             },
-                            class: "active-tab",
+                            class: "active-tab-header",
                             "Purchase",
                         }
                     } else {
@@ -83,7 +83,7 @@ pub fn Forms() -> Element {
                             onclick: move |_| {
                                 fs.set(FormState::Lease);
                             },
-                            class: "active-tab",
+                            class: "active-tab-header",
                             "Lease",
                         }
                     } else {
@@ -99,7 +99,7 @@ pub fn Forms() -> Element {
                             onclick: move |_| {
                                 fs.set(FormState::BackGlass);
                             },
-                            class: "active-tab",
+                            class: "active-tab-header",
                             "Back glass",
                         }
                     } else {
@@ -115,7 +115,7 @@ pub fn Forms() -> Element {
                             onclick: move |_| {
                                 fs.set(FormState::FragileScreen);
                             },
-                            class: "active-tab",
+                            class: "active-tab-header",
                             "Fragile screen",
                         }
                     } else {
