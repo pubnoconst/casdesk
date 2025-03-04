@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use dioxus::{desktop::LogicalSize, prelude::*};
 mod scenes;
 use scenes::{adjust::*, forms::*, home::*, quote::*, GLOBAL_CSS};
