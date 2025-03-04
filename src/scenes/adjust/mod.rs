@@ -51,7 +51,7 @@ pub fn Adjust() -> Element {
                     if *software.read() > *machine.read() {
                         "You are missing ${missing_extra_neg} sales from the EFTPOS Machine. Mybug is ahead ⚠️"
                     } if *software.read() < *machine.read() {
-                        "You recorded ${missing_extra} extraneous sales in Mybug. EFTPOS is ahead ✔️ "
+                        "You recorded ${missing_extra} less sales in Mybug. EFTPOS is ahead ✔️ "
                     }
                 }
             }
