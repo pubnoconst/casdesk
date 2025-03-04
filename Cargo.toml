@@ -16,14 +16,8 @@ rust_decimal_macros = "1.36.0"
 default = ["desktop"]
 desktop = ["dioxus/desktop"]
 
-[profile]
+[package.metadata.bundle]
+name = "Casdesk"
 
-[profile.wasm-dev]
-inherits = "dev"
-opt-level = 1
-
-[profile.server-dev]
-inherits = "dev"
-
-[profile.android-dev]
-inherits = "dev"
+[package.metadata.bundle.mac]
+bundle-identifier = "com.github.pubnoconst"
