@@ -20,12 +20,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px; /* Increased to provide big padding inside the card */
+    padding: 5rem; /* Increased to provide big padding inside the card */
     gap: 10px; /* Adds space between the label and input */
     border-radius: 8px;
     background: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-    width: 200px; /* Fixed width retained */
+    width: 12rem; /* Fixed width retained */
     /* Height is no longer fixed, adjusts to content */
 }
 
@@ -37,7 +37,11 @@
 }
 
 .summary {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 1rem;
     width: 100%;
 }
