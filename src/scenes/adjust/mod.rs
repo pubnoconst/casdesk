@@ -1,5 +1,7 @@
 use std::str::FromStr;
+use arboard::Clipboard;
 use dioxus::prelude::*;
+use notify_rust::Notification;
 use rust_decimal::Decimal;
 use rust_decimal_macros::dec;
 
@@ -50,8 +52,36 @@ pub fn Adjust() -> Element {
                     class: "summary",
                     if *software.read() > *machine.read() {
                         "You are missing ${missing_extra_neg} sales from the EFTPOS Machine. Mybug is ahead ⚠️"
+                        div {
+                            button {
+                                onclick: move |_| {
+                                    let to_copy = format!("{missing_extra_neg}");
+                                    if let Ok(_) = Clipboard::new().map(|mut cb| cb.set_text(to_copy.clone())) {
+                                        let _ = Notification::new()
+                                                    .appname("Casdesk")
+                                                    .body(&format!("Copied {to_copy} to clipboard"))
+                                                    .show();
+                                    }    
+                                },
+                                "Copy"
+                            }
+                        }
                     } if *software.read() < *machine.read() {
                         "You recorded ${missing_extra} less sales in Mybug. EFTPOS is ahead ✔️ "
+                        div {
+                            button {
+                                onclick: move |_| {
+                                    let to_copy = format!("{missing_extra}");
+                                    if let Ok(_) = Clipboard::new().map(|mut cb| cb.set_text(to_copy.clone())) {
+                                        let _ = Notification::new()
+                                                    .appname("Casdesk")
+                                                    .body(&format!("Copied {to_copy} to clipboard"))
+                                                    .show();
+                                    }    
+                                },
+                                "Copy"
+                            }
+                        }
                     }
                 }
             }
