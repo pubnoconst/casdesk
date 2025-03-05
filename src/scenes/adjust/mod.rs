@@ -63,6 +63,7 @@ pub fn Adjust() -> Element {
                                                     .show();
                                     }    
                                 },
+                                class: "encouraged-button",
                                 "Copy"
                             }
                         }
@@ -79,6 +80,7 @@ pub fn Adjust() -> Element {
                                                     .show();
                                     }    
                                 },
+                                class: "encouraged-button",
                                 "Copy"
                             }
                         }
