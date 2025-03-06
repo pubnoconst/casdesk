@@ -61,16 +61,29 @@ pub mod date {
 
 pub fn open(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
     #[cfg(target_os = "windows")]
-    Command::new("cmd").arg("/c").arg("start").arg(path).spawn()?;
+    {
+        let _ = Command::new("chrome").arg(path).spawn().or_else(|_| {
+            Command::new("cmd").arg("/c").arg("start").arg(path).spawn()
+        });
+    }
 
     #[cfg(target_os = "macos")]
-    Command::new("open").arg(path).spawn()?;
+    {
+        let _ = Command::new("open").arg("-a").arg("Google Chrome").arg(path).spawn().or_else(|_| {
+            Command::new("open").arg(path).spawn()
+        });
+    }
 
     #[cfg(target_os = "linux")]
-    Command::new("xdg-open").arg(path).spawn()?;
+    {
+        let _ = Command::new("google-chrome").arg(path).spawn().or_else(|_| {
+            Command::new("xdg-open").arg(path).spawn()
+        });
+    }
 
     Ok(())
 }
+
 
 pub fn logo_bytes() -> String {
     rbase64::encode(super::LOGOBANNER)
