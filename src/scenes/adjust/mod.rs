@@ -51,7 +51,7 @@ pub fn Adjust() -> Element {
                 div {
                     class: "summary",
                     if *software.read() > *machine.read() {
-                        "You are missing ${missing_extra_neg} sales from the EFTPOS Machine. Mybug is ahead ⚠️"
+                        "You are missing ${missing_extra_neg} sales in the EFTPOS Machine. Mybug is ahead ⚠️"
                         div {
                             button {
                                 onclick: move |_| {
