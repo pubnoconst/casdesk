@@ -83,8 +83,3 @@ pub fn open(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
-
-
-pub fn logo_bytes() -> String {
-    rbase64::encode(super::LOGOBANNER)
-}

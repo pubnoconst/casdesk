@@ -69,7 +69,7 @@ impl SaleFormArgs {
 
         // Replace placeholders
         let output_html = template
-            .replace("%LOGO_BANNER%", &super::io::logo_bytes())
+            .replace("%LOGO_BANNER%", &super::LOGO)
             .replace("%CUSTOMER_NAME%", &self.customer_name)
             .replace("%DEVICE_NAME%", &self.device_model)
             .replace("%DEVICE_COLOR%", &self.device_color)

@@ -13,6 +13,9 @@ Cargo.lock
 
 *.exe
 *.dmg
+*.App
+
+assets/output/*
 
 # Added by cargo
 #

@@ -18,10 +18,9 @@ pub enum Route {
 
 #[component]
 fn App() -> Element {
-    let font_base64 = rbase64::encode(scenes::FONT_BYTES);
+    let jost_base64 = scenes::JOST_FONT_BYTES;
     let font_face = format!(
-        "@font-face {{ font-family: 'Jost'; src: url('data:font/ttf;base64,{}') format('truetype'); }}",
-        font_base64
+        "@font-face {{ font-family: 'Jost'; src: url('data:font/ttf;base64,{jost_base64}') format('truetype'); }}"
     );
     let global_css = format!("{}\n{}", font_face, GLOBAL_CSS);
     rsx! {

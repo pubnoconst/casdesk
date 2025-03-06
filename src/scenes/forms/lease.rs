@@ -45,7 +45,7 @@ impl LeaseFormArgs {
 
         // Replace placeholders
         let output_html = template
-            .replace("%LOGO_BANNER%", &super::io::logo_bytes())
+            .replace("%LOGO_BANNER%", &super::LOGO)
             .replace("%DEVICE_NAME%", &self.device_model)
             .replace("%DEVICE_COLOR%", &self.device_color)
             .replace("%DEVICE_STORAGE%", &self.device_storage)

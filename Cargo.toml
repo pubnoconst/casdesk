@@ -3,6 +3,9 @@ name = "casdesk"
 version = "1.2.0"
 edition = "2021"
 
+[build-dependencies]
+rbase64 = "2.0.3"
+
 [dependencies]
 arboard = "3.4.1"
 dioxus = { version = "0.6.3", features = ["router", "launch"] }
