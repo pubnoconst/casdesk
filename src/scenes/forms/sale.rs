@@ -147,7 +147,7 @@ pub fn Sale(props: SaleFormProps) -> Element {
             }
             div {
                 class: "form-row",
-                label { "Device Price AUD $:" }
+                label { "Price (AUD):" }
                 input { r#type: "number", name: "device_price", placeholder: "Enter device price" }
             }
             div {
@@ -162,12 +162,12 @@ pub fn Sale(props: SaleFormProps) -> Element {
             }
             div {
                 class: "form-row",
-                label { "Customer's address:" }
+                label { "Customer address:" }
                 input { r#type: "text", name: "customer_addr", placeholder: "Enter customer's address" }
             }
             div {
                 class: "form-row",
-                label { "Customer's ID number:" }
+                label { "Customer ID:" }
                 input { r#type: "text", name: "customer_id", placeholder: "Enter customer's ID" }
             }
             div {

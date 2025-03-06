@@ -108,12 +108,12 @@ pub fn Lease() -> Element {
             }
             div {
                 class: "form-row",
-                label { "Device Storage (GB):" }
+                label { "Storage (GB):" }
                 input { r#type: "number", name: "device_storage", placeholder: "64" }
             }
             div {
                 class: "form-row",
-                label { "IMEI/Serial number:" }
+                label { "IMEI/Serial:" }
                 input { r#type: "text", name: "device_imei", placeholder: "*#06#" }
             }
             div {
@@ -143,7 +143,7 @@ pub fn Lease() -> Element {
             }
             div {
                 class: "form-row",
-                label { "Borrower's ID number:" }
+                label { "Borrower's ID:" }
                 input { r#type: "text", name: "borrower_id", placeholder: "Enter borrower's ID" }
             }
             div {

@@ -127,7 +127,7 @@ pub fn Purchase() -> Element {
             }
             div {
                 class: "form-row",
-                label { "Purchase price AUD $:" }
+                label { "Pice (AUD):" }
                 input { r#type: "number", name: "purchase_price", placeholder: "Enter purchase price" }
             }
             div {
