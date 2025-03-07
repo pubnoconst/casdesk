@@ -43,7 +43,7 @@ impl PurchaseFormArgs {
 
         // Replace placeholders
         let output_html = template
-            .replace("%LOGO_BANNER%", &super::LOGO)
+            .replace("%LOGO_BANNER%", super::LOGO)
             .replace("%SELLER_NAME%", &self.seller_name)
             .replace("%DEVICE_NAME%", &self.device_model)
             .replace("%DEVICE_COLOR%", &self.device_color)

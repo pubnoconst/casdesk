@@ -56,7 +56,7 @@ pub fn Adjust() -> Element {
                             button {
                                 onclick: move |_| {
                                     let to_copy = format!("{missing_extra_neg}");
-                                    if let Ok(_) = Clipboard::new().map(|mut cb| cb.set_text(to_copy.clone())) {
+                                    if Clipboard::new().map(|mut cb| cb.set_text(to_copy.clone())).is_ok() {
                                         let _ = Notification::new()
                                                     .appname("Casdesk")
                                                     .body(&format!("Copied {to_copy} to clipboard"))
@@ -73,7 +73,7 @@ pub fn Adjust() -> Element {
                             button {
                                 onclick: move |_| {
                                     let to_copy = format!("{missing_extra}");
-                                    if let Ok(_) = Clipboard::new().map(|mut cb| cb.set_text(to_copy.clone())) {
+                                    if Clipboard::new().map(|mut cb| cb.set_text(to_copy.clone())).is_ok() {
                                         let _ = Notification::new()
                                                     .appname("Casdesk")
                                                     .body(&format!("Copied {to_copy} to clipboard"))

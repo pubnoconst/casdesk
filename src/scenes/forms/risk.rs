@@ -36,7 +36,7 @@ impl RiskFormArgs {
 
         // Replace placeholders
         let output_html = template
-            .replace("%LOGO_BANNER%", &super::LOGO)
+            .replace("%LOGO_BANNER%", super::LOGO)
             .replace("%DEVICE_MODEL%", &self.device_model)
             .replace("%CUSTOMER_NAME%", &self.customer_name)
             .replace("%DATE%", &super::io::date::today().expect(""));
