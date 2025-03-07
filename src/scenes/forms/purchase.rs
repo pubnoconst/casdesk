@@ -1,21 +1,21 @@
-use std::{collections::HashMap, env, fs, sync::Arc};
+use std::{collections::HashMap, env, fs, rc::Rc};
 use dioxus::prelude::*;
 use super::io::open;
 
 struct PurchaseFormArgs {
-    seller_name: Arc<str>,
-    device_model: Arc<str>,
-    device_color: Arc<str>,
-    device_memory: Arc<str>,
-    device_imei: Arc<str>,
-    device_provider: Arc<str>,
-    purchase_price: Arc<str>,
-    sellers_contact_number: Arc<str>,
-    seller_addr: Arc<str>,
-    seller_id: Arc<str>,
-    staff_name: Arc<str>,
-    date_of_sale: Arc<str>,
-    notes: Arc<str>,
+    seller_name: Rc<str>,
+    device_model: Rc<str>,
+    device_color: Rc<str>,
+    device_memory: Rc<str>,
+    device_imei: Rc<str>,
+    device_provider: Rc<str>,
+    purchase_price: Rc<str>,
+    sellers_contact_number: Rc<str>,
+    seller_addr: Rc<str>,
+    seller_id: Rc<str>,
+    staff_name: Rc<str>,
+    date_of_sale: Rc<str>,
+    notes: Rc<str>,
 }
 
 impl PurchaseFormArgs {

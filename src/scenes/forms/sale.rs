@@ -1,5 +1,5 @@
 use dioxus::prelude::*;
-use std::{collections::HashMap, env, fs, sync::Arc};
+use std::{collections::HashMap, env, fs, rc::Rc};
 use super::io::open;
 
 #[derive(PartialEq, Clone, Copy)]
@@ -15,18 +15,18 @@ pub struct SaleFormProps {
 }
 
 struct SaleFormArgs {
-    customer_name: Arc<str>,
-    device_model: Arc<str>,
-    device_color: Arc<str>,
-    device_imei: Arc<str>,
-    device_provider: Arc<str>,
-    device_price: Arc<str>,
-    payment_method: Arc<str>,
-    customers_contact_number: Arc<str>,
-    customer_addr: Arc<str>,
-    customer_id: Arc<str>,
-    staff_name: Arc<str>,
-    date_of_sale: Arc<str>,
+    customer_name: Rc<str>,
+    device_model: Rc<str>,
+    device_color: Rc<str>,
+    device_imei: Rc<str>,
+    device_provider: Rc<str>,
+    device_price: Rc<str>,
+    payment_method: Rc<str>,
+    customers_contact_number: Rc<str>,
+    customer_addr: Rc<str>,
+    customer_id: Rc<str>,
+    staff_name: Rc<str>,
+    date_of_sale: Rc<str>,
 }
 
 impl SaleFormArgs {

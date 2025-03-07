@@ -1,4 +1,4 @@
-use std::{collections::HashMap, env, fs, sync::Arc};
+use std::{collections::HashMap, env, fs, rc::Rc};
 use dioxus::prelude::*;
 use super::io::open;
 
@@ -15,8 +15,8 @@ pub struct RiskFormProps {
 }
 
 struct RiskFormArgs {
-    customer_name: Arc<str>,
-    device_model: Arc<str>,
+    customer_name: Rc<str>,
+    device_model: Rc<str>,
 }
 
 impl RiskFormArgs {

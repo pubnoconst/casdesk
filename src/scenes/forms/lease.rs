@@ -1,20 +1,20 @@
-use std::{collections::HashMap, env, fs, sync::Arc};
+use std::{collections::HashMap, env, fs, rc::Rc};
 use dioxus::prelude::*;
 use super::io::open;
 
 struct LeaseFormArgs {
-    device_model: Arc<str>,
-    device_color: Arc<str>,
-    device_storage: Arc<str>,
-    device_imei: Arc<str>,
-    device_condition: Arc<str>,
-    accessories: Arc<str>,
-    borrower_name: Arc<str>,
-    borrower_contact_number: Arc<str>,
-    borrower_addr: Arc<str>,
-    borrower_id: Arc<str>,
-    staff_name: Arc<str>,
-    date: Arc<str>,
+    device_model: Rc<str>,
+    device_color: Rc<str>,
+    device_storage: Rc<str>,
+    device_imei: Rc<str>,
+    device_condition: Rc<str>,
+    accessories: Rc<str>,
+    borrower_name: Rc<str>,
+    borrower_contact_number: Rc<str>,
+    borrower_addr: Rc<str>, 
+    borrower_id: Rc<str>,
+    staff_name: Rc<str>,
+    date: Rc<str>,
 }
 
 impl LeaseFormArgs {
