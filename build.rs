@@ -3,10 +3,10 @@ use std::{fs, path::Path};
 const OUT_DIR: &str = "assets/output";
 
 fn load_font() {
-    let jost_font_bytes = include_bytes!("assets/Jost.ttf");
-    let jost_encoded = rbase64::encode(jost_font_bytes);
-    let font_out_path = Path::new(&OUT_DIR).join("Jost.ttf.bin");
-    fs::write(font_out_path, jost_encoded).expect("WRITE FAILURE: font");
+    let figtree_font_bytes = include_bytes!("assets/Figtree.ttf");
+    let figtree_encoded = rbase64::encode(figtree_font_bytes);
+    let font_out_path = Path::new(&OUT_DIR).join("Figtree.ttf.bin");
+    fs::write(font_out_path, figtree_encoded).expect("WRITE FAILURE: font");
 }
 
 fn load_logo() {

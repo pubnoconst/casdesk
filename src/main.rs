@@ -18,9 +18,9 @@ pub enum Route {
 
 #[component]
 fn App() -> Element {
-    let jost_base64 = scenes::JOST_FONT_BYTES;
+    let figtree_base64 = scenes::FIGTREE_FONT_BYTES;
     let font_face = format!(
-        "@font-face {{ font-family: 'Jost'; src: url('data:font/ttf;base64,{jost_base64}') format('truetype'); }}"
+        "@font-face {{ font-family: 'Figtree'; src: url('data:font/ttf;base64,{figtree_base64}') format('truetype'); }}"
     );
     let global_css = format!("{}\n{}", font_face, GLOBAL_CSS);
     rsx! {
