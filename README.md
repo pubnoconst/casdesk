@@ -17,6 +17,11 @@
 
 ---
 
+## Requirements
+
+On Windows it requires VCRedist. Download it from this link here: https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+---
 ## Building
 
 To build Casdesk from source, follow these steps:
