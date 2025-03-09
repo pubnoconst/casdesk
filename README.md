@@ -17,6 +17,29 @@
 
 ---
 
+## Building
+
+To build Casdesk from source, follow these steps:
+
+1. Install Rust from https://www.rust-lang.org/tools/install
+2. Clone the repository:
+```bash 
+git clone https://github.com/pubnoconst/casdesk.git
+```
+3. Navigate to the project directory:
+
+```bash
+cd casdesk
+```
+4. Build the project:
+
+```bash
+cargo build --release
+```
+5. The executable will be located in the `target/release` directory.
+
+---
+
 ## Disclaimer
 
 This project is still under **heavy construction**, and its functionality may change or break at any time. By using this software, you agree that:
