@@ -3,6 +3,7 @@
 use dioxus::{desktop::LogicalSize, prelude::*};
 mod scenes;
 use scenes::{adjust::*, forms::*, home::*, quote::*, GLOBAL_CSS};
+mod update_manager;
 
 #[derive(Routable, Clone, PartialEq)]
 pub enum Route {
@@ -30,13 +31,14 @@ fn App() -> Element {
 }
 
 fn main() {
+    let _ = update_manager::update();
     LaunchBuilder::new()
         .with_cfg(
             dioxus::desktop::Config::default()
                 .with_menu(None)
                 .with_window(
                     dioxus::desktop::WindowBuilder::new()
-                        .with_title("Casdesk 1.2.0")
+                        .with_title(&format!("Casdesk {}", env!("CARGO_PKG_VERSION")))
                         .with_inner_size(LogicalSize::new(800.0, 800.0)),
                 ),
         )

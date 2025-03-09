@@ -1,6 +1,6 @@
 [package]
 name = "casdesk"
-version = "1.2.0"
+version = "2.0.0"
 edition = "2021"
 
 [build-dependencies]
@@ -14,6 +14,12 @@ notify-rust = "4.11.5"
 rbase64 = "2.0.3"
 rust_decimal = "1.36.0"
 rust_decimal_macros = "1.36.0"
+reqwest = { version = "0.11", features = ["json", "blocking"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+winapi = { version = "0.3", features = ["shellapi", "winuser"] }
 
 [features]
 default = ["desktop"]
