@@ -8,7 +8,6 @@ use reqwest::blocking::Client;
 use serde::Deserialize;
 use notify_rust::Notification;
 use log::{info, warn, error, debug};
-use chrono::{Local, DateTime};
 
 #[derive(Deserialize)]
 struct Release {
