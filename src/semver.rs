@@ -27,6 +27,7 @@ fn parse_semver(semver: &str) -> (u32, u32, u32) {
         .collect();
 
     if parts.len() != 3 {
+        log::error!("Semver must have exactly three parts: {}", semver);
         panic!("Semver must have exactly three parts: {}", semver);
     }
 
