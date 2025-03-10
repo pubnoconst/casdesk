@@ -36,14 +36,14 @@ fn main() {
         eprintln!("Failed to initialize logger: {}", e);
         return;
     }
-    let _ = update_manager::update();
+    update_manager::update();
     LaunchBuilder::new()
         .with_cfg(
             dioxus::desktop::Config::default()
                 .with_menu(None)
                 .with_window(
                     dioxus::desktop::WindowBuilder::new()
-                        .with_title(&format!("Casdesk {}", env!("CARGO_PKG_VERSION")))
+                        .with_title(format!("Casdesk {}", env!("CARGO_PKG_VERSION")))
                         .with_inner_size(LogicalSize::new(800.0, 800.0)),
                 ),
         )

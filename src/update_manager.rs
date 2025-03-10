@@ -7,7 +7,6 @@ use std::thread;
 use reqwest::blocking::Client;
 use serde::Deserialize;
 use notify_rust::Notification;
-use serde_json;
 use log::{info, warn, error, debug};
 use chrono::{Local, DateTime};
 
@@ -256,9 +255,9 @@ Remove-Item -Path "{}" -Force
 Remove-Item -Path $MyInvocation.MyCommand.Path -Force
 "#,
         current_exe_name.trim_end_matches(".exe"),
-        new_exe_path.display().to_string().replace("\\", "\\"),
-        current_exe.display().to_string().replace("\\", "\\"),
-        new_exe_path.display().to_string().replace("\\", "\\")
+        new_exe_path.display(),
+        current_exe.display(),
+        new_exe_path.display()
     );
     
     debug!("[{}] Writing PowerShell script content", timestamp());
