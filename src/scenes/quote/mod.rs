@@ -99,88 +99,90 @@ pub fn Quote() -> Element {
                 }
             }
             // Quote summary and reset button
-            div {
-                id: "quote-summary",
+            if quotes.read().len() > 0 {
                 div {
-                    class: "summary-amounts",
+                    id: "quote-summary",
                     div {
-                        class: "summary-row",
-                        span { class: "label", "Total quote:" }
-                        span { class: "value", "${total}" }
-                        button { 
-                            onclick: move |_| {
-                                if let Ok(mut cb) = Clipboard::new() {
-                                    if cb.set_text(format!("{:.2}", total.read())).is_ok() {
-                                        let _ = Notification::new()
-                                            .body(&format!("Copied {:.2} to clipboard", total.read()))
-                                            .appname("Casdesk")
-                                            .show();
+                        class: "summary-amounts",
+                        div {
+                            class: "summary-row",
+                            span { class: "label", "Total quote:" }
+                            span { class: "value", "${total}" }
+                            button { 
+                                onclick: move |_| {
+                                    if let Ok(mut cb) = Clipboard::new() {
+                                        if cb.set_text(format!("{:.2}", total.read())).is_ok() {
+                                            let _ = Notification::new()
+                                                .body(&format!("Copied {:.2} to clipboard", total.read()))
+                                                .appname("Casdesk")
+                                                .show();
+                                        }
                                     }
-                                }
-                            },
-                            "Copy total" 
-                        }
-                    }
-                    div {
-                        class: "summary-row",
-                        class: "deposit-row",
-                        span { class: "label", "Minimum deposit:" }
-                        span { class: "value", "${deposit}" }
-                        button { 
-                            onclick: move |_| {
-                                if let Ok(mut cb) = Clipboard::new() {
-                                    if cb.set_text(format!("{:.2}", deposit.read())).is_ok() {
-                                        let _ = Notification::new()
-                                            .body(&format!("Copied {:.2} to clipboard", deposit.read()))
-                                            .appname("Casdesk")
-                                            .show();
-                                    }
-                                }
-                            },
-                            "Copy deposit" 
-                        }
-                    }
-                }
-                div {
-                    id: "reset-button-container",
-                    button {
-                        onclick: move |_| {
-                            quotes.write().clear();
-                        },
-                        class: "danger-button",
-                        "Reset Table"
-                    }
-                }
-            }
-            // Quotes table with delete buttons
-            div {
-                id: "quotes-table",
-                if quotes.read().len() > 0 {
-                    table {
-                        thead {
-                            tr {
-                                th { "Quote" }
-                                th { "Action" }
+                                },
+                                "Copy total" 
                             }
                         }
-                        tbody {
-                            for quote in quotes.read().iter().cloned() {
+                        div {
+                            class: "summary-row",
+                            class: "deposit-row",
+                            span { class: "label", "Minimum deposit:" }
+                            span { class: "value", "${deposit}" }
+                            button { 
+                                onclick: move |_| {
+                                    if let Ok(mut cb) = Clipboard::new() {
+                                        if cb.set_text(format!("{:.2}", deposit.read())).is_ok() {
+                                            let _ = Notification::new()
+                                                .body(&format!("Copied {:.2} to clipboard", deposit.read()))
+                                                .appname("Casdesk")
+                                                .show();
+                                        }
+                                    }
+                                },
+                                "Copy deposit" 
+                            }
+                        }
+                    }
+                    div {
+                        id: "reset-button-container",
+                        button {
+                            onclick: move |_| {
+                                quotes.write().clear();
+                            },
+                            class: "danger-button",
+                            "Reset Table"
+                        }
+                    }
+                }
+                // Quotes table with delete buttons
+                div {
+                    id: "quotes-table",
+                    if quotes.read().len() > 0 {
+                        table {
+                            thead {
                                 tr {
-                                    td { "{quote.value}" }
-                                    td {
-                                        button {
-                                            onclick: move |_| {
-                                                quotes.write().retain(|q| q.id != quote.id);
-                                            },
-                                            class: "danger-button",
-                                            "Remove"
+                                    th { "Quote" }
+                                    th { "Action" }
+                                }
+                            }
+                            tbody {
+                                for quote in quotes.read().iter().cloned() {
+                                    tr {
+                                        td { "{quote.value}" }
+                                        td {
+                                            button {
+                                                onclick: move |_| {
+                                                    quotes.write().retain(|q| q.id != quote.id);
+                                                },
+                                                class: "danger-button",
+                                                "Remove"
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                }
+                }    
             }
         }
     }
