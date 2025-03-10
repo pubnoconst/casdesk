@@ -15,7 +15,6 @@
     flex-direction: column;
     flex-wrap: wrap;
     gap: 10px;
-    background-color: #f3f3f3;
 }
 
 #tabstrip > button {
@@ -44,7 +43,9 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 50%;
+    padding-left: .5rem;
 }
+
 
 .form-submit-button-container {
     margin: 1rem;
@@ -69,6 +70,10 @@
     flex-wrap: wrap;
     overflow-y: auto;
     gap: 3px;
+}
+
+.form-submit-button-container > button {
+    width: 12rem;
 }
 
 .form-row {

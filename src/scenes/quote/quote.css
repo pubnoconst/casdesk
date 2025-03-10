@@ -58,6 +58,10 @@ input[type="number"] {
     text-align: right;
 }
 
+#reset-button-container > button {
+    width: 8rem;
+}
+
 /* Table styling */
 #quotes-table table {
     width: 100%;
