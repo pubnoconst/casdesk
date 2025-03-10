@@ -6,7 +6,6 @@
 
 ![Image](https://i.imgur.com/R3SJVgB.png)
 
----
 
 ## Features
 
@@ -15,7 +14,6 @@
 - **Adjusting POS**: Helps you adjust your POS for missing sales
 - **More to come**
 
----
 
 ## Requirements and Installation
 
@@ -23,7 +21,6 @@
 
 * Install the latest version from here: https://www.github.com/pubnoconst/casdesk/releases/latest
 
----
 ## Building
 
 To build Casdesk from source, follow these steps:
@@ -45,7 +42,6 @@ cargo build --release
 ```
 5. The executable will be located in the `target/release` directory.
 
----
 
 ## Disclaimer
 
@@ -54,7 +50,6 @@ This project is still under **heavy construction**, and its functionality may ch
 - Author is **not liable** for any damages or issues arising from the use of this software.
 - This project is provided **as-is**, without any warranties or guarantees.
 
----
 
 ## License
 
