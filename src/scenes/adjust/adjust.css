@@ -24,7 +24,7 @@
     padding: 5rem;
     gap: 10px; /* Adds space between the label and input */
     border-radius: 8px;
-    background: white;
+    background: #dedddd;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
     flex-grow: 1; /* Allows the card to grow and take up available space */
     flex-basis: 0; /* Ensures cards shrink properly when space is limited */

@@ -5,6 +5,7 @@ mod scenes;
 use scenes::{adjust::*, forms::*, home::*, quote::*, GLOBAL_CSS};
 mod update_manager;
 mod logger;
+mod semver;
 
 #[derive(Routable, Clone, PartialEq)]
 pub enum Route {

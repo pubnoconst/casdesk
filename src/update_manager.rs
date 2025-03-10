@@ -8,6 +8,7 @@ use reqwest::blocking::Client;
 use serde::Deserialize;
 use notify_rust::Notification;
 use log::{info, warn, error, debug};
+use crate::semver::*;
 
 #[derive(Deserialize)]
 struct Release {
@@ -81,11 +82,19 @@ fn check_and_update() -> Result<(), Box<dyn std::error::Error>> {
     info!("[{}] Latest available version: {}", timestamp(), latest_version);
     
     // Skip if already on latest version
-    if current_version == latest_version {
+    if current_version.is_equal_to(&latest_version) {
         info!("[{}] Already on latest version, skipping update", timestamp());
         return Ok(());
     }
     
+    // Skip if already on future version (dev)
+    if current_version.is_bigger_than(&latest_version) {
+        info!("[{}] Already on future version, skipping downgrade", timestamp());
+        return Ok(());
+    }
+
+    assert!(current_version.is_smaller_than(&latest_version));
+
     info!("[{}] New version found: {} -> {}", timestamp(), current_version, latest_version);
     
     // OS-specific update handling
