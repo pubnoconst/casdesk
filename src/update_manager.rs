@@ -3,7 +3,7 @@ use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
 use std::thread;
-
+use crate::logger::timestamp;
 use reqwest::blocking::Client;
 use serde::Deserialize;
 use notify_rust::Notification;
@@ -31,11 +31,6 @@ pub fn update() {
             eprintln!("Update check failed: {}", e);
         }
     });
-}
-
-fn timestamp() -> String {
-    let now: DateTime<Local> = Local::now();
-    now.format("%Y-%m-%d %H:%M:%S%.3f").to_string()
 }
 
 fn check_and_update() -> Result<(), Box<dyn std::error::Error>> {

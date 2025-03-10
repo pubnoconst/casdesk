@@ -1,6 +1,13 @@
 use flexi_logger::{Logger, LogSpecBuilder, WriteMode};
 use log::LevelFilter;
 use std::path::PathBuf;
+use chrono::prelude::*;
+
+pub fn timestamp() -> String {
+    let now: DateTime<Local> = Local::now();
+    now.format("%Y-%m-%d %H:%M:%S%.3f").to_string()
+}
+
 
 /// Get the standard logging directory based on the operating system
 fn get_log_directory() -> PathBuf {
