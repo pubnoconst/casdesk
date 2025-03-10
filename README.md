@@ -17,9 +17,11 @@
 
 ---
 
-## Requirements
+## Requirements and Installation
 
-On Windows it requires VCRedist. Download it from this link here: https://aka.ms/vs/17/release/vc_redist.x64.exe
+* On Windows it requires VCRedist. Download it from this link here: https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+* Install the latest version from here: https:://www.github.com/pubnoconst/casdesk/releases/latest
 
 ---
 ## Building
