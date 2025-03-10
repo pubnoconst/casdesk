@@ -123,6 +123,7 @@ pub fn Quote() -> Element {
                     }
                     div {
                         class: "summary-row",
+                        class: "deposit-row",
                         span { class: "label", "Minimum deposit:" }
                         span { class: "value", "${deposit}" }
                         button { 
