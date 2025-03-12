@@ -60,6 +60,7 @@ pub fn RiskForm(props: RiskFormProps) -> Element {
     rsx! {
         form {
             class: "form",
+            autocomplete: "off",
             onsubmit: move |e| {
                 match RiskFormArgs::parse(e.data().values()) {
                     Some(args) => {

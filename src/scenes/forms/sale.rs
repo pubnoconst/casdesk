@@ -102,6 +102,7 @@ pub fn Sale(props: SaleFormProps) -> Element {
     rsx! {
         form {
             class: "form",
+            autocomplete: "off",
             onsubmit: move |e| {
                 match SaleFormArgs::parse(e.data().values()) {
                     Some(args) => {

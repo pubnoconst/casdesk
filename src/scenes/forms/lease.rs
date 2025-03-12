@@ -78,6 +78,7 @@ pub fn Lease() -> Element {
     rsx! {
        form {
             class: "form",
+            autocomplete: "off",
             onsubmit: move |e| {
                 match LeaseFormArgs::parse(e.data().values()) {
                     Some(args) => {
