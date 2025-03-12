@@ -86,6 +86,7 @@ pub fn Quote() -> Element {
                     div {
                         class: "input-row",
                         input {
+                            autofocus: true,
                             r#type: "number",
                             name: "quotable_price",
                             placeholder: "Quotation formula will be applied"

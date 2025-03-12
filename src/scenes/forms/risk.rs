@@ -82,7 +82,7 @@ pub fn RiskForm(props: RiskFormProps) -> Element {
             div {
                 class: "form-row",
                 label { "Customer Name:" }
-                input { r#type: "text", placeholder: "Customer Name", name: "customer_name" }
+                input { autofocus: true, r#type: "text", placeholder: "Customer Name", name: "customer_name" }
             }
             div {
                 class: "form-row",

@@ -100,7 +100,7 @@ pub fn Lease() -> Element {
             div {
                 class: "form-row",
                 label { "Device:" }
-                input { r#type: "text", name: "device_model", placeholder: "Name, model, model number" }
+                input { autofocus: true, r#type: "text", name: "device_model", placeholder: "Name, model, model number" }
             }
             div {
                 class: "form-row",

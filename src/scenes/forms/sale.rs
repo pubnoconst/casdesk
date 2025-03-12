@@ -124,7 +124,7 @@ pub fn Sale(props: SaleFormProps) -> Element {
             div {
                 class: "form-row",
                 label { "Customer Name:" }
-                input { r#type: "text", name: "customer_name", placeholder: "Enter customer name" }
+                input { autofocus: true, r#type: "text", name: "customer_name", placeholder: "Enter customer name" }
             }
             div {
                 class: "form-row",

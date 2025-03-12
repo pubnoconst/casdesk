@@ -99,7 +99,7 @@ pub fn Purchase() -> Element {
             div {
                 class: "form-row",
                 label { "Seller's Name:" }
-                input { r#type: "text", name: "seller_name", placeholder: "Enter seller's name" }
+                input { autofocus: true, r#type: "text", name: "seller_name", placeholder: "Enter seller's name" }
             }
             div {
                 class: "form-row",

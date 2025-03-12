@@ -33,6 +33,7 @@ pub fn Adjust() -> Element {
                         class: "card",
                         "EFTPOS Total in Mybug"
                         input {
+                            autofocus: true,
                             r#type: "number",
                             value: "{software}",
                             oninput: move |e| software.set(Decimal::from_str(&e.value()).unwrap_or(dec!(0)))

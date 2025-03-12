@@ -26,6 +26,7 @@ pub fn Home() -> Element {
                         onclick: move |_| {
                             nv.push("/quote");
                         }, 
+                        autofocus: true,
                         "Quote"
                     }
                     button { 
