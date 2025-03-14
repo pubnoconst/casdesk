@@ -77,6 +77,7 @@ impl LeaseFormArgs {
 pub fn Lease() -> Element {
     rsx! {
        form {
+            autocomplete: "off",
             class: "form",
             autocomplete: "off",
             onsubmit: move |e| {

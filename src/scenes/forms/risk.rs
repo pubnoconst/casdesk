@@ -59,6 +59,7 @@ impl RiskFormArgs {
 pub fn RiskForm(props: RiskFormProps) -> Element {
     rsx! {
         form {
+            autocomplete: "off",
             class: "form",
             autocomplete: "off",
             onsubmit: move |e| {

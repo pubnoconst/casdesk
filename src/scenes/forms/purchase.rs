@@ -76,6 +76,7 @@ impl PurchaseFormArgs {
 pub fn Purchase() -> Element {
     rsx! {
         form {
+            autocomplete: "off",
             class: "form",
             autocomplete: "off",
             onsubmit: move |e| {
