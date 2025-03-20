@@ -3,12 +3,12 @@ use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
 use std::thread;
-use crate::logger::timestamp;
+use super::logger::timestamp;
 use reqwest::blocking::Client;
 use serde::Deserialize;
 use notify_rust::Notification;
 use log::{info, warn, error, debug};
-use crate::semver::*;
+use super::semver::*;
 
 #[derive(Deserialize)]
 struct Release {

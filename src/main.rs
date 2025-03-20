@@ -3,9 +3,8 @@
 use dioxus::{desktop::LogicalSize, prelude::*};
 mod scenes;
 use scenes::{adjust::*, forms::*, home::*, quote::*, GLOBAL_CSS};
-mod update_manager;
-mod logger;
-mod semver;
+mod utils;
+
 
 #[derive(Routable, Clone, PartialEq)]
 pub enum Route {
@@ -33,11 +32,11 @@ fn App() -> Element {
 }
 
 fn main() {
-    if let Err(e) = logger::init_logger() {
+    if let Err(e) = utils::logger::init_logger() {
         eprintln!("Failed to initialize logger: {}", e);
         return;
     }
-    update_manager::update();
+    utils::update_manager::update();
     LaunchBuilder::new()
         .with_cfg(
             dioxus::desktop::Config::default()
